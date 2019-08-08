@@ -295,7 +295,7 @@ class NavbarPage extends Component {
 
         <SectionContainer header="With dropdown">
           <MDBNavbar
-            color="indigo"
+            color="red"
             dark
             expand="md"
             style={{ marginTop: "20px" }}

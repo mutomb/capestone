@@ -12,7 +12,9 @@ import {
 import { ReactComponent as Logo } from "./assets/logo.svg";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
-
+import MyHomePage from "./pages/MyHomePage";
+import HomePage from "./pages/HomePage";
+import NavbarPage from "./pages/NavbarPage";
 class App extends Component {
   state = {
     collapseID: ""
@@ -41,15 +43,7 @@ class App extends Component {
 
     return (
       <Router>
-        <div className="flyout">
-
-          <MDBFooter color="indigo">
-            <p className="footer-copyright mb-0 py-3 text-center">
-              &copy; {new Date().getFullYear()} Copyright:
-              <a href="https://www.MDBootstrap.com"> MDBootstrap.com </a>
-            </p>
-          </MDBFooter>
-        </div>
+          <MyHomePage/>
       </Router>
     );
   }
