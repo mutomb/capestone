@@ -41,7 +41,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2017/06/navigation-1.jpg"
+                          src="Image/9.jpeg"
                         />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
@@ -75,7 +75,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2017/06/navigation-1.jpg"
+                          src="Image/9.jpeg"
                           alt="mdbreact-logo"
                         />
                         <MDBCardBody cascade className="text-center">
@@ -106,8 +106,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2018/11/mdb-jquery-free.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="code" className="green-text pr-2" />
@@ -141,8 +140,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2017/06/navigation-1.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="bars" className="pink-text pr-2" />
@@ -173,8 +171,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2015/08/forms.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="edit" className="blue-text pr-2" />
@@ -204,8 +201,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2015/08/table-fb.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="table" className="green-text pr-2" />
@@ -238,8 +234,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/wp-content/uploads/2018/02/modal-new.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon
@@ -274,8 +269,7 @@ class MyHomePage extends React.Component {
                         <MDBCardImage
                           cascade
                           className="img-fluid"
-                          src="https://mdbootstrap.com/img/Marketing/docs/social/main-addons.jpg"
-                        />
+                          src="Image/9.jpeg"                        />
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon

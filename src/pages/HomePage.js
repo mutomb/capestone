@@ -15,7 +15,7 @@ import {
   MDBNavLink
 } from "mdbreact";
 import "./HomePage.css";
-
+//import image from "../assets/mdb-react-small.png";
 class HomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
   render() {
@@ -33,7 +33,8 @@ class HomePage extends React.Component {
                   <h2 className="h2-responsive mb-4">
                     <strong className="font-weight-bold">
                       <img
-                        src="https://mdbootstrap.com/img/Marketing/other/logo/logo-mdb-react-small.png"
+                        src="randomImanges/9.jpeg"
+                        //src="https://mdbootstrap.com/img/Marketing/other/logo/logo-mdb-react-small.png"
                         alt="mdbreact-logo"
                         className="pr-2"
                       />
