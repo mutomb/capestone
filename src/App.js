@@ -15,7 +15,8 @@ import Routes from "./Routes";
 import MyHomePage from "./pages/MyHomePage";
 import HomePage from "./pages/HomePage";
 import NavbarPage from "./pages/NavbarPage";
-import MyOrganisationalPage from "./pages/MyOrganisationalPage"
+import MyOrganisationalPage from "./pages/MyOrganisationalPage.jsx"
+import InputPage from "./pages/InputPage";
 class App extends Component {
   state = {
     collapseID: ""
@@ -46,7 +47,7 @@ class App extends Component {
      //<MyHomePage/>
     return (
       <Router>
-          <MyHomePage/>
+          <MyOrganisationalPage/>
       </Router>
     );
   }
