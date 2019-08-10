@@ -56,7 +56,7 @@ class MyHomePage extends React.Component {
                           </MDBCardText>
                           <MDBNavLink 
                               tag="button"
-                              to="/css"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -87,7 +87,7 @@ class MyHomePage extends React.Component {
                           </MDBCardText>
                           <MDBNavLink 
                               tag="button"
-                              to="/components"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -118,7 +118,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/advanced"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -152,7 +152,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/navigation"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -182,7 +182,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/forms"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -212,7 +212,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/tables"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -250,7 +250,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/modals"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -284,7 +284,7 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/addons"
+                              to="/table"
                               color="mdb-color"
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -299,7 +299,6 @@ class MyHomePage extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBContainer>
-          <MyFooter/>
         </div>
 
       </>
