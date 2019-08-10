@@ -42,6 +42,9 @@ import MyNavbarWithIcon from "./pages/MyNavbarWithIcon";
 import MyNavbar from "./pages/MyNavbar";
 import NavigationNavPage from "./pages/NavigationNavPage";
 import ModalsNavPage from "./pages/ModalsNavPage";
+import ModalExamplesPage from "./pages/ModalExamplesPage";
+import ModalPage from "./pages/ModalPage";
+import FormsNavPage from "./pages/FormsNavPage";
 class App extends Component {
   state = {
     collapseID: ""
@@ -82,7 +85,7 @@ class App extends Component {
         <Route path = "/event" component ={EventPost}/>
         <Route path = "/organisation" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
-        <Route path = "/about" component ={ModalsNavPage}/>
+        <Route path = "/about" component ={FormsPage}/>
       </Switch>
       <MyFooter/>
     
