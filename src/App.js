@@ -71,12 +71,7 @@ class App extends Component {
 
     const { collapseID } = this.state;
      //Jean components: 
-     //<MyOrganisationalPage/>
-     //<MyHomePage/>
-
-     //Kb components
-     //<eventPost
-     //testPage
+     
     return (
       <BrowserRouter>
      <NavPage/>
