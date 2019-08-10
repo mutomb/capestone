@@ -24,8 +24,6 @@ class TestPage extends React.Component {
   render() {
     return (
       <>
-        <MDBEdgeHeader color="light-blue" className="sectionPage" />
-        <MyNavbar/>
         <div className="mt-3 mb-5">
           <MDBContainer>
             <MDBRow>

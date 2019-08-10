@@ -47,21 +47,13 @@ class MyNavbar extends Component {
         >
             <MDBNavbarNav left>
             <MDBNavItem active>
-                <MDBNavLink to="#!">Social Issues</MDBNavLink>
+                <MDBNavLink to="/">Social Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-                <MDBNavLink to="#!">Events</MDBNavLink>
+                <MDBNavLink to="/event">Events</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-                <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                    <div className="d-none d-md-inline">MDBDropdown</div>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu right>
-                    <MDBDropdownItem href="#!">Filter Organisations</MDBDropdownItem>
-                    <MDBDropdownItem href="#!"> About Us</MDBDropdownItem>
-                </MDBDropdownMenu>
-                </MDBDropdown>
+                <MDBNavLink to="/about">About</MDBNavLink>
             </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>

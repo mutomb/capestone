@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 import {
   MDBNavbar,
   MDBNavbarBrand,
@@ -35,6 +36,7 @@ import Post from "./pages/Post";
 import EventPost from "./pages/eventPost";
 import SideWay from "./pages/sideWay";
 import HoverPage from "./pages/HoverPage";
+import NavPage from "./pages/NavPage";
 class App extends Component {
   state = {
     collapseID: ""
@@ -68,9 +70,18 @@ class App extends Component {
      //<eventPost
      //testPage
     return (
-      <Router>
-          <TestPage/>
-      </Router>
+      <BrowserRouter>
+     <NavPage/>
+      <Switch>
+        <Route path = "/" component ={MyHomePage} exact/>
+        <Route path = "/event" component ={EventPost}/>
+        <Route path = "/organisation" component ={MyOrganisationalPage}/>
+        <Route path = "/table" component ={TestPage}/>
+       
+      </Switch>
+    
+
+    </BrowserRouter>
     );
   }
 }

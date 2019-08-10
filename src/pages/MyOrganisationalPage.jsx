@@ -71,8 +71,6 @@ class MyOrganisationalPage extends React.Component {
   render() {
     return (
       <>
-        <MDBEdgeHeader color="light-blue" className="sectionPage" />
-        <MyNavbarWithIcon/>
         <div className="mt-3 mb-5">
           <MDBContainer>
             <MDBRow>
