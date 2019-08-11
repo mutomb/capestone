@@ -48,6 +48,7 @@ import FormsNavPage from "./pages/FormsNavPage";
 import RadioB from "./pages/radioB";
 import Events from "./pages/events";
 import Maps from "./pages/maps";
+import Sign from "./pages/Sign";
 class App extends Component {
   state = {
     collapseID: ""
@@ -84,6 +85,8 @@ class App extends Component {
         <Route path = "/organisation" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
         <Route path = "/post" component ={Post}/>
+        
+        <Route path = "/sign" component ={FormsPage}/>
       </Switch>
       <MyFooter/>
     

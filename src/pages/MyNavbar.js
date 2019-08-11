@@ -50,16 +50,10 @@ class MyNavbar extends Component {
                 <MDBNavLink to="/">Social Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-              <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Post</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href="/event">Events</MDBDropdownItem>
-                  <MDBDropdownItem href="/post">Post</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-               
+                <MDBNavLink to="/event">Event</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+                <MDBNavLink to="/post">Post</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
                 <MDBNavLink to="/about">About</MDBNavLink>
@@ -73,7 +67,7 @@ class MyNavbar extends Component {
                   Profile
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="/organisation">My account</MDBDropdownItem>
+                  <MDBDropdownItem href="/organisation">Edit Profile</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Log out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>

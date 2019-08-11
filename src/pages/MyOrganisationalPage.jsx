@@ -152,7 +152,7 @@ class MyOrganisationalPage extends React.Component {
               </MDBCol>
               </MDBRow>
           </MDBContainer>
-          <MyFooter/>
+         
         </div>
 
       </>

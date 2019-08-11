@@ -52,7 +52,7 @@ class NavUsers extends Component {
             <MDBNavItem>
             <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <span className="mr-2">Post</span>
+                  <span className="mr-2">View</span>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem href="/event">Events</MDBDropdownItem>
@@ -66,7 +66,7 @@ class NavUsers extends Component {
             </MDBNavbarNav>
             <MDBNavbarNav right>
             <MDBNavItem>
-                <MDBNavLink to="/organisation">
+                <MDBNavLink to="/sign">
                   <MDBIcon icon="user" className="d-inline-inline" />{" "}
                   <div className="d-none d-md-inline">Sign in</div>
                 </MDBNavLink>
