@@ -46,6 +46,7 @@ import ModalExamplesPage from "./pages/ModalExamplesPage";
 import ModalPage from "./pages/ModalPage";
 import FormsNavPage from "./pages/FormsNavPage";
 import RadioB from "./pages/radioB";
+import Events from "./pages/events";
 class App extends Component {
   state = {
     collapseID: ""
@@ -78,10 +79,10 @@ class App extends Component {
      <NavPage/>
       <Switch>
         <Route path = "/" component ={MyHomePage} exact/>
-        <Route path = "/event" component ={EventPost}/>
+        <Route path = "/event" component ={Events}/>
         <Route path = "/organisation" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
-        <Route path = "/about" component ={RadioB}/>
+        <Route path = "/post" component ={Post}/>
       </Switch>
       <MyFooter/>
     

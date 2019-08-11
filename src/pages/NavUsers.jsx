@@ -50,7 +50,15 @@ class NavUsers extends Component {
                 <MDBNavLink to="/">Social Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-                <MDBNavLink to="/event">Events</MDBNavLink>
+            <MDBDropdown>
+                <MDBDropdownToggle nav caret>
+                  <span className="mr-2">Post</span>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem href="/event">Events</MDBDropdownItem>
+                  <MDBDropdownItem href="/post">Post</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
             </MDBNavItem>
             <MDBNavItem>
                 <MDBNavLink to="/about">About</MDBNavLink>

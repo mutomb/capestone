@@ -9,11 +9,16 @@ export class Events extends Component {
     render() {
 
         return (
-            <MDBContainer>
             
-            <MDBCard className ="filter">
-                <MDBCardBody>ayepyep</MDBCardBody>
-            </MDBCard>
+            <MDBContainer>
+             <MDBRow>
+              <MDBCol md="12" className="mt-4">
+              <h2 className="text-center my-5 font-weight-bold">
+               Events
+              </h2>
+              
+            </MDBCol>
+            </MDBRow>
 
             <MDBCard className="my-5 px-5 pb-5">
               <MDBCardBody>
