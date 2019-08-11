@@ -61,6 +61,7 @@ import NotificationPage from './pages/NotificationPage';
 import InputGroupPage from './pages/InputGroupPage'
 import TreeviewPage from './pages/TreeviewPage'
 import MyHomePage from "./pages/MyHomePage";
+import Sign from "./pages/Sign";
 
 
 class Routes extends React.Component {
@@ -68,6 +69,7 @@ class Routes extends React.Component {
     return (
       <Switch>
         <Route exact path="/" component={MyHomePage} />
+        <Route path="/register" component={Sign} />
         
         <Route
           render={function () {

@@ -9,6 +9,7 @@ import NavPage from "./pages/NavPage";
 import MyFooter from "./pages/MyFooter";
 
 import Events from "./pages/events";
+import Sign from "./pages/Sign";
 class App extends Component {
   state = {
     collapseID: ""
@@ -25,15 +26,7 @@ class App extends Component {
   };
 
   render() {
-    const overlay = (
-      <div
-        id="sidenav-overlay"
-        style={{ backgroundColor: "transparent" }}
-        onClick={this.toggleCollapse("mainNavbarCollapse")}
-      />
-    );
-
-    const { collapseID } = this.state;
+   
      //Jean components: 
      
     return (
@@ -45,7 +38,7 @@ class App extends Component {
         <Route path = "/organisation" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
         <Route path = "/post" component ={Post}/>
-        
+        <Route path="/register" component={Sign} />
         <Route path = "/sign" component ={FormsPage}/>
       </Switch>
       <MyFooter/>

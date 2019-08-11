@@ -1,18 +1,11 @@
 import React, { Component } from "react";
 import {
   MDBContainer,
-  MDBRow,
   MDBCol,
   MDBInput,
   MDBBtn,
-  MDBIcon,
-  MDBCard,
-  MDBCardBody,
-  MDBModal,
-  MDBModalBody,
-  MDBModalFooter
+
 } from "mdbreact";
-import DocsLink from "./../components/docsLink";
 import SectionContainer from "./../components/sectionContainer";
 
 class Sign extends Component {
