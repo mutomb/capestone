@@ -33,96 +33,96 @@ const DatatablePage = () => {
     rows: [
       {
         name: "Tiger Nixon",
-        position: "System Architect",
+        position: "Education",
         office: "Edinburgh",
         clickEvent: () => testClickEvent(1)
       },
       {
         name: "Garrett Winters",
-        position: "Accountant",
+        position: "Education",
         office: "Tokyo"
        
       },
       {
         name: "Ashton Cox",
-        position: "Junior Technical Author",
+        position: "Education",
         office: "San Francisco"
        
       },
       {
         name: "Cedric Kelly",
-        position: "Senior Javascript Developer",
+        position: "Education",
         office: "Edinburgh"
       },
       {
         name: "Airi Satou",
-        position: "Accountant",
+        position: "Education",
         office: "Tokyo"
       },
       {
         name: "Brielle Williamson",
-        position: "Integration Specialist",
+        position: "Education",
         office: "New York"
       },
       {
         name: "Herrod Chandler",
-        position: "Sales Assistant",
+        position: "Education",
         office: "San Francisco"
       },
       {
         name: "Rhona Davidson",
-        position: "Integration Specialist",
+        position: "Education",
         office: "Tokyo"
       },
       {
         name: "Colleen Hurst",
-        position: "Javascript Developer",
+        position: " Education",
         office: "San Francisco"
       },
       {
         name: "Sonya Frost",
-        position: "Software Engineer",
+        position: "Education",
         office: "Edinburgh"
       },
       {
         name: "Jena Gaines",
-        position: "Office Manager",
+        position: "Education",
         office: "London"
       },
       {
         name: "Quinn Flynn",
-        position: "Support Lead",
+        position: "Education",
         office: "Edinburgh"
       },
       {
         name: "Charde Marshall",
-        position: "Regional Director",
+        position: "Education",
         office: "San Francisco"
       },
       {
         name: "Haley Kennedy",
-        position: "Senior Marketing Designer",
+        position: "Education",
         office: "London"
       },
       {
         name: "Tatyana Fitzpatrick",
-        position: "Regional Director",
+        position: "Education",
         office: "London"
       },
       {
         name: "Michael Silva",
-        position: "Marketing Designer",
+        position: "Education",
         office: "London"
       },
       {
         name: "Paul Byrd",
-        position: "Chief Financial Officer (CFO)",
+        position: "Education",
         office: "New York"
       },
      
       {
         name: "Donna Snider",
-        position: "Customer Support",
+        position: "Education",
         office: "New York"
        
       }

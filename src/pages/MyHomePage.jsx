@@ -45,12 +45,8 @@ class MyHomePage extends React.Component {
                               brand
                               className="pink-text pr-2"
                             />
-                            <strong>CSS</strong>
+                            <strong>Education</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Animations, colours, shadows, skins and many more!
-                            Get to know all our css styles in one place.
-                          </MDBCardText>
                           <MDBNavLink 
                               tag="button"
                               to="/table"
@@ -58,7 +54,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                              View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -76,12 +72,9 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="cubes" className="blue-text pr-2" />
-                            <strong>COMPONENTS</strong>
+                            <strong>Poverty</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Ready-to-use components that you can use in your
-                            applications. Both basic and extended versions!
-                          </MDBCardText>
+                         
                           <MDBNavLink 
                               tag="button"
                               to="/table"
@@ -89,7 +82,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -105,13 +98,9 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="code" className="green-text pr-2" />
-                            <strong>ADVANCED</strong>
+                            <strong>Crime</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Advanced components such as charts, carousels,
-                            tooltips and popovers. All in Material Design
-                            version.
-                          </MDBCardText>
+                         
 
                           <MDBNavLink 
                               tag="button"
@@ -120,7 +109,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -139,13 +128,9 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="bars" className="pink-text pr-2" />
-                            <strong>NAVIGATION</strong>
+                            <strong>Fees Must Fall</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Ready-to-use navigation layouts, navbars,
-                            breadcrumbs and much more! More about our navigation
-                            components.
-                          </MDBCardText>
+                       
 
                           <MDBNavLink 
                               tag="button"
@@ -154,7 +139,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -170,12 +155,9 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="edit" className="blue-text pr-2" />
-                            <strong>FORMS</strong>
+                            <strong>Corruption</strong>
                           </MDBCardTitle>
-                          <MDBCardText className="mb-4 pb-3">
-                            Inputselecst, date and time pickers. Everything in
-                            one place is ready to use!
-                          </MDBCardText>
+                         
 
                           <MDBNavLink 
                               tag="button"
@@ -184,7 +166,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -200,12 +182,9 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <MDBIcon icon="table" className="green-text pr-2" />
-                            <strong>TABLES</strong>
+                            <strong>Drug Abuse</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Basic and advanced tables. Responsive, datatables,
-                            with sorting, searching and export to csv.
-                          </MDBCardText>
+                          
 
                           <MDBNavLink 
                               tag="button"
@@ -214,7 +193,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -237,14 +216,9 @@ class MyHomePage extends React.Component {
                               far
                               className="pink-text pr-2"
                             />
-                            <strong>MODALS</strong>
+                            <strong>Regionalism</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Modals used to display advanced messages to the
-                            user. Cookies, logging in, registration and much
-                            more.
-                          </MDBCardText>
-
+                        
                           <MDBNavLink 
                               tag="button"
                               to="/table"
@@ -252,7 +226,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
@@ -271,13 +245,8 @@ class MyHomePage extends React.Component {
                               icon="arrows-alt"
                               className="blue-text pr-2"
                             />
-                            <strong>PLUGINS & ADDONS</strong>
+                            <strong>Unemployment</strong>
                           </MDBCardTitle>
-                          <MDBCardText>
-                            Google Maps, Social Buttons, Pre-built Contact Forms
-                            and Steppers. Find out more about our extended
-                            components.
-                          </MDBCardText>
 
                           <MDBNavLink 
                               tag="button"
@@ -286,7 +255,7 @@ class MyHomePage extends React.Component {
                               className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
-                              More
+                               View Organisations
                           </MDBNavLink>
                         </MDBCardBody>
                       </MDBCard>
