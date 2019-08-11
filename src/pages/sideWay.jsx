@@ -1,20 +1,9 @@
 import React, { Component } from "react";
 import {
-  MDBContainer,
   MDBRow,
-  MDBCol,
-  MDBInput,
-  MDBBtn,
-  MDBIcon,
-  MDBCard,
-  MDBCardBody,
-  MDBModal,
-  MDBModalBody,
-  MDBModalFooter
+  MDBCol
 } from "mdbreact";
-import DocsLink from "./../components/docsLink";
 import SectionContainer from "./../components/sectionContainer";
-import TestPage from "./testPage";
 import DatatablePage from "./DatatablePage";
 import Maps from "./maps";
 

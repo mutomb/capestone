@@ -1,7 +1,5 @@
 import React from "react";
-import { MDBCol, MDBContainer, MDBRow, MDBFooter } from "mdbreact";
-import DocsLink from "./../components/docsLink";
-import SectionContainer from "./../components/sectionContainer";
+import { MDBContainer, MDBFooter } from "mdbreact";
 
 const MyFooter = () => {
   return (

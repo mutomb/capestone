@@ -1,23 +1,10 @@
 import React from "react";
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
   MDBContainer,
   MDBCol,
-  MDBRow,
-  MDBCardBody,
-  MDBIcon,
-  MDBCard,
-  MDBCardTitle,
-  MDBCardImage,
-  MDBCardText,
-  MDBAnimation,
-  MDBNavLink
+  MDBRow
 } from "mdbreact";
 import "./MyHomePage.css";
-import MyNavbar from "./MyNavbar";
-import MyFooter from './MyFooter';
-import DatatablePage from "./DatatablePage";
 import SideWay from "./sideWay";
 class TestPage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);

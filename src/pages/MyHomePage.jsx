@@ -1,7 +1,5 @@
 import React from "react";
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
   MDBContainer,
   MDBCol,
   MDBRow,
@@ -15,8 +13,7 @@ import {
   MDBNavLink
 } from "mdbreact";
 import "./MyHomePage.css";
-import MyNavbar from "./MyNavbar";
-import MyFooter from './MyFooter';
+
 class MyHomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
   render() {

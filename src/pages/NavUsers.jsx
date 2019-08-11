@@ -1,21 +1,13 @@
 import React, { Component } from "react";
 import {
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavItem,
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
-  MDBFormInline,
-  MDBDropdown,
-  MDBDropdownToggle,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBContainer,
   MDBIcon
 } from "mdbreact";
-import DocsLink from "../components/docsLink";
 import SectionContainer from "../components/sectionContainer";
 
 class NavUsers extends Component {
@@ -50,15 +42,10 @@ class NavUsers extends Component {
                 <MDBNavLink to="/">Social Issues</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
-            <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className="mr-2">View</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href="/event">Events</MDBDropdownItem>
-                  <MDBDropdownItem href="/post">Post</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
+                <MDBNavLink to="/post">Post</MDBNavLink>
+            </MDBNavItem>
+            <MDBNavItem>
+                <MDBNavLink to="/event">Event</MDBNavLink>
             </MDBNavItem>
             <MDBNavItem>
                 <MDBNavLink to="/about">About</MDBNavLink>

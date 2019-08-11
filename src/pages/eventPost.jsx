@@ -1,26 +1,11 @@
 import React from "react";
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
   MDBContainer,
   MDBCol,
-  MDBRow,
-  MDBCardBody,
-  MDBIcon,
-  MDBCard,
-  MDBCardTitle,
-  MDBCardImage,
-  MDBCardText,
-  MDBAnimation,
-  MDBNavLink
+  MDBRow
 } from "mdbreact";
 import "./MyHomePage.css";
-import MyNavbar from "./MyNavbar";
-import MyFooter from './MyFooter';
-import DatatablePage from "./DatatablePage";
 import Post from "./Post";
-import RadioB from "./radioB";
-import Events from "./events";
 class EventPost extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
   render() {

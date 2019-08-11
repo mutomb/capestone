@@ -1,30 +1,14 @@
 import React from "react";
 import {
-  MDBEdgeHeader,
-  MDBFreeBird,
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBCardBody,
-  MDBIcon,
-  MDBCard,
-  MDBCardTitle,
-  MDBCardImage,
-  MDBCardText,
-  MDBAnimation,
-  MDBNavLink,
   MDBInputGroup,
   MDBBtn,
-  MDBDropdown,
-  MDBDropdownMenu,
-  MDBDropdownItem,
-  MDBDropdownToggle,
-  MDBInput,MDBInputSelect, MDBFormInline
+  MDBInput
 } from "mdbreact";
-import DocsLink from "../components/docsLink";
 import SectionContainer from "../components/sectionContainer";
-import MyNavbarWithIcon from "./MyNavbarWithIcon";
-import MyFooter from './MyFooter';
+
 class MyOrganisationalPage extends React.Component {
   constructor() {
     super();

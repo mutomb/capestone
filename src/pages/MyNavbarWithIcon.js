@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarNav,
   MDBNavItem,
   MDBNavLink,
@@ -12,10 +11,8 @@ import {
   MDBDropdownToggle,
   MDBDropdownMenu,
   MDBDropdownItem,
-  MDBContainer,
-  MDBIcon
+
 } from "mdbreact";
-import DocsLink from "../components/docsLink";
 import SectionContainer from "../components/sectionContainer";
 
 class MyNavbarWithIcon extends Component {
