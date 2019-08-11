@@ -47,6 +47,7 @@ import ModalPage from "./pages/ModalPage";
 import FormsNavPage from "./pages/FormsNavPage";
 import RadioB from "./pages/radioB";
 import Events from "./pages/events";
+import Maps from "./pages/maps";
 class App extends Component {
   state = {
     collapseID: ""

@@ -55,8 +55,8 @@ class MyNavbar extends Component {
                   <span className="mr-2">Post</span>
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem href="/events">Events</MDBDropdownItem>
-                  <MDBDropdownItem href="">Post</MDBDropdownItem>
+                  <MDBDropdownItem href="/event">Events</MDBDropdownItem>
+                  <MDBDropdownItem href="/post">Post</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
                
@@ -66,18 +66,6 @@ class MyNavbar extends Component {
             </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right>
-            <MDBNavItem >
-                <MDBFormInline waves>
-                <div className="md-form my-0">
-                    <input
-                    className="form-control mr-sm-2"
-                    type="text"
-                    placeholder="Search"
-                    aria-label="Search"
-                    />
-                </div>
-                </MDBFormInline>
-            </MDBNavItem>
             <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
@@ -85,7 +73,7 @@ class MyNavbar extends Component {
                   Profile
                 </MDBDropdownToggle>
                 <MDBDropdownMenu className="dropdown-default" right>
-                  <MDBDropdownItem href="#!">My account</MDBDropdownItem>
+                  <MDBDropdownItem href="/organisation">My account</MDBDropdownItem>
                   <MDBDropdownItem href="#!">Log out</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>

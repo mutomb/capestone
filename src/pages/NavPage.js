@@ -24,7 +24,7 @@ class NavPage extends React.Component {
     return (
       <>
         <MDBEdgeHeader color="light-blue" className="sectionPage" />
-        <NavUsers/>
+        <MyNavbar/>
     </>
     );
   }

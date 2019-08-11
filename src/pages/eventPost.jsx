@@ -33,8 +33,7 @@ class EventPost extends React.Component {
               <MDBCol md="12" className="mt-4">
               <h2 className="text-center my-5 font-weight-bold">
                Post
-                
-                </h2>
+              </h2>
                 <Post/>
               
             </MDBCol>
