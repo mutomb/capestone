@@ -4,12 +4,26 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors= require('cors');
+var mongoose= require('mongoose');
+var bodyParser= require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var testAPI= require('./routes/TestAPI')
+var organisations= require('./routes/organisations');
 
 var app = express();
+
+//body-parser middleware
+app.use(bodyParser.json());
+
+
+//database config
+const db= require('./config/mongodbURI').mongoURI; 
+mongoose
+  .connect(db)
+  .then(()=>(console.log("db connected successfully..")))
+  .catch(err=>console.log('db connection ERROR'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +40,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/testAPI', testAPI);
+app.use('/organisation', organisations);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
