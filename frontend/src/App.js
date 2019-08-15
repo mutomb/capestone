@@ -11,6 +11,19 @@ import MyFooter from "./pages/MyFooter";
 import Events from "./pages/events";
 import Sign from "./pages/Sign";
 class App extends Component {
+ 
+  constructor(props){
+      super(props);
+      this.state={apiResponse:""};
+  }
+  //fetch the data from the API 
+  callAPI(){
+    fetch('http://localhost:9000/tesAPI')
+      .then(res=>res.text())
+      .then(res=>this.setState({apiResponse:res}))
+      .catch(err=>err);
+  }
+
   state = {
     collapseID: ""
   };
@@ -25,13 +38,17 @@ class App extends Component {
     this.state.collapseID === collapseID && this.setState({ collapseID: "" });
   };
 
+  //lifecycle methods
+  componentDidMount(){
+    this.callAPI();
+  }
+
+
   render() {
-   
-     //Jean components: 
      
     return (
-      <BrowserRouter>
-     <NavPage/>
+    <BrowserRouter>
+      <NavPage/>
       <Switch>
         <Route path = "/" component ={MyHomePage} exact/>
         <Route path = "/event" component ={Events}/>
@@ -41,9 +58,8 @@ class App extends Component {
         <Route path="/register" component={Sign} />
         <Route path = "/sign" component ={FormsPage}/>
       </Switch>
+      <p>this.state.apiResponse</p>
       <MyFooter/>
-    
-
     </BrowserRouter>
     );
   }
