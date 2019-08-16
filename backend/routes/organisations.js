@@ -1,32 +1,26 @@
-const express = require('express');
-const router =express.Router();
+const router = require('express').Router();
+let Organisation= require('../models/organisation.model');
 
-//organisation model
-const Organisation= require('../models/Organisation');
-
-//@route GET /organisation
-router.get('/',(req,res)=>{
+router.route('/').get((req,res)=>{
     Organisation.find()
-        .sort({date:-1})
-        .then(org => res.json(org));
+        .then(organisation => res.json(organisation))
+        .catch(err=>res.status(400).json('Error: '+err));
 });
 
-//@route POST /organisation
-router.post('/',(req,res)=>{
-    const newOrganisation= new Organisation({
-        username: req.body.name,
-        password: req.body.password
-    });
+router.route('/add').post((req,res)=>{
+    const username = req.body.username; 
+    const password = req.body.password;
+    const description =req.body.description;
+    const events = req.body.events; 
+    const posts = req.body.posts;
+    const newOrganisation= new Organisation({username,password,description,events,posts});
     newOrganisation.save()
-        .then(org=>res.json(org));
+        .then(()=> res.json('organisation added'))
+        .catch(err=>res.status(400).json('Error: '+err));
 });
 
-//@route DELETE /organisation
-router.delete('/:id',(req,res)=>{
-    Friend.findById(req.params.id)
-    .then(friend => item.remove().then(()=>res.json({success:true}))
-    .catch(err=> res.status(404).json({success:false}))
-    )
-});
+router.route('/delete').post((req,res)=>{
+    
+})
 
 module.exports=router;
