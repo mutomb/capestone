@@ -3,7 +3,7 @@ import { MDBInput, MDBInputSelect, MDBFormInline, MDBBtn, MDBContainer, MDBRow, 
 import DocsLink from "./../components/docsLink";
 import SectionContainer from "./../components/sectionContainer";
 
-class InputPage extends Component {
+class Temp extends Component {
   constructor() {
     super();
     this.state = {
@@ -81,7 +81,7 @@ class InputPage extends Component {
           <MDBRow>
             <MDBCol md="6">
               <MDBInput
-                iconclassName="iconHover"
+                iconClass="iconHover"
                 label="Run function on click icon"
                 icon="bell"
                 onIconClick={() => alert("Wait! This is an alert!")}
@@ -150,12 +150,12 @@ class InputPage extends Component {
           <MDBRow>
             <MDBCol md="6" tag="section">
               <SectionContainer header="Outline">
-                <MDBInput labelclassName="labelBg" outline label="Type your email" type="email" />
+                <MDBInput labelClass="labelBg" outline label="Type your email" type="email" />
 
-                <MDBInput labelclassName="labelBg" outline label="Type your password" icon="lock" type="password" />
+                <MDBInput labelClass="labelBg" outline label="Type your password" icon="lock" type="password" />
 
                 <MDBInput
-                  labelclassName="labelBg"
+                  labelClass="labelBg"
                   outline
                   getValue={this.getValue}
                   type="textarea"
@@ -164,18 +164,18 @@ class InputPage extends Component {
                   icon="pencil-alt"
                 />
 
-                <MDBInput labelclassName="labelBg" outline type="textarea" label="Basic textarea" rows="2" />
+                <MDBInput labelClass="labelBg" outline type="textarea" label="Basic textarea" rows="2" />
               </SectionContainer>
             </MDBCol>
 
             <MDBCol md="6" tag="section">
               <SectionContainer header="With background">
-                <MDBInput labelclassName="labelBg" background label="Type your email" type="email" />
+                <MDBInput labelClass="labelBg" background label="Type your email" type="email" />
 
-                <MDBInput labelclassName="labelBg" background label="Type your password" icon="lock" type="password" />
+                <MDBInput labelClass="labelBg" background label="Type your password" icon="lock" type="password" />
 
                 <MDBInput
-                  labelclassName="labelBg"
+                  labelClass="labelBg"
                   background
                   getValue={this.getValue}
                   type="textarea"
@@ -184,7 +184,7 @@ class InputPage extends Component {
                   icon="pencil-alt"
                 />
 
-                <MDBInput labelclassName="labelBg" background type="textarea" label="Basic textarea" rows="2" />
+                <MDBInput labelClass="labelBg" background type="textarea" label="Basic textarea" rows="2" />
               </SectionContainer>
             </MDBCol>
           </MDBRow>
@@ -315,7 +315,7 @@ class InputPage extends Component {
             </div>
             <div className="form-group row">
               <div className="col-sm-10">
-                <button type="submit" className="btn btn-primary btn-md">
+                <button type="submit" className="btn btn-green btn-md">
                   Sign in
                 </button>
               </div>
@@ -429,4 +429,4 @@ class InputPage extends Component {
   }
 }
 
-export default InputPage;
+export default Temp;

@@ -10,21 +10,35 @@ const organisationSchema= new schema({
     },
     password:{
         type: String,
-        required: true   
+        required: true,
+        trim: true,   
     },
-    description:{        
+    name:{
+        type:String,
+        trim: true
+    },
+    description:{
         type: String,
+        trim: true
     },
-    events:{
-        type: String,
-    },
-    posts:{
-        type: String,
-    },
+ 
+    zipcode: { type: String },
+    street_address: { type: String },
+    city:{ type: String },
+    province: {type: String},
+    country:{ type: String },
+
+    email: { type: String },
+    phonenumber: { type: String },
+
+    tags:{
+        type: Array
+    }
+
 },
     {timestamps:{
         timeStamp: true,
     }}
 ); 
 
-module.exports=Friend=mongoose.model('organisation',organisationSchema);
+module.exports=Organisation=mongoose.model('organisation',organisationSchema);

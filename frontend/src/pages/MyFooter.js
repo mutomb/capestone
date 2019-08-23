@@ -6,7 +6,7 @@ const MyFooter = () => {
         <MDBFooter color="green" className="font-small pt-4 mt-4">
           <div className="footer-copyright text-center py-3">
             <MDBContainer fluid>
-            Organisation
+            Community Organisation Portal
             </MDBContainer>
           </div>
         </MDBFooter>

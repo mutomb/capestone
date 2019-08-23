@@ -16,14 +16,6 @@ class App extends Component {
       super(props);
       this.state={apiResponse:""};
   }
-  //fetch the data from the API 
-  callAPI(){
-    fetch('http://localhost:9000/tesAPI')
-      .then(res=>res.text())
-      .then(res=>this.setState({apiResponse:res}))
-      .catch(err=>err);
-  }
-
   state = {
     collapseID: ""
   };
@@ -37,13 +29,6 @@ class App extends Component {
     window.scrollTo(0, 0);
     this.state.collapseID === collapseID && this.setState({ collapseID: "" });
   };
-
-  //lifecycle methods
-  componentDidMount(){
-    this.callAPI();
-  }
-
-
   render() {
      
     return (
@@ -52,13 +37,13 @@ class App extends Component {
       <Switch>
         <Route path = "/" component ={MyHomePage} exact/>
         <Route path = "/event" component ={Events}/>
-        <Route path = "/organisation" component ={MyOrganisationalPage}/>
+        <Route path = "/organisation/" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
         <Route path = "/post" component ={Post}/>
         <Route path="/register" component={Sign} />
         <Route path = "/sign" component ={FormsPage}/>
+        <Route path = "/sign1" component ={Post}/>
       </Switch>
-      <p>this.state.apiResponse</p>
       <MyFooter/>
     </BrowserRouter>
     );

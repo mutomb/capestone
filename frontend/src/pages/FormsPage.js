@@ -27,7 +27,7 @@ class Log extends Component {
            
             <MDBCol md="6">
               <SectionContainer>
-                <form>
+                <form method="post" action="http://localhost:3000/organisation/username" >  
                   <p className="h5 text-center mb-4">Sign in</p>
                   <label htmlFor="defaultFormLoginEmailEx" className="grey-text">
                     Your email
