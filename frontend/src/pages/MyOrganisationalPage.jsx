@@ -14,57 +14,18 @@ import ProfileDetails from "../pages/ProfileDetails";
 import EditProfileDetails from "../pages/EditProfileDetails";
 import PostsDetails from "../pages/PostsDetails";
 import EventsDetails from "../pages/EventsDetails";
-import Temp from "./Temp";
-
+import jwt_decode from 'jwt-decode';
 
 class MyOrganisationalPage extends React.Component {
   constructor() {
     super();
+    const token= localStorage.getItem('usertoken'); 
+    const decoded= jwt_decode(token);
     this.state={
-      username:"jeanlcu",
-      password:null,
-      name:null,
-      description:null, 
-      zipcode:null,
-      street_address:null,
-      city:null,
-      country:null,
-      province:null,  
-      phonenumber:null,
-      email:null,
-      organisation:null
+      organisation:{...decoded}
     }
-    this.getUsername.bind(this);
   }
-  getUsername(){
-    return this.state.username;
-  }
-  /*retrieve the organisation from the database by username*/
-  getOrganisation=(username)=> {
  
-    
-  }
-  componentWillMount(){
-    //this.getOrganisation("billgate");
-       axios.get(`http://localhost:5000/organisation/username/${"billgate"}`)  //
-    .then(res=>{ 
-      this.setState({
-        username:res.data.username,
-        password:res.data.password,
-        name:res.data.name,
-        description:res.data.description,
-        zipcode:res.data.zipcode,
-        street_address:res.data.street_address,
-        city:res.data.city,
-        province:res.data.province,
-        country:res.data.country,        
-        phonenumber:res.data.phonenumber, 
-        email:res.data.email,
-        organisation:res.data
-      })    
-    })
-    .catch(err=>console.log(err));
-  }
   render(){
     return(
       <>
@@ -75,7 +36,6 @@ class MyOrganisationalPage extends React.Component {
               <InnerNavBar 
               profileContent={
               <ProfileDetails 
-
               organisation={this.state.organisation}
               />
             }

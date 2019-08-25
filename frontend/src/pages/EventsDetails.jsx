@@ -107,7 +107,11 @@ class EventDetails extends React.Component {
                     <div class="d-flex justify-content-center">
                         <img src={this.state.profilePic}
                           style={this.state.profilePicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}} 
-                        class="z-depth-1-half avatar-pic" alt="profile Picture" width="100%" height="auto"/>
+                        class="z-depth-1-half avatar-pic" 
+                        alt="profile Picture" 
+                        width="100%" 
+                        height='auto'
+                       />
                     </div>
                     </div>
                     <div class="file-field">

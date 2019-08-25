@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import MyHomePage from "./pages/MyHomePage";
 import MyOrganisationalPage from "./pages/MyOrganisationalPage.jsx"
-import FormsPage from "./pages/FormsPage";
+import Login from "./pages/Login";
 import TestPage from "./pages/testPage";
 import Post from "./pages/Post";
 import NavPage from "./pages/NavPage";
 import MyFooter from "./pages/MyFooter";
-
 import Events from "./pages/events";
 import Sign from "./pages/Sign";
+import Register from './pages/Register';
+
 class App extends Component {
  
   constructor(props){
@@ -37,12 +38,11 @@ class App extends Component {
       <Switch>
         <Route path = "/" component ={MyHomePage} exact/>
         <Route path = "/event" component ={Events}/>
-        <Route path = "/organisation/" component ={MyOrganisationalPage}/>
+        <Route path = "/organisation" component ={MyOrganisationalPage}/>
         <Route path = "/table" component ={TestPage}/>
         <Route path = "/post" component ={Post}/>
-        <Route path="/register" component={Sign} />
-        <Route path = "/sign" component ={FormsPage}/>
-        <Route path = "/sign1" component ={Post}/>
+        <Route path="/register" component={Register} />
+        <Route path = "/login" component ={Login}/>
       </Switch>
       <MyFooter/>
     </BrowserRouter>

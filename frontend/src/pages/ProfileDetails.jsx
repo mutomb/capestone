@@ -14,7 +14,7 @@ import { MDBEdgeHeader, MDBJumbotron, MDBIcon, MDBAnimation } from "mdbreact";
 const Content= props=>{ {/* Stateless component to Handle the display of your personal information*/}
     var style={
       marginRight:10,
-    }
+    } 
     return(
           <MDBAnimation type="slideInLeft" duration="500ms">
           <MDBContainer>
@@ -56,21 +56,20 @@ class ProfileDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state={
-        organisation:{},
+        organisation:props.organisation,
         selectedFile:null,
         profilePic:null,
         profilePicStyle:null,
     }
   }
-  componentWillReceiveProps(props){
+/*  componentWillReceiveProps(props){
     this.setState({
- 
       organisation:props.organisation
     })
     console.log(props.city)
   }
 
-
+*/
 
   addProfilePicture=event =>{
     this.setState({profilePic:URL.createObjectURL(event.target.files[0]),profilePicStyle:{opacity:1}})
@@ -87,7 +86,10 @@ class ProfileDetails extends React.Component {
    // .then(res=>console.log(res))
     //.catch(err=>console.log(err));
   }
-  componentWillMount(){
+  componentWillReceiveProps(nextProps){
+      this.setState({
+        organisation:nextProps
+      })
   }
 
   render(){
@@ -105,7 +107,7 @@ class ProfileDetails extends React.Component {
                         street_address={this.state.organisation.street_address}
                         city={this.state.organisation.city}
                         province={this.state.organisation.province}
-                        country={this.state.organisation.country}  
+                        country={this.state.organisation.country}   
                         email={this.state.organisation.email}
                         phonenumber={this.state.organisation.phonenumber}
                     />
@@ -139,10 +141,11 @@ class ProfileDetails extends React.Component {
                       </span>
                       <input onClick={this.fileSelectedHandler} 
                               ref={fileInput=>this.fileInput=fileInput}
-                              style={{opacity:0, position:"absolute", pointerEvents:"none"}} 
+                              style={{opacity:0,pointerEvents:"none", width:10}} 
                               type="file"
                               id="inputGroupFile01" 
                               onChange={this.addProfilePicture}
+                              
                        />
                       </div>
                   </SectionContainer>

@@ -6,16 +6,15 @@ import {
   MDBModalFooter
 } from "mdbreact";
 import { MDBBtn, MDBCard, MDBCardHeader, MDBCardBody,MDBIcon,MDBInput } from 'mdbreact';
-
-
-
+import axios from 'axios';
+import {login} from './UserFunctions'
 
 const FormErrors = (props) =>
   <div className='formErrors'>
     {Object.keys(props.formErrors).map((fieldName, i) => {
       if(props.formErrors[fieldName].length > 0 && props.feedbackFor==fieldName){ 
         return (
-          <small style={{color:'green'}} >{fieldName} {props.formErrors[fieldName]}</small>
+          <small style={{color:'green'}} key={i}>{fieldName} {props.formErrors[fieldName]}</small>
         )        
       } else {
         return '';
@@ -23,7 +22,7 @@ const FormErrors = (props) =>
     })}
   </div>
 
-class FormPage extends Component {
+class Login extends Component {
   constructor(props){
     super(props);
     this.state={
@@ -40,11 +39,6 @@ class FormPage extends Component {
     this.setState({
       modal: !this.state.modal
     });
-  };
-
-  submitHandler = event => {
-    event.preventDefault();
-    event.target.className += " was-validated"; 
   };
 
   changeHandler = event => {
@@ -85,21 +79,27 @@ class FormPage extends Component {
   }
   errorClass=(error)=>{
     return(error.length === 0 ? '' : 'has-error');
-  }  
+  } 
 
-
-  onSubmit =(e)=>{
-    e.preventDefault();
-    const obj = {
-        email: this.state.email,
-        password: this.state.password
-    };
-
-    //axios.post('http://localhost:5000/organisation/form/'+this.props.match.params.id, obj)
-        //.then(res => console.log(res.data));
-    
-    //this.props.history.push('/');
+  submitHandler = event => {
+    event.preventDefault();
+    event.target.className += " was-validated"; 
+    let obj={  
+      email: this.state.email,
+      password: this.state.password
+    }
+    if(this.state.formValid){    
+      login(obj)
+        .then(res=>{
+          if(res){
+            this.props.history.push('/organisation')
+          }
+        })
+    }
+  } 
   
+  tryagain=(why)=>{
+    
   }
 
   render() {
@@ -107,16 +107,16 @@ class FormPage extends Component {
       <>
      <MDBContainer>
       <MDBRow>
-        <MDBCol md="6">
+        <MDBCol md="10">
           <MDBCard>
             <MDBCardBody>
-              <form method="post" action=""
-                className="needs-validation"
+              <form 
+                method="post" action=""
                 onSubmit={this.submitHandler}
                 noValidate
               >
                 <p className="h5 text-center mb-4">Sign in</p> 
-                <div className="grey-text">
+                <div className="grey-text ">
                   <MDBInput
                     label="Enter your email address"
                     icon="envelope"
@@ -151,6 +151,7 @@ class FormPage extends Component {
                   <MDBBtn 
                   className="m-0 px-5 py-3  btn-green"
                   disabled={!this.state.formValid}
+                  type="submit"
                   >
                     Login
                   </MDBBtn>
@@ -167,5 +168,5 @@ class FormPage extends Component {
 }
 
 
-export default FormPage;
+export default Login;
 

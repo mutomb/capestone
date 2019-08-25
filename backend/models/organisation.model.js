@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose= require('mongoose');
 const schema= mongoose.Schema;
 const organisationSchema= new schema({
     username:{
@@ -31,14 +31,10 @@ const organisationSchema= new schema({
     email: { type: String },
     phonenumber: { type: String },
 
-    tags:{
-        type: Array
-    }
-
 },
     {timestamps:{
         timeStamp: true,
     }}
 ); 
 
-module.exports=Organisation=mongoose.model('organisation',organisationSchema);
+module.exports=Organisation=mongoose.model('organisations',organisationSchema);
