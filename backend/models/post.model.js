@@ -1,15 +1,32 @@
 const mongoose = require('mongoose');
 const schema= mongoose.Schema;
 const postSchema= new schema({
-    subject:{
+    owner:{
         type: String,
         required: true,
         unique: false,
         trim: true,
         minlength: 3
+    },    
+    title:{
+        type: String,
+        required: true,
+        unique: false,
+        trim: true,
+        minlength: 3
+    }, 
+    what:{
+        type: String,
+        required: true,
+        unique: false,
     },
-    picture:{
-        type: Object
+    imageName: {
+        type: String,
+        required: false,
+    },
+    imageData: {
+        type: String,
+        required: false,
     }
 },
     {timestamps:{
@@ -17,4 +34,4 @@ const postSchema= new schema({
     }}
 ); 
 
-module.exports=Post=mongoose.model('post',eventSchema);
+module.exports=Post=mongoose.model('posts',postSchema);

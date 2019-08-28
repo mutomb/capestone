@@ -3,24 +3,23 @@ import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBInputGroup,
-  MDBBtn,
-  MDBInput
+  MDBBtn, 
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import axios from "axios";
-import { MDBEdgeHeader, MDBJumbotron, MDBIcon, MDBAnimation } from "mdbreact";
-
+import { MDBJumbotron, MDBAnimation } from "mdbreact";
+import './font.css';
+import {uploadProfilePicture, getProfilePicture} from './UserFunctions'
+import { MDBCard, MDBCardTitle, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody } from "mdbreact";
 const Content= props=>{ {/* Stateless component to Handle the display of your personal information*/}
     var style={
       marginRight:10,
     } 
     return(
-          <MDBAnimation type="slideInLeft" duration="500ms">
-          <MDBContainer>
-            <MDBRow>
-              <MDBCol md="10" className="mt-3 mx-auto">
-                <MDBJumbotron>
+        //  <MDBContainer>
+          //  <MDBRow>
+            //  <MDBCol md="10" className="mt-3 mx-auto">
+              //  <MDBJumbotron>
                 <div>
                     <h3>Login details</h3>      
                     <p><span style={style} >Username:</span>{props.username}</p>
@@ -28,7 +27,7 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
                     <br/>
                     <h3>About Your Organisation</h3>
                     <p><span style={style}>Organisation Name:</span>{props.name}</p>
-                    <p><span >Description:</span><br/>{props.description}</p>
+                    <p style={{wordWrap:"break-word"}}><span >Description:</span><br/>{props.description}</p>
                     <br/>
                     <h3>Your Location</h3>
                     <p><span style={style}>Street Address:</span>{props.street_address}</p>
@@ -41,12 +40,10 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
                     <p><span style={style}>Phone Number:</span>{props.phonenumber}</p>
                     <br/>
                 </div>
-                </MDBJumbotron>
-              </MDBCol>
-            </MDBRow>
-          </MDBContainer>
-          </MDBAnimation>
-
+       //         </MDBJumbotron>
+         //     </MDBCol>
+          //  </MDBRow>
+         // </MDBContainer>
     )
   }
 
@@ -57,103 +54,117 @@ class ProfileDetails extends React.Component {
     super(props);
     this.state={
         organisation:props.organisation,
-        selectedFile:null,
-        profilePic:null,
-        profilePicStyle:null,
+        imageStyle:null,
+        multerImage:"",
+        owner: props.organisation.email,
+  
+
     }
   }
-/*  componentWillReceiveProps(props){
+  resetProfilePicture=()=>{
+    this.setState({ multerImage:null})
+    
+  }
+
+  uploadImage=(e)=> {
+    let imageFormObj = new FormData();
+    imageFormObj.append("imageName", this.state.owner); 
+    imageFormObj.append("imageData", e.target.files[0]);
+    imageFormObj.append('owner', this.state.owner) 
+    uploadProfilePicture(imageFormObj)
+          .then(data=>{
+            if(data.success){
+              this.resetProfilePicture();
+              this.setState({ multerImage:`http://localhost:5000/${data.imageData}?${Date.now}`, imageStyle: {opacity: 1} })
+              alert("Image has been successfully uploaded using multer");
+
+            }
+          })
+
+    
+  }
+
+  removeImage=() =>{
     this.setState({
-      organisation:props.organisation
+      multerImage:null,
+      imageStyle:null
     })
-    console.log(props.city)
-  }
-
-*/
-
-  addProfilePicture=event =>{
-    this.setState({profilePic:URL.createObjectURL(event.target.files[0]),profilePicStyle:{opacity:1}})
-  }
-  removeProfilePicture=() =>{
-    this.setState({profilePic:null,profilePicStyle:{opacity:0, position:"absolute", pointerEvents:"none"}})
-  }
-  fileSelectedHandler= event =>{
-    console.log(event.target.files[0]);
-    this.setState({selectedFile:event.target.files[0]});
-  }
-  changeProfilePictureHandler= event=>{
-    //axios.get(`http://localhost:5000/organisation/fileUpload/${this.state.selectedFile}`)
-   // .then(res=>console.log(res))
-    //.catch(err=>console.log(err));
   }
   componentWillReceiveProps(nextProps){
       this.setState({
-        organisation:nextProps
+        organisation:nextProps.organisation
       })
   }
 
+  componentWillMount(){
+    if(this.state.owner){
+      getProfilePicture(this.state.owner)
+        .then(res=>{
+          if(res){
+            this.setState({ multerImage:`http://localhost:5000/${res.imageData}` , imageStyle: {opacity: 1} })
+          }
+        })
+    }
+    
+  }
+
+
   render(){
     return(
-      <SectionContainer noBorder="px-0" header="Personal Details">
-            <div class="media"> 
-                <div class="media-body">             
-                    {/* Handle the display of your personal information*/}
-                    <Content 
-                        username={this.state.organisation.username} 
-                        password={this.state.organisation.password}
-                        name={this.state.organisation.name}
-                        description={this.state.organisation.description}
-                        zipcode={this.state.organisation.zipcode}
-                        street_address={this.state.organisation.street_address}
-                        city={this.state.organisation.city}
-                        province={this.state.organisation.province}
-                        country={this.state.organisation.country}   
-                        email={this.state.organisation.email}
-                        phonenumber={this.state.organisation.phonenumber}
-                    />
-                </div>
-                <div>
-                  {/* Handle the display of your Profile picture*/}
-                  <MDBAnimation type="slideInLeft" duration="500ms">
-                  <SectionContainer header="Profile Picture">
-                      <div class="file-field">
-                      <div class="d-flex justify-content-center">
-                          <img src={this.state.profilePic}
-                            style={this.state.profilePicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}} 
-                          class="z-depth-1-half avatar-pic" alt="profile Picture" width="300" height="300"/>
-                      </div>
-                      </div>
-                      <div class="file-field">  
-                      <span style={{margin:"2%"}}>
-                     <MDBBtn size="md" className="m-0 px-3 py-2  btn-green" 
-                      onClick={()=>this.fileInput.click()}
-                      >
-                        Upload 
-                      </MDBBtn>
-                      </span>
-                      <span style={{margin:"2%"}}> 
-                      <MDBBtn size="md" className="m-0 px-3 py-2  btn-red"   
-                      onClick={this.removeProfilePicture}
-                      style={this.state.profilePicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}}
-                      >
-                        Delete
-                      </MDBBtn>
-                      </span>
-                      <input onClick={this.fileSelectedHandler} 
-                              ref={fileInput=>this.fileInput=fileInput}
-                              style={{opacity:0,pointerEvents:"none", width:10}} 
-                              type="file"
-                              id="inputGroupFile01" 
-                              onChange={this.addProfilePicture}
-                              
-                       />
-                      </div>
-                  </SectionContainer>
-                  </MDBAnimation>
-                </div>
-             </div>
-
-
+      <SectionContainer noBorder="px-0" header="Personal Details">           
+          <MDBCardGroup>
+            <MDBCard>
+              <MDBCardImage 
+                alt="MDBCard image cap" top hover
+                overlay="white-slight"
+                style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                src={this.state.multerImage} 
+                height="300px"
+                />
+              <MDBCardBody>
+                  <span style={{margin:"2%"}}>
+                    <MDBBtn size="md"  className="btn-green" 
+                    onClick={()=>this.fileInput.click()}
+                    >
+                      Add  
+                    </MDBBtn>
+                  </span>
+                  <span style={{margin:"2%"}}> 
+                    <MDBBtn size="md" className="tn-red"   
+                    onClick={this.removeImage}
+                    style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                    >
+                      Delete
+                    </MDBBtn>
+                  </span> 
+                  <form  method="post">
+                      <input 
+                        ref={fileInput=>this.fileInput=fileInput}
+                        style={{opacity:0,pointerEvents:"none", width:10}} 
+                        type="file"
+                        onChange={this.uploadImage}
+                        name='avatar'
+                      />
+                  </form>
+                <MDBCardTitle tag="h5">Personal Details</MDBCardTitle>
+                <MDBCardText>
+                  <Content 
+                                username={this.state.organisation.username} 
+                                password={this.state.organisation.password}
+                                name={this.state.organisation.name}
+                                description={this.state.organisation.description}
+                                zipcode={this.state.organisation.zipcode}
+                                street_address={this.state.organisation.street_address}
+                                city={this.state.organisation.city}
+                                province={this.state.organisation.province}
+                                country={this.state.organisation.country}   
+                                email={this.state.organisation.email}
+                                phonenumber={this.state.organisation.phonenumber}
+                  />
+                </MDBCardText>
+              </MDBCardBody>
+            </MDBCard>
+            </MDBCardGroup>            
       </SectionContainer>       
     )
 }

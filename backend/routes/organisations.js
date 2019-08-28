@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-const bcrpyt = require('bcrypt-nodejs');
+//const bcrpyt = require('bcrypt-nodejs');
+const mongoose= require('mongoose');
 
 let Organisation = require('../models/organisation.model');
 router.use(cors())
@@ -26,25 +27,6 @@ router.post('/register', (req, res) => {
     })
         .then(organisation => {
             if (!organisation) {
-                
-                //organisationData.password=bcrpyt.hashSync(organisationData.password);
-                
-                const username= req.body.username;
-                const password= bcrpyt.hashSync(organisationData.password);
-                const name= req.body.name;
-                const description= req.body.description;
-                const zipcode= req.body.zipcode;
-                const street_address= req.body.street_address;
-                const city= req.body.city;
-                const province= req.body.province;
-                const country= req.body.country;
-                const email= req.body.email;
-                const phonenumber= req.body.phonenumber;
-
-  
-               // const newOrganisation= new Organisation({
-                   // username,password,name,description,zipcode,street_address,city,province,country,email,phonenumber
-              //  }).save()
                 Organisation.create(organisationData)
                     .then(organisation => {
                         console.log(organisation.email + 'has registered');
@@ -136,8 +118,70 @@ router.get('/profile', (req, res) => {
         })
 })
 
+router.post('/update',(req, res)=>{
+        console.log(req.body)
+        Organisation.findOne({
+            email: req.body.email,
+        })
+        .then(organisation=>{
+            if(!organisation){res.send('oragnisation not found')}
+            else{ 
+                organisation.username=req.body.username,
+                organisation.password=req.body.password,
+                organisation.name=req.body.name,
+                organisation.description=req.body.description,
+                organisation.zipcode=req.body.zipcode,
+                organisation.street_address=req.body.street_address,
+                organisation.city=req.body.city,
+                organisation.province=req.body.province,
+                organisation.country=req.body.country,
+                organisation.email=req.body.email,
+                organisation.phonenumber=req.body.phonenumber
+                organisation.save()
+                    .then((org)=>res.send(org))
+                    .catch(err=>res.send('Error: '+err));
+            }
+        })
+        .catch(err=>res.send('error: '+err));
+});
 
 
+/*
+const upload= multer({dest: 'uploads/'});
+router.post('/profilePic/add',upload.single('profileImage'),(req,res,next)=>{
+    console.log(req.file);
+    res.send('works')
+    const profilePicData={
+        //_id: new mongoose.Types.ObjectId(),
+        owner: req.body.owner,
+        fileUrl: req.body.fileUrl
+    };
+    ProfilePic.create(profilePicData)
+        .then(image => {
+            console.log(image.fileUrl + 'saved');
+            res.json({ status: image.fileUrl+ 'saved' })
+        })
+        .catch(err => {
+            res.send('Error:' + err)
+        })
+})
+*/
+
+/*
+router.get('/profilePic',(req,res,next)=>{
+    ProfilePic.findOne({
+        owner: req.owner
+    })
+    .then(image=>{
+        return{
+            owner:image.owner,
+            fileUrl:image.fileUrl
+        }
+    })
+
+})
+
+*/
 
 /*
 router.route('/').get((req,res)=>{
@@ -184,23 +228,6 @@ router.route('/:id').delete((req,res)=>{
     Organisation.findByIdAndDelete(req.params.id)
         .then(org=> res.json('organsation delete.'))
         .catch(err=>res.status(400).json('Error: '+err));   
-});
-*/
-/*
-router.route('/update/:id').post((req,res)=>{
-    Organisation.findById(req.paramas.id)
-        .then(org=>{
-            const username = req.body.username; 
-            const password = req.body.password;
-            const description =req.body.description;
-            const events = req.body.events; 
-            const posts = req.body.posts;
-
-            org.save()
-                .then(()=> res.json('Exercise saved'))
-                .catch(err=>res.status(400).json('Error'+err));
-        })
-        .catch(err=>res.status(400).json('Error'+err));
 });
 */
 

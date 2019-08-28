@@ -6,7 +6,6 @@ import {
   MDBModalFooter
 } from "mdbreact";
 import { MDBBtn, MDBCard, MDBCardHeader, MDBCardBody,MDBIcon,MDBInput } from 'mdbreact';
-import axios from 'axios';
 import {login} from './UserFunctions'
 
 const FormErrors = (props) =>
@@ -40,7 +39,7 @@ class Login extends Component {
       modal: !this.state.modal
     });
   };
-
+ 
   changeHandler = event => {
     const name=event.target.name;
     const value=event.target.value;

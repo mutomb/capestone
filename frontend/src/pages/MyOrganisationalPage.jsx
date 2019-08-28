@@ -36,12 +36,22 @@ class MyOrganisationalPage extends React.Component {
               <InnerNavBar 
               profileContent={
               <ProfileDetails 
-              organisation={this.state.organisation}
+                organisation={this.state.organisation}
               />
-            }
-              eventsContent={<EventsDetails/>} 
-              postsContent={<PostsDetails/>}
-              EditProfileContent={<EditProfileDetails/>} 
+              }  
+              eventsContent={
+              <EventsDetails
+                email={this.state.organisation.email}
+              />
+              }  
+              postsContent={
+              <PostsDetails
+                email={this.state.organisation.email}
+              />}
+              EditProfileContent={
+              <EditProfileDetails
+                organisation={this.state.organisation}
+              />} 
               />
             </MDBCol>
           </MDBRow>

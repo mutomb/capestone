@@ -1,29 +1,49 @@
 const mongoose = require('mongoose');
-const schema= mongoose.Schema;
-const eventSchema= new schema({
-    username:{
+const schema = mongoose.Schema;
+const eventSchema = new schema({
+    owner: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 3
+    },
+    title: {
         type: String,
         required: true,
         unique: false,
         trim: true,
         minlength: 3
     },
-    where:{
-        type:String
+    where: {
+        type: String,
+        required: true,
+        minlength: 3
     },
-    when:{
-        type: String
+    when: {
+        type: String,
+        required: true,
+        minlength: 3
     },
-    what:{
-        type: Array
+    what: {
+        type: String,
+        required: true,
+        unique: false,
+        minlength: 3
     },
-    picture:{
-        type: Object
+    imageName: {
+        type: String,
+        required: false,
+    },
+    imageData: {
+        type: String,
+        required: false,
     }
 },
-    {timestamps:{
-        timeStamp: true,
-    }}
-); 
+    {
+        timestamps: {
+            timeStamp: true,
+        }
+    }
+);
 
-module.exports=Event=mongoose.model('event',eventSchema);
+module.exports = Event = mongoose.model('events', eventSchema);

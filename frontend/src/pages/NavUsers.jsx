@@ -6,7 +6,9 @@ import {
   MDBNavLink,
   MDBNavbarToggler,
   MDBCollapse,
-  MDBIcon
+  MDBIcon,
+  MDBCol,
+  MDBFormInline
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import { withRouter } from 'react-router';
@@ -61,15 +63,16 @@ class NavUsers extends Component {
                 </MDBNavItem>
                 </MDBNavbarNav>
                 <MDBNavbarNav right>
+                  
                   <MDBNavItem>
                     <MDBNavLink to="/login">
-                      <MDBIcon icon="user" className="d-inline-inline" />
+                      <MDBIcon className="d-inline-inline fas fa-lock" />
                       <div className="d-none d-md-inline">Sign in</div>
                     </MDBNavLink>
                   </MDBNavItem>
                   <MDBNavItem>
                     <MDBNavLink to="/register">
-                      <MDBIcon icon="lock" className="d-inline-inline" />
+                      <MDBIcon className="d-inline-inline fas fa-user-plus" />
                       <div className="d-none d-md-inline">Register</div>
                     </MDBNavLink>
                   </MDBNavItem>
@@ -112,14 +115,14 @@ class NavUsers extends Component {
                 </MDBNavbarNav>
                 <MDBNavbarNav right>
                 <MDBNavItem>
-                    <MDBNavLink to="organisation/profile">
-                      <MDBIcon icon="user" className="d-inline-inline" />
+                    <MDBNavLink to="/organisation">
+                      <MDBIcon className="d-inline-inline fas fa-user-circle" />
                       <div className="d-none d-md-inline">User</div>
                     </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>
                    <MDBNavLink onClick={this.logOut.bind(this)}>
-                      <MDBIcon icon="user" className="d-inline-inline" />
+                      <MDBIcon className="d-inline-inline fas fa-power-off" />
                       <div className="d-none d-md-inline">Logout</div>
                     </MDBNavLink>
                 </MDBNavItem>

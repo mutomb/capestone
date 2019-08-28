@@ -1,99 +1,115 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
 import {
-  MDBContainer,
   MDBCol,
   MDBRow,
-  MDBInputGroup,
-  MDBBtn,
-  MDBInput
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import axios from "axios";
-import InnerNavBar from "../pages/InnerNavBar";
-import ProfileDetails from "../pages/ProfileDetails";
-import PostDetails from "../pages/PostsDetails";
-
-import { MDBEdgeHeader, MDBJumbotron, MDBIcon, MDBAnimation } from "mdbreact";
-import MenuLink from "./../components/menuLink";
+import {updateOrganisation} from "./UserFunctions";
 
 class EditProfileDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      iconInput: "eye-slash",
-      typeInput: "password",
-      selectedFile:null,
-      eventPic:null,
-      events:[],
-      profilePicStyle:null,
-      profilePic:null
+      organisation:props.organisation,
+      username:props.organisation.username, 
+      password:props.organisation.password,
+      name:props.organisation.name,
+      description:props.organisation.description,
+      zipcode:props.organisation.zipcode,
+      street_address:props.organisation.street_address,
+      city:props.organisation.city,
+      province:props.organisation.province,
+      country:props.organisation.country,  
+      email:props.organisation.email,
+      phonenumber:props.organisation.phonenumber,
+      formValid:true,
     };
   }
-
-  addProfilePicture=event =>{
-    this.setState({profilePic:URL.createObjectURL(event.target.files[0]),profilePicStyle:{opacity:1}})
+  changeHandler=(e)=>{
+    const name = e.target.name;
+    const value= e.target.value;
+    this.setState({
+      [name]:value
+    })
   }
-  removeProfilePicture=() =>{
-    this.setState({profilePic:null,profilePicStyle:{opacity:0, position:"absolute", pointerEvents:"none"}})
+  uploadHandler=event=>{
+    event.preventDefault();
+    const organisationData={
+      username:this.state.username, 
+      password:this.state.password,
+      name:this.state.name,
+      description:this.state.description,
+      zipcode:this.state.zipcode,
+      street_address:this.state.street_address,
+      city:this.state.city,
+      province:this.state.province,
+      country:this.state.country,  
+      email:this.state.email,
+      phonenumber:this.state.phonenumber,
+      formValid:true,
+    }
+    console.log(organisationData)
+    updateOrganisation(organisationData)
+      .then(res=>{
+        this.props.history.push('/login')
+      })
+      .catch(err=>console.log(err));
   }
-  fileSelectedHandler= event =>{
-    console.log(event.target.files[0]);
-    this.setState({selectedFile:event.target.files[0]});
+  componentWillReceiveProps(nextProps){
+    this.setState({
+      organisation:nextProps
+    })
   }
-  changeProfilePictureHandler= event=>{
-    //axios.get(`http://localhost:5000/organisation/fileUpload/${this.state.selectedFile}`)
-   // .then(res=>console.log(res))
-    //.catch(err=>console.log(err));
-  }
-
-  componentWillMount(){
-      this.setState({events:this.props.events});
-  }
-
+  shouldComponentUpdate(nextProps,nexState){}
 
   render(){
     return(
       <>
       <MDBRow>
         <MDBCol md="12">
-        <SectionContainer header="Form layout">
-          <form>
+        <SectionContainer header="Edit Your Details">
+          <form 
+          method="post"
+          onSubmit={this.uploadHandler} 
+          noValidate
+          >
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="inputEmail4">Enter New Username</label>
-                <input type="email" className="form-control" id="inputEmail4" placeholder="username" />
+                <input defaultValue={this.state.organisation.username} name="username" onChange={this.changeHandler} type="email" className="form-control" id="inputEmail4"/>
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="inputPassword4">Enter New Password</label>
-                <input type="password" className="form-control" id="inputPassword4" placeholder="Password" />
+                <input defaultValue={this.state.organisation.password} name="password" onChange={this.changeHandler} type="password" className="form-control" id="inputPassword4" />
               </div>
             </div>
             <div className="form-group">
               <label htmlFor="inputAddress">Enter New Country</label>
-              <input type="text" className="form-control" id="inputAddress" placeholder=" e.g 1234 Main St" />
+              <input defaultValue={this.state.organisation.country} name="country" onChange={this.changeHandler} type="text" className="form-control" id="inputAddress" />
             </div>
             <div className="form-group">
               <label htmlFor="inputAddress">Enter New Province</label>
-              <input type="text" className="form-control" id="inputAddress" placeholder=" e.g Western Cape" />
+              <input defaultValue={this.state.organisation.province} name="province" onChange={this.changeHandler} type="text" className="form-control" id="inputAddress" />
             </div>
             <div className="form-row">
               <div className="form-group col-md-6">
                 <label htmlFor="inputCity">Enter City</label>
-                <input type="text" className="form-control" id="inputCity" placeholder="New York City" />
+                <input defaultValue={this.state.organisation.city} name="city" onChange={this.changeHandler} type="text" className="form-control" id="inputCity" />
               </div>
               <div className="form-group col-md-6">
                 <label htmlFor="inputZip">Enter New Zip</label>
-                <input type="text" className="form-control" id="inputZip" placeholder="11206-1117" />
+                <input defaultValue={this.state.organisation.zipcode} name="zipcode" onChange={this.changeHandler} type="text" className="form-control" id="inputZip" />
               </div>
             </div>
             <div className="form-row">
               <div className="form-group col-md-12">
               <label htmlFor="exampleFormControlTextarea1">Describe your organisation</label>
-              <textarea className="form-control" id="exampleFormControlTextarea1" rows="5" />
+              <textarea defaultValue={this.state.organisation.description} name="description" onChange={this.changeHandler} className="form-control" id="exampleFormControlTextarea1" rows="5" />
               </div>
             </div>
             <button type="submit" className="btn btn-green btn-md">
-              Save
+              Save Changes
             </button>
           </form>
         </SectionContainer>
@@ -104,4 +120,4 @@ class EditProfileDetails extends React.Component {
 }
 
 }
-export default EditProfileDetails;
+export default withRouter (EditProfileDetails); 
