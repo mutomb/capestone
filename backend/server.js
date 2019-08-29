@@ -20,6 +20,8 @@ app.use(bodyParser.json());
 app.use('/uploads/profile', express.static('uploads/profile'));
 app.use('/uploads/events', express.static('uploads/events'));
 app.use('/uploads/posts', express.static('uploads/posts'));
+app.use('/uploads/socialissues', express.static('uploads/socialissues'));
+
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 

@@ -3,16 +3,25 @@ import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBInputGroup,
   MDBBtn,
-  MDBInput,
+  MDBInput, 
   MDBCard,
   MDBCardBody
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import axios from "axios";
 import {register} from './UserFunctions';
-
+import './Chips.css'
+const Chips=(props)=>{  
+  return(
+    <>
+        <div class="chip">
+          {props.item}
+          <span class="closebtn" onClick={(e)=>props.deleteItem(props.index)}>&times;</span>
+        </div>
+    </>
+  )
+}
 
 const FormErrors = (props) =>
   <div className='formErrors'>
@@ -44,6 +53,8 @@ class Register extends React.Component {
       country:"",  
       email:"",
       phonenumber:"",
+      item:"",
+      socialissues:[],
       usernameValid: false,
       passwordValid: false,
       nameValid: false,
@@ -72,7 +83,23 @@ class Register extends React.Component {
     };
   }
 
-
+  addItem=()=>{
+    this.setState({
+      socialissues:[...this.state.socialissues,this.state.item]
+    },()=>{
+      console.log(this.state.socialissues)
+    })
+  }
+  deleteItem=(index)=>{
+    var array = [...this.state.socialissues]; 
+    console.log(index);
+    if (index > -1) {
+      array.splice(index, 1);
+      this.setState({
+        socialissues:array
+      })
+    }   
+}
 
   changeHandler = event => {
     const name=event.target.name;
@@ -180,6 +207,7 @@ class Register extends React.Component {
   } 
 
   submitHandler = event => {
+    console.log(this.state.socialissues)
     event.preventDefault();
     event.target.className += " was-validated"; 
     let obj={
@@ -194,7 +222,8 @@ class Register extends React.Component {
       country:this.state.country, 
       email:this.state.email,
       phonenumber:this.state.phonenumber,
-      username:this.state.username
+      username:this.state.username,
+      socialissues: this.state.socialissues
     }
     register(obj)
 
@@ -302,6 +331,11 @@ class Register extends React.Component {
                         </MDBInput>
                       </MDBCol>
                     </MDBRow>
+
+                    <MDBRow>
+                      <MDBCol md='12'>
+                      </MDBCol>
+                    </MDBRow>
                     <MDBRow>
                       <MDBCol md='12'>
                       <MDBInput label="Describe your organisation" type="textarea" className="form-control" rows="5"  name="description" onChange={this.changeHandler}>
@@ -309,6 +343,24 @@ class Register extends React.Component {
                               <FormErrors formErrors={this.state.formErrors} feedbackFor={'description'} />
                         </div>
                         </MDBInput>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBRow>
+                      <MDBCol md='8'>
+                      <MDBInput value={this.state.item} label="Social issues you deal with" type="text" className="form-control" rows="5"  name="item" onChange={this.changeHandler}>
+                        {this.state.socialissues.map(((item,index)=>{
+                           return(<Chips index={index} deleteItem={this.deleteItem} item={item} />)
+                        }))}
+                      </MDBInput> 
+                      </MDBCol>
+                      <MDBCol md='2'>
+                            <MDBBtn
+                              className="m-0 px-3 py-2  btn-green"
+                              style={{borderRadius:'50%'}}
+                              onClick={this.addItem}
+                          >
+                            <span style={{fontSize:'1.5em',color:'white'}}>+</span>       
+                          </MDBBtn>
                       </MDBCol>
                     </MDBRow>
                     <MDBBtn

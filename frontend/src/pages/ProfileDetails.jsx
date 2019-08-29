@@ -116,23 +116,25 @@ class ProfileDetails extends React.Component {
             <MDBCard>
               <MDBCardImage 
                 alt="MDBCard image cap" top hover
-                overlay="white-slight"
+                overlay="green-strong"
                 style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
                 src={this.state.multerImage} 
                 height="300px"
                 />
               <MDBCardBody>
                   <span style={{margin:"2%"}}>
-                    <MDBBtn size="md"  className="btn-green" 
+                    <MDBBtn size="md"  className="btn-white"
                     onClick={()=>this.fileInput.click()}
+                    style={{color:'green', border:'1px solid green',hover:'yellow'}}
                     >
                       Add  
                     </MDBBtn>
                   </span>
                   <span style={{margin:"2%"}}> 
-                    <MDBBtn size="md" className="tn-red"   
+                    <MDBBtn size="md" className="btn-white"   
                     onClick={this.removeImage}
-                    style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                    style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none"}}
+                    style={{border:'1px solid red', color: 'red'}}
                     >
                       Delete
                     </MDBBtn>
@@ -148,7 +150,7 @@ class ProfileDetails extends React.Component {
                   </form>
                 <MDBCardTitle tag="h5">Personal Details</MDBCardTitle>
                 <MDBCardText>
-                  <Content 
+                  <Content ad
                                 username={this.state.organisation.username} 
                                 password={this.state.organisation.password}
                                 name={this.state.organisation.name}

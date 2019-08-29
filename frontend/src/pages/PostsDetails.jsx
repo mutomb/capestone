@@ -34,7 +34,7 @@ class PostDetails extends React.Component {
 
   addPostPicture=event =>{
     this.setState({postPic:URL.createObjectURL(event.target.files[0]),
-      postPicStyle:{opacity:1},
+      postPicStyle:{opacity:1, color:'red'},
       selectedImage: event.target.files[0]
     })
   }
@@ -192,23 +192,22 @@ class PostDetails extends React.Component {
                     </div>
                     <div class="file-field">
                       <div class="d-flex justify-content-center">
-                      <MDBCol md="4">
                           <span style={{margin:3}}>
-                            <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-green" 
+                            <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white" 
                             onClick={()=>this.fileInput.click()}
+                            style={{border:'1px solid green',color:'green'}}
                             >
                               Add
                             </MDBBtn>
                           </span>
                           <span style={{margin:3}}> 
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-red"   
+                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"   
                           onClick={this.removePostPicture}
                           style={this.state.postPicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}}
                           >
                             Delete
                           </MDBBtn>
                           </span>
-                      </MDBCol>
                       <form metho='post'>
                       <input onClick={this.fileSelectedHandler} 
                               ref={fileInput=>this.fileInput=fileInput}

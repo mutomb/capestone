@@ -1,17 +1,21 @@
 const mongoose= require('mongoose');
 const schema= mongoose.Schema;
 const organisationSchema= new schema({
+    email: { 
+        type: String, 
+        required: true, 
+        trim: true },
+    password:{
+        type: String,
+        required: true,
+        trim: true,   
+    },
     username:{
         type: String,
         required: true,
         unique: false,
         trim: true,
         minlength: 3
-    },
-    password:{
-        type: String,
-        required: true,
-        trim: true,   
     },
     name:{
         type:String,
@@ -28,9 +32,11 @@ const organisationSchema= new schema({
     province: {type: String},
     country:{ type: String },
 
-    email: { type: String },
     phonenumber: { type: String },
 
+    socialissues:{
+        type: Array,
+    }
 },
     {timestamps:{
         timeStamp: true,

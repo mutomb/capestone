@@ -39,7 +39,7 @@ class EventDetails extends React.Component {
   addEventPicture = event => {
     this.setState({ 
       eventPic: URL.createObjectURL(event.target.files[0]), 
-      eventPicStyle: { opacity: 1 },
+      eventPicStyle: { opacity: 1},
       selectedImage: event.target.files[0]
     })
   }
@@ -81,7 +81,8 @@ class EventDetails extends React.Component {
             wheres: [...this.state.wheres,...events.map(event=>event.where)],
             whens: [...this.state.whens,...events.map(event=>event.when)],
             whats: [...this.state.whats,...events.map(event=>event.what)],
-            eventPics:[...this.state.eventPics,...events.map(event=>event.imageData)]})
+            eventPics:[...this.state.eventPics,...events.map(event=>event.imageData)]
+          })
         })
         .catch(err => console.log('error'));
       })
@@ -98,7 +99,7 @@ class EventDetails extends React.Component {
           .then(data=>{
             if(data.success){
               this.resetEventPicture();
-              this.setState({ eventPic:`http://localhost:5000/${data.imageData}?${Date.now}`, eventPicStyle: {opacity: 1} })
+              this.setState({ eventPic:`http://localhost:5000/${data.imageData}?${Date.now}`, eventPicStyle: {opacity: 1, border:'1px solid red', color:''} })
               alert("Image has been successfully uploaded using multer");
             }
             else{
@@ -117,7 +118,7 @@ class EventDetails extends React.Component {
       when:this.state.whens[i],
       what:this.state.whats[i],
       eventPic:`http://localhost:5000/${this.state.eventPics[i]}?${Date.now}`,
-      eventPicStyle:{opacity: 1}
+      eventPicStyle:{opacity: 1,border:'1px solid red', color:'red'}
     })
   }
   preventDefault=(e)=>{e.preventDefault();}
@@ -221,23 +222,24 @@ class EventDetails extends React.Component {
                   </div>
                   <div class="file-field">
                     <div class="d-flex justify-content-center">
-                      <MDBCol md="4">
+               
                         <span style={{ margin: 3 }}>
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-green"
+                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"
                             onClick={() => this.fileInput.click()}
+                            style={{border:'1px solid green',color:'green'}}
                           >
                             Add
                         </MDBBtn>
                         </span>
                         <span style={{ margin: 3 }}>
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-red"
+                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"
                             onClick={this.removeEventPicture}
                             style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
                           >
                             Delete
                           </MDBBtn>
                         </span>
-                      </MDBCol>
+                    
                       <form  method="post">
                         <input 
                           ref={fileInput => this.fileInput = fileInput}

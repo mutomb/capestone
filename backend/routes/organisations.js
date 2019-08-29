@@ -20,7 +20,8 @@ router.post('/register', (req, res) => {
         province: req.body.province,
         country: req.body.country,
         email: req.body.email,
-        phonenumber: req.body.phonenumber
+        phonenumber: req.body.phonenumber,
+        socialissues: req.body.socialissues
     }
     Organisation.findOne({
         email: req.body.email
@@ -80,7 +81,8 @@ router.post('/login', (req, res) => {
                         province: organisation.province,
                         country: organisation.country,
                         email: organisation.email,
-                        phonenumber: organisation.phonenumber
+                        phonenumber: organisation.phonenumber,
+                        socialissues: organisation.socialissues
                     }
                     let token = jwt.sign(payload, process.env.SECRET_KEY, {
                         expiresIn: 1440
@@ -136,7 +138,8 @@ router.post('/update',(req, res)=>{
                 organisation.province=req.body.province,
                 organisation.country=req.body.country,
                 organisation.email=req.body.email,
-                organisation.phonenumber=req.body.phonenumber
+                organisation.phonenumber=req.body.phonenumber,
+                organisation.socialissues=req.body.socialissues
                 organisation.save()
                     .then((org)=>res.send(org))
                     .catch(err=>res.send('Error: '+err));
@@ -146,82 +149,6 @@ router.post('/update',(req, res)=>{
 });
 
 
-/*
-const upload= multer({dest: 'uploads/'});
-router.post('/profilePic/add',upload.single('profileImage'),(req,res,next)=>{
-    console.log(req.file);
-    res.send('works')
-    const profilePicData={
-        //_id: new mongoose.Types.ObjectId(),
-        owner: req.body.owner,
-        fileUrl: req.body.fileUrl
-    };
-    ProfilePic.create(profilePicData)
-        .then(image => {
-            console.log(image.fileUrl + 'saved');
-            res.json({ status: image.fileUrl+ 'saved' })
-        })
-        .catch(err => {
-            res.send('Error:' + err)
-        })
-})
-*/
-
-/*
-router.get('/profilePic',(req,res,next)=>{
-    ProfilePic.findOne({
-        owner: req.owner
-    })
-    .then(image=>{
-        return{
-            owner:image.owner,
-            fileUrl:image.fileUrl
-        }
-    })
-
-})
-
-*/
-
-/*
-router.route('/').get((req,res)=>{
-    Organisation.find()
-        .then(organisation => res.json(organisation))
-        .catch(err=>res.status(400).json('Error: '+err));
-});
-*/
-//router.route('/login/',obje).post(req)
-
-/*
-router.route('/add').post((req,res)=>{
-    const username = req.body.username; 
-    const password = req.body.password;
-    const description =req.body.description;
-    const events = req.body.events; 
-    const posts = req.body.posts;
-    const newOrganisation= new Organisation({username,password,description,events,posts});
-    newOrganisation.save()
-        .then(()=> res.json('organisation added'))
-        .catch(err=>res.status(400).json('Error: '+err));
-});
-*/
-/*
-router.route('/:id').get((req,res)=>{
-    Organisation.findById(req.params.id)
-        .then(org=> res.json(org))
-        .catch(err=>res.status(400).json('Error: '+err));   
-});
-*/
-
-/*get organisation based on organisation */
-/*
-router.route('/email/:id').post((req,res)=>{
-    console.log("passed here");
-    Organisation.findOne({email:req.params.id})
-        .then(org=> res.json(org))
-        .catch(err=>res.status(400).json('Error: '+err));   
-});
-*/
 
 /*
 router.route('/:id').delete((req,res)=>{

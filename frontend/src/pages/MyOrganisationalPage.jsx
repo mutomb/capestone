@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBInputGroup,
-  MDBBtn,
-  MDBInput
-} from "mdbreact";
-import SectionContainer from "../components/sectionContainer";
-import axios from "axios";
+import {MDBContainer,MDBCol,MDBRow} from "mdbreact";
 import InnerNavBar from "../pages/InnerNavBar";
 import ProfileDetails from "../pages/ProfileDetails";
 import EditProfileDetails from "../pages/EditProfileDetails";

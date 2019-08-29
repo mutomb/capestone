@@ -14,7 +14,8 @@ export const register = newUser=>{
                     province:newUser.province,
                     country:newUser.country,  
                     email:newUser.email,
-                    phonenumber:newUser.phonenumber
+                    phonenumber:newUser.phonenumber,
+                    socialissues: newUser.socialissues,
                 })
                     .then(res=>{
                         console.log('Registered!')
@@ -167,7 +168,6 @@ export const uploadEventPicture=(imageFormObj)=>{
  export const uploadPostPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/postimage/add`, imageFormObj)
                  .then((data) => {
-                    console.log(data)
                      if (data.data.success) {
                          return data.data;
                      }
@@ -176,7 +176,6 @@ export const uploadEventPicture=(imageFormObj)=>{
                      }
                  })
                  .catch((err) => {
-                     console.log('not worked')
                      alert("Error while uploading image using multer"+err);
                  }); 
  }

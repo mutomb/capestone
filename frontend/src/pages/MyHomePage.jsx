@@ -4,15 +4,14 @@ import {
   MDBCol,
   MDBRow,
   MDBCardBody,
-  MDBIcon,
   MDBCard,
   MDBCardTitle,
-  MDBCardImage,
-  MDBCardText,
   MDBAnimation,
-  MDBNavLink
+  MDBNavLink,MDBView,MDBMask
 } from "mdbreact";
 import "./MyHomePage.css";
+
+const URI='http://localhost:5000/'
 
 class MyHomePage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
@@ -32,26 +31,27 @@ class MyHomePage extends React.Component {
                 <MDBRow id="categories">
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
-                      <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBCard cascade className="my-3 grey lighten-4" >  
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/education.jpeg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"
+                          alt=""
+                          style={{height:"235px"}}
                         />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">view organisations that are promoting education of your community</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon
-                              icon="css3"
-                              brand
-                              className="pink-text pr-2"
-                            />
                             <strong>Education</strong>
                           </MDBCardTitle>
                           <MDBNavLink 
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                               View Organisations
@@ -63,23 +63,27 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
-                          className="img-fluid"
-                          src="Image/9.jpeg"
-                          alt="mdbreact-logo"
-                        />
+                          <MDBView hover>
+                            <img
+                          src={`${URI}uploads/socialissues/poverty.jpeg`}
+                              className="img-fluid"
+                              alt=""
+                              style={{height:"235px"}}
+                            />
+                            <MDBMask className="flex-center" overlay="green-strong">
+                              <p className="white-text">View organisations that are fighting porverty in your community</p>
+                            </MDBMask>
+                          </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon icon="cubes" className="blue-text pr-2" />
-                            <strong>Poverty</strong>
+                           <strong>Poverty</strong>
                           </MDBCardTitle>
                          
                           <MDBNavLink 
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
@@ -91,13 +95,19 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/crime.jpeg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"                        />
+                          alt=""
+                          style={{height:"235px"}}
+                        />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">view organisations that are fighting crime in your community</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon icon="code" className="green-text pr-2" />
                             <strong>Crime</strong>
                           </MDBCardTitle>
                          
@@ -106,7 +116,7 @@ class MyHomePage extends React.Component {
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
@@ -121,13 +131,19 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/FeesMustFall.jpg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"                        />
+                          alt=""
+                          style={{height:"235px"}}
+                        />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">view organisations that advocate free education</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon icon="bars" className="pink-text pr-2" />
                             <strong>Fees Must Fall</strong>
                           </MDBCardTitle>
                        
@@ -136,7 +152,7 @@ class MyHomePage extends React.Component {
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
@@ -148,13 +164,19 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/corruption.jpeg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"                        />
+                          alt=""
+                          style={{height:"235px"}}
+                        />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">view organisations that are fighting corruption</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon icon="edit" className="blue-text pr-2" />
                             <strong>Corruption</strong>
                           </MDBCardTitle>
                          
@@ -163,7 +185,7 @@ class MyHomePage extends React.Component {
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
@@ -175,13 +197,19 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/drug.jpeg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"                        />
+                          alt=""
+                          style={{height:"235px"}}
+                        />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">Find help with drug abuse</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon icon="table" className="green-text pr-2" />
                             <strong>Drug Abuse</strong>
                           </MDBCardTitle>
                           
@@ -190,7 +218,7 @@ class MyHomePage extends React.Component {
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
@@ -205,46 +233,19 @@ class MyHomePage extends React.Component {
                   <MDBCol md="4">
                     <MDBAnimation reveal type="zoomIn">
                       <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
+                      <MDBView hover>
+                        <img
+                          src={`${URI}uploads/socialissues/unemployment.jpg`}
                           className="img-fluid"
-                          src="Image/9.jpeg"                        />
+                          alt=""
+                          style={{height:"235px"}}
+                        />
+                        <MDBMask className="flex-center" overlay="green-strong">
+                          <p className="white-text">find help if you're unemployed</p>
+                        </MDBMask>
+                      </MDBView>
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
-                            <MDBIcon
-                              icon="window-restore"
-                              far
-                              className="pink-text pr-2"
-                            />
-                            <strong>Regionalism</strong>
-                          </MDBCardTitle>
-                        
-                          <MDBNavLink 
-                              tag="button"
-                              to="/table"
-                              color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
-                              onClick={this.scrollToTop}
-                            >
-                               View Organisations
-                          </MDBNavLink>
-                        </MDBCardBody>
-                      </MDBCard>
-                    </MDBAnimation>
-                  </MDBCol>
-                  <MDBCol md="4">
-                    <MDBAnimation reveal type="zoomIn">
-                      <MDBCard cascade className="my-3 grey lighten-4">
-                        <MDBCardImage
-                          cascade
-                          className="img-fluid"
-                          src="Image/9.jpeg"                        />
-                        <MDBCardBody cascade className="text-center">
-                          <MDBCardTitle>
-                            <MDBIcon
-                              icon="arrows-alt"
-                              className="blue-text pr-2"
-                            />
                             <strong>Unemployment</strong>
                           </MDBCardTitle>
 
@@ -252,7 +253,7 @@ class MyHomePage extends React.Component {
                               tag="button"
                               to="/table"
                               color="mdb-color"
-                              className="btn btn-outline-mdb-color btn-sm btn-rounded d-inline"
+                              className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
                             >
                                View Organisations
