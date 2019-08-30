@@ -87,9 +87,9 @@ router.post('/login', (req, res) => {
                     let token = jwt.sign(payload, process.env.SECRET_KEY, {
                         expiresIn: 1440
                     })
+
                     res.send(token);
                 } else {
-                    console.log('incorrect password')
                     res.json({ error: 'Incorrect password' })
                 }
             } else {
