@@ -6,18 +6,33 @@ import EditProfileDetails from "../pages/EditProfileDetails";
 import PostsDetails from "../pages/PostsDetails";
 import EventsDetails from "../pages/EventsDetails";
 import jwt_decode from 'jwt-decode';
-
+import  { Redirect } from 'react-router-dom'
 class MyOrganisationalPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const token= localStorage.getItem('usertoken'); 
-    const decoded= jwt_decode(token);
-    this.state={
-      organisation:{...decoded}
+    if(token){
+      const decoded= jwt_decode(token);
+      this.state={
+        organisation:{...decoded},
+        token:true
+      }
     }
+    else{
+      this.state={
+        token:false,
+        organisation:null
+      }
+    }
+
   }
  
   render(){
+    if(!this.state.token){
+      return(
+        <Redirect to='/notfound'/>
+      )
+    }
     return(
       <>
      <div className="mt-3 mb-5">

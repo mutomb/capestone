@@ -9,7 +9,7 @@ import NavPage from "./pages/NavPage";
 import MyFooter from "./pages/MyFooter";
 import Events from "./pages/events";
 import Register from './pages/Register';
-
+import  NotFound from './pages/NotFound';
 class App extends Component {
  
   constructor(props){
@@ -42,6 +42,7 @@ class App extends Component {
         <Route path = "/post" component ={Post}/>
         <Route path="/register" component={Register} />
         <Route path = "/login" component ={Login}/>
+        <Route path = "/notfound" component ={NotFound}/>
       </Switch>
       <MyFooter/>
     </BrowserRouter>

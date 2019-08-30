@@ -102,8 +102,8 @@ class Login extends Component {
           }
         })
         .catch(err=>{
-          alert(err)
           localStorage.clear()
+          alert('Error occured on login')
           this.props.history.push('/')
         })
     }
