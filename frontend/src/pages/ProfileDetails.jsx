@@ -20,21 +20,22 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
           //  <MDBRow>
             //  <MDBCol md="10" className="mt-3 mx-auto">
               //  <MDBJumbotron>
-                <div>
+                <div style={{fontSize:'1.3em'}}>
+                    <hr/>
                     <h3>Login details</h3>      
                     <p><span style={style} >Username:</span>{props.username}</p>
                     <p><span  style={style}>Password:</span>{props.password}</p>
-                    <br/>
+                    <hr/>
                     <h3>About Your Organisation</h3>
                     <p><span style={style}>Organisation Name:</span>{props.name}</p>
                     <p style={{wordWrap:"break-word"}}><span >Description:</span><br/>{props.description}</p>
-                    <br/>
+                    <hr/>
                     <h3>Your Location</h3>
                     <p><span style={style}>Street Address:</span>{props.street_address}</p>
                     <p><span style={style}>City:</span>{props.city}</p>
                     <p><span style={style}>Province:</span>{props.province}</p>
                     <p><span style={style}>Country:</span>{props.country}</p>
-                    <br/>
+                    <hr/>
                     <h3>Your Contact Detail</h3>
                     <p><span style={style}>Email:</span>{props.email}</p>
                     <p><span style={style}>Phone Number:</span>{props.phonenumber}</p>
@@ -111,7 +112,7 @@ class ProfileDetails extends React.Component {
 
   render(){
     return(
-      <SectionContainer noBorder="px-0" header="Personal Details">           
+      <SectionContainer flexCenter noBottom noBorder="px-0" header="Profile Picture">           
           <MDBCardGroup>
             <MDBCard>
               <MDBCardImage 
@@ -125,7 +126,8 @@ class ProfileDetails extends React.Component {
                   <span style={{margin:"2%"}}>
                     <MDBBtn size="md"  className="btn-white"
                     onClick={()=>this.fileInput.click()}
-                    style={{color:'green', border:'1px solid green',hover:'yellow'}}
+                    style={{color:'green', border:'1px solid green'}}
+                    
                     >
                       Add  
                     </MDBBtn>
@@ -148,9 +150,9 @@ class ProfileDetails extends React.Component {
                         name='avatar'
                       />
                   </form>
-                <MDBCardTitle tag="h5">Personal Details</MDBCardTitle>
+                <MDBCardTitle tag="h1">Personal Details</MDBCardTitle>
                 <MDBCardText>
-                  <Content ad
+                  <Content      
                                 username={this.state.organisation.username} 
                                 password={this.state.organisation.password}
                                 name={this.state.organisation.name}

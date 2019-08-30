@@ -8,7 +8,6 @@ import Post from "./pages/Post";
 import NavPage from "./pages/NavPage";
 import MyFooter from "./pages/MyFooter";
 import Events from "./pages/events";
-import Sign from "./pages/Sign";
 import Register from './pages/Register';
 
 class App extends Component {

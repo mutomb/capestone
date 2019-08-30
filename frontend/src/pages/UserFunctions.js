@@ -31,8 +31,13 @@ export const login = user=>{
             email:user.email,
         })
             .then(res=>{
-                localStorage.setItem('usertoken', res.data)
-                return res.data
+                if(!res.data.error){
+                    localStorage.setItem('usertoken', res.data)
+                    return true;
+                }
+                else{
+                    return false;
+                }
             })
             .catch(err=>{
                 console.log("Error: "+err)

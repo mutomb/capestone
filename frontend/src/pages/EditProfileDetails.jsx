@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import {
   MDBCol,
   MDBRow,
+  MDBBtn
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import {updateOrganisation} from "./UserFunctions";
@@ -108,9 +109,11 @@ class EditProfileDetails extends React.Component {
               <textarea defaultValue={this.state.organisation.description} name="description" onChange={this.changeHandler} className="form-control" id="exampleFormControlTextarea1" rows="5" />
               </div>
             </div>
-            <button type="submit" className="btn btn-green btn-md">
-              Save Changes
-            </button>
+            <MDBRow className='d-flex flex-center'>
+              <MDBCol md="4">
+              <MDBBtn type='submit' className="btn btn-green">Save Changes</MDBBtn>
+              </MDBCol>
+            </MDBRow> 
           </form>
         </SectionContainer>
         </MDBCol>

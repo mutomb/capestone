@@ -345,12 +345,12 @@ class Register extends React.Component {
                         </MDBInput>
                       </MDBCol>
                     </MDBRow>
-                    <MDBRow>
+                    <MDBRow className="d-flex justify-content-center">
                       <MDBCol md='8'>
                       <MDBInput value={this.state.item} label="Social issues you deal with" type="text" className="form-control" rows="5"  name="item" onChange={this.changeHandler}>
                         {this.state.socialissues.map(((item,index)=>{
                            return(<Chips index={index} deleteItem={this.deleteItem} item={item} />)
-                        }))}
+                        }))} 
                       </MDBInput> 
                       </MDBCol>
                       <MDBCol md='2'>

@@ -3,11 +3,11 @@ import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBModalFooter
+  MDBAlert,
+  MDBAnimation
 } from "mdbreact";
 import { MDBBtn, MDBCard, MDBCardHeader, MDBCardBody,MDBIcon,MDBInput } from 'mdbreact';
 import {login} from './UserFunctions'
-
 const FormErrors = (props) =>
   <div className='formErrors'>
     {Object.keys(props.formErrors).map((fieldName, i) => {
@@ -32,6 +32,7 @@ class Login extends Component {
       passwordValid: false,
       formValid: false,
       formErrors: {email: '', password: ''},
+      incorrectdetails:''
     }
   }
   toggle = () => {
@@ -43,7 +44,7 @@ class Login extends Component {
   changeHandler = event => {
     const name=event.target.name;
     const value=event.target.value;
-    this.setState({ [name]: value },
+    this.setState({ [name]: value, incorrectdetails:''},
         ()=>{
           this.validateField(name,value)
     });
@@ -90,22 +91,31 @@ class Login extends Component {
     if(this.state.formValid){    
       login(obj)
         .then(res=>{
+          console.log(res)
           if(res){
             this.props.history.push('/organisation')
           }
+          else{  
+            this.setState({
+              incorrectdetails:'incorrect user name/password'
+            })
+          }
+        })
+        .catch(err=>{
+          alert(err)
+          localStorage.clear()
+          this.props.history.push('/')
         })
     }
   } 
   
-  tryagain=(why)=>{
-    
-  }
+
 
   render() {
     return (
       <>
      <MDBContainer>
-      <MDBRow>
+      <MDBRow className=" d-flex justify-content-center">
         <MDBCol md="10">
           <MDBCard>
             <MDBCardBody>
@@ -113,7 +123,8 @@ class Login extends Component {
                 method="post" action=""
                 onSubmit={this.submitHandler}
                 noValidate
-              >
+              > 
+              <div className="panel panel-default" style={{color:'red', textAlign:'center'}} >{this.state.incorrectdetails}</div> 
                 <p className="h5 text-center mb-4">Sign in</p> 
                 <div className="grey-text ">
                   <MDBInput
@@ -142,7 +153,7 @@ class Login extends Component {
                   >
                     <div className="panel panel-default">
                       <FormErrors formErrors={this.state.formErrors} feedbackFor={'password'} />
-                    </div>                      
+                    </div> 
                   </MDBInput>
 
                 </div>
