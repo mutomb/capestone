@@ -8,7 +8,6 @@ import {
 import SectionContainer from "../components/sectionContainer";
 import axios from "axios";
 import { MDBJumbotron, MDBAnimation } from "mdbreact";
-import './font.css';
 import {uploadProfilePicture, getProfilePicture} from './UserFunctions'
 import { MDBCard, MDBCardTitle, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody } from "mdbreact";
 const Content= props=>{ {/* Stateless component to Handle the display of your personal information*/}
@@ -25,17 +24,17 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
                     <h3>Login details</h3>      
                     <p><span style={style} >Username:</span>{props.username}</p>
                     <p><span  style={style}>Password:</span>{props.password}</p>
-                    <hr/>
+                    <hr style={{backgroundColor:'green'}}/>
                     <h3>About Your Organisation</h3>
                     <p><span style={style}>Organisation Name:</span>{props.name}</p>
                     <p style={{wordWrap:"break-word"}}><span >Description:</span><br/>{props.description}</p>
-                    <hr/>
+                    <hr style={{backgroundColor:'green'}}/>
                     <h3>Your Location</h3>
                     <p><span style={style}>Street Address:</span>{props.street_address}</p>
                     <p><span style={style}>City:</span>{props.city}</p>
                     <p><span style={style}>Province:</span>{props.province}</p>
                     <p><span style={style}>Country:</span>{props.country}</p>
-                    <hr/>
+                    <hr style={{backgroundColor:'green'}}/>
                     <h3>Your Contact Detail</h3>
                     <p><span style={style}>Email:</span>{props.email}</p>
                     <p><span style={style}>Phone Number:</span>{props.phonenumber}</p>
@@ -108,19 +107,20 @@ class ProfileDetails extends React.Component {
     }
     
   }
-
+  s=()=>{console.log('HI')}
 
   render(){
     return(
-      <SectionContainer flexCenter noBottom noBorder="px-0" header="Profile Picture">           
+      <SectionContainer  noBottom noBorder="px-0" header="Profile Picture">           
           <MDBCardGroup>
             <MDBCard>
               <MDBCardImage 
-                alt="MDBCard image cap" top hover
+                alt="MDBCard image cap" top hover zoom 
                 overlay="green-strong"
                 style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
                 src={this.state.multerImage} 
                 height="300px"
+                
                 />
               <MDBCardBody>
                   <span style={{margin:"2%"}}>
