@@ -8,7 +8,8 @@ import {
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import { getEvents, addEvent } from './UserFunctions';
-import './scrollbar.css'
+import './scrollbar.css';
+import './style.css';
 import {uploadEventPicture} from './UserFunctions'
 class EventDetails extends React.Component {
   constructor(props) {
@@ -158,17 +159,25 @@ class EventDetails extends React.Component {
                           {   
                             this.state.titles.map((event,index)=>{
                                return(
-                                
-                                  <MDBListGroup >
-                                  <MDBListGroupItem active href="#" key={index} onClick={(e)=>{this.displayEvent(index); this.preventDefault(e)}} style={{backgroundColor:'#33b838',border:'2px solid white'}}>
+                                <div className="eventside">
+                                  <MDBListGroup>
+                                  <MDBListGroupItem 
+                                  style={{backgroundColor:'#33b838',border:'1px solid white'}}
+                                  className='btn'
+                                  active href="#" key={index} 
+                                  onClick={(e)=>{this.displayEvent(index); this.preventDefault(e)}}
+                                  >
+                                    <div className='p'>
                                     <div className="d-flex w-100 justify-content-between">
                                       <h5 className="mb-1">{this.state.titles[index]}</h5>
                                       <small>posted today</small>
                                     </div>
-                                    <p className="mb-1" style={{wordWrap:"break-word",textOverflow:'ellipsis'}}>{this.state.whats[index]}</p>
+                                    <p className="mb-1">{this.state.whats[index]}</p>
                                     <small>{this.state.wheres[index]+" "+this.state.whens[index]}</small>
+                                    </div>
                                   </MDBListGroupItem>
                                   </MDBListGroup> 
+                                  </div>
                                )   
                             })
                           } 
@@ -210,35 +219,28 @@ class EventDetails extends React.Component {
               <MDBCol md="12">
                 <SectionContainer header="Event Picture">
                   <div class="file-field">
-                    <div class="d-flex justify-content-center">
-                      <img src={this.state.eventPic}
-                        style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
-                        class="z-depth-1-half avatar-pic"
-                        alt="event picture"
-                        width="100%"
-                        height='auto'
-                      />
+                    <div class="d-flex justify-content-center box1">
+                        <img src={this.state.eventPic}
+                          style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                          class="z-depth-1-half avatar-pic"
+                          alt="event picture"
+
+                        />
+                        <button class="btn1" 
+                        onClick={()=>this.fileInput.click()}
+                        >
+                          ADD
+                        </button>
+                        <button class="btn2" 
+                          style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                          onClick={this.removeEventPicture}
+                      >
+                          X
+                        </button>
                     </div>
                   </div>
                   <div class="file-field">
                     <div class="d-flex justify-content-center">
-               
-                        <span style={{ margin: 3 }}>
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"
-                            onClick={() => this.fileInput.click()}
-                            style={{border:'1px solid green',color:'green'}}
-                          >
-                            Add
-                        </MDBBtn>
-                        </span>
-                        <span style={{ margin: 3 }}>
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"
-                            onClick={this.removeEventPicture}
-                            style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
-                          >
-                            Delete
-                          </MDBBtn>
-                        </span>
                     
                       <form  method="post">
                         <input 

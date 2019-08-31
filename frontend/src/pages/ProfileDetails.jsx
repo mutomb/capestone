@@ -6,8 +6,6 @@ import {
   MDBBtn, 
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import axios from "axios";
-import { MDBJumbotron, MDBAnimation } from "mdbreact";
 import {uploadProfilePicture, getProfilePicture} from './UserFunctions'
 import { MDBCard, MDBCardTitle, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody } from "mdbreact";
 const Content= props=>{ {/* Stateless component to Handle the display of your personal information*/}
@@ -19,22 +17,21 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
           //  <MDBRow>
             //  <MDBCol md="10" className="mt-3 mx-auto">
               //  <MDBJumbotron>
-                <div style={{fontSize:'1.3em'}}>
-                    <hr/>
-                    <h3>Login details</h3>      
+                <div style={{fontSize:'1.1em'}}>
+                    <hr style={{backgroundColor:'green', height:'0.2em'}}/>
                     <p><span style={style} >Username:</span>{props.username}</p>
                     <p><span  style={style}>Password:</span>{props.password}</p>
-                    <hr style={{backgroundColor:'green'}}/>
+                    <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>About Your Organisation</h3>
                     <p><span style={style}>Organisation Name:</span>{props.name}</p>
                     <p style={{wordWrap:"break-word"}}><span >Description:</span><br/>{props.description}</p>
-                    <hr style={{backgroundColor:'green'}}/>
+                    <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Location</h3>
                     <p><span style={style}>Street Address:</span>{props.street_address}</p>
                     <p><span style={style}>City:</span>{props.city}</p>
                     <p><span style={style}>Province:</span>{props.province}</p>
                     <p><span style={style}>Country:</span>{props.country}</p>
-                    <hr style={{backgroundColor:'green'}}/>
+                    <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Contact Detail</h3>
                     <p><span style={style}>Email:</span>{props.email}</p>
                     <p><span style={style}>Phone Number:</span>{props.phonenumber}</p>
@@ -114,33 +111,28 @@ class ProfileDetails extends React.Component {
       <SectionContainer  noBottom noBorder="px-0" header="Profile Picture">           
           <MDBCardGroup>
             <MDBCard>
+              <div className='box1'>
               <MDBCardImage 
-                alt="MDBCard image cap" top hover zoom 
+                alt="MDBCard image cap" top hover zoom noBottom
                 overlay="green-strong"
                 style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
                 src={this.state.multerImage} 
                 height="300px"
                 
                 />
+                <button class="btn1" 
+                onClick={()=>this.fileInput.click()}
+                >
+                  ADD
+                </button>
+                <button class="btn2" 
+                style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none"}}
+                onClick={this.removeImage}
+               >
+                  X
+                </button>
+                </div>
               <MDBCardBody>
-                  <span style={{margin:"2%"}}>
-                    <MDBBtn size="md"  className="btn-white"
-                    onClick={()=>this.fileInput.click()}
-                    style={{color:'green', border:'1px solid green'}}
-                    
-                    >
-                      Add  
-                    </MDBBtn>
-                  </span>
-                  <span style={{margin:"2%"}}> 
-                    <MDBBtn size="md" className="btn-white"   
-                    onClick={this.removeImage}
-                    style={this.state.imageStyle || { opacity: 0, position: "absolute", pointerEvents: "none"}}
-                    style={{border:'1px solid red', color: 'red'}}
-                    >
-                      Delete
-                    </MDBBtn>
-                  </span> 
                   <form  method="post">
                       <input 
                         ref={fileInput=>this.fileInput=fileInput}

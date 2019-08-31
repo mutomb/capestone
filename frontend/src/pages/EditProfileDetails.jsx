@@ -7,7 +7,7 @@ import {
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import {updateOrganisation} from "./UserFunctions";
-
+import './style.css'
 class EditProfileDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -111,7 +111,10 @@ class EditProfileDetails extends React.Component {
             </div>
             <MDBRow className='d-flex flex-center'>
               <MDBCol md="4">
-              <MDBBtn type='submit' className="btn btn-green">Save Changes</MDBBtn>
+              <MDBBtn size="sm" type='submit' className="btn btn-green input-block-level">Save Changes</MDBBtn>
+              </MDBCol>
+              <MDBCol md="4">
+                <MDBBtn size="sm" onClick={this.confirm} className="btn btn-red">Delete Account</MDBBtn>
               </MDBCol>
             </MDBRow> 
           </form>

@@ -10,7 +10,7 @@ import SectionContainer from "../components/sectionContainer";
 import { getPosts, addPost } from './UserFunctions';
 import './scrollbar.css'
 import {uploadPostPicture} from './UserFunctions'
-
+import './style.css';
 class PostDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -141,16 +141,22 @@ class PostDetails extends React.Component {
                       {   
                         this.state.titles.map((post,index)=>{
                             return(
-                            
-                              <MDBListGroup >
-                              <MDBListGroupItem active href="#" key={index} onClick={(e)=>{this.displayPost(index); this.preventDefault(e)}} style={{backgroundColor:'#33b838',border:'2px solid white'}}>
-                                <div className="d-flex w-100 justify-content-between">
-                                  <h5 className="mb-1">{this.state.titles[index]}</h5>
-                                  <small>posted today</small>
-                                </div>
-                                <p className="mb-1" style={{wordWrap:"break-word",textOverflow:'ellipsis'}}>{this.state.whats[index]}</p>
-                              </MDBListGroupItem>
-                              </MDBListGroup> 
+                              <div className="eventside">
+                                <MDBListGroup >
+                                <MDBListGroupItem active href="#" key={index} 
+                                onClick={(e)=>{this.displayPost(index); this.preventDefault(e)}} 
+                                style={{backgroundColor:'#33b838',border:'2px solid white'}}
+                                >
+                                  <div className='p'>
+                                    <div className="d-flex w-100 justify-content-between">
+                                      <h5 className="mb-1">{this.state.titles[index]}</h5>
+                                      <small>posted today</small>
+                                    </div>
+                                    <p className="mb-1">{this.state.whats[index]}</p>
+                                  </div>
+                                </MDBListGroupItem>
+                                </MDBListGroup> 
+                              </div>
                             )   
                         })
                       } 
@@ -180,34 +186,27 @@ class PostDetails extends React.Component {
               <MDBCol md="12">
                 <SectionContainer header="Post Picture">
                     <div class="file-field">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center box1">
                         <img src={this.state.postPic}
                           style={this.state.postPicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}} 
                           class="z-depth-1-half avatar-pic"
                           alt="Post Picture" 
-                          width="100%" 
-                          height="auto"
                           />
+                        <button class="btn1" 
+                        onClick={()=>this.fileInput.click()}
+                        >
+                          ADD
+                        </button>
+                        <button class="btn2" 
+                          style={this.state.postPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
+                          onClick={this.removePostPicture}
+                      >
+                          X
+                        </button>
                     </div>
                     </div>
                     <div class="file-field">
                       <div class="d-flex justify-content-center">
-                          <span style={{margin:3}}>
-                            <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white" 
-                            onClick={()=>this.fileInput.click()}
-                            style={{border:'1px solid green',color:'green'}}
-                            >
-                              Add
-                            </MDBBtn>
-                          </span>
-                          <span style={{margin:3}}> 
-                          <MDBBtn size="md" className="m-0 px-3 py-2 btn btn-white"   
-                          onClick={this.removePostPicture}
-                          style={this.state.postPicStyle || {opacity:0, position:"absolute", pointerEvents:"none"}}
-                          >
-                            Delete
-                          </MDBBtn>
-                          </span>
                       <form metho='post'>
                       <input onClick={this.fileSelectedHandler} 
                               ref={fileInput=>this.fileInput=fileInput}
