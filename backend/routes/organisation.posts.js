@@ -24,6 +24,29 @@ router.post('/', (req, res) => {
         })
 })
 
+router.get("/", (req, res)=> {
+  Post.find({
+
+  })
+      .then(posts => {
+          if (posts) {
+              res.json(posts)
+          } else {
+              console.log('event does not exist')
+              res.send('event does not exist')
+          }
+      })
+      .catch(err => {
+          res.send('Error: name' + err)
+      })
+});
+
+router.post("/getPost", (req, res)=> {
+  var name = req.body.postName;
+  res.json("name of post is ");
+});
+
+
 router.post('/add', (req, res) => {
     const postData = {
         owner: req.body.owner,
@@ -45,7 +68,7 @@ router.post('/add', (req, res) => {
                         res.send('Error:' + err)
                     })
             } else {
-                console.log('Event already exits'); 
+                console.log('Event already exits');
                 res.json({ error: 'Event already exists' })
             }
 
