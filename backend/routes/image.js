@@ -99,11 +99,18 @@ ImageRouter.post('/:email', (req, res, next) => {
             })
     });
 
-/*
-    upload image in base64 format, thereby,
-    directly storing it in mongodb datanase
-    along with images uploaded using firebase
-    storage
-*/    
+  
+    ImageRouter.route('/delete/:email').delete((req,res)=>{
+        Image.findOneAndDelete({
+           owner:req.params.email
+        })
+            .then(data=> {
+                res.json({success: true })
+            })
+            .catch(err=>{
+                console.log(err)
+            });   
+    });
+
 
 module.exports = ImageRouter;

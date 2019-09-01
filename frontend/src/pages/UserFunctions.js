@@ -152,6 +152,15 @@ export const getProfilePicture=(email)=>{
                 }); 
 }
 
+export const deleteProfilePicture=(email)=>{
+    return  axios.delete(`http://localhost:5000/image/delete/${email}`)
+                .then((data) => {
+                    return data.data;           
+                })
+                .catch((err) => {
+                    alert("error occured while deleting picture:"+err);
+                }); 
+}
 
 export const uploadEventPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/eventimage/add`, imageFormObj)

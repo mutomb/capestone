@@ -6,17 +6,14 @@ import {
   MDBBtn, 
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import {uploadProfilePicture, getProfilePicture} from './UserFunctions'
+import {uploadProfilePicture, getProfilePicture, deleteProfilePicture} from './UserFunctions'
 import { MDBCard, MDBCardTitle, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody } from "mdbreact";
 const Content= props=>{ {/* Stateless component to Handle the display of your personal information*/}
     var style={
       marginRight:10,
     } 
     return(
-        //  <MDBContainer>
-          //  <MDBRow>
-            //  <MDBCol md="10" className="mt-3 mx-auto">
-              //  <MDBJumbotron>
+        
                 <div style={{fontSize:'1.1em'}}>
                     <hr style={{backgroundColor:'green', height:'0.2em'}}/>
                     <p><span style={style} >Username:</span>{props.username}</p>
@@ -37,10 +34,7 @@ const Content= props=>{ {/* Stateless component to Handle the display of your pe
                     <p><span style={style}>Phone Number:</span>{props.phonenumber}</p>
                     <br/>
                 </div>
-       //         </MDBJumbotron>
-         //     </MDBCol>
-          //  </MDBRow>
-         // </MDBContainer>
+
     )
   }
 
@@ -54,7 +48,7 @@ class ProfileDetails extends React.Component {
         imageStyle:null,
         multerImage:"",
         owner: props.organisation.email,
-  
+        defaultImage:'/uploads/profile/default.jpg'
 
     }
   }
@@ -66,7 +60,7 @@ class ProfileDetails extends React.Component {
   uploadImage=(e)=> {
     let imageFormObj = new FormData();
     imageFormObj.append("imageName", this.state.owner); 
-    imageFormObj.append("imageData", e.target.files[0]);
+    imageFormObj.append("imageData", e.target.files[0]); console.log(e.target.files[0]);
     imageFormObj.append('owner', this.state.owner) 
     uploadProfilePicture(imageFormObj)
           .then(data=>{
@@ -81,11 +75,14 @@ class ProfileDetails extends React.Component {
     
   }
 
-  removeImage=() =>{
-    this.setState({
-      multerImage:null,
-      imageStyle:null
-    })
+  removeImage=() =>{ 
+    deleteProfilePicture(this.state.owner)
+      .then(data=>{
+        if(data.success){
+          this.resetProfilePicture();
+          this.setState({ multerImage:`http://localhost:5000${this.state.defaultImage}`, imageStyle: {opacity: 1} })
+        }
+      })
   }
   componentWillReceiveProps(nextProps){
       this.setState({
@@ -97,15 +94,17 @@ class ProfileDetails extends React.Component {
     if(this.state.owner){
       getProfilePicture(this.state.owner)
         .then(res=>{
-          if(res){
+          if(res.success){
             this.setState({ multerImage:`http://localhost:5000/${res.imageData}` , imageStyle: {opacity: 1} })
+          }
+          else{
+            console.log(res)
+            this.setState({ multerImage:`http://localhost:5000${this.state.defaultImage}`, imageStyle: {opacity: 1} })
           }
         })
     }
     
   }
-  s=()=>{console.log('HI')}
-
   render(){
     return(
       <SectionContainer  noBottom noBorder="px-0" header="Profile Picture">           
@@ -145,17 +144,17 @@ class ProfileDetails extends React.Component {
                 <MDBCardTitle tag="h1">Personal Details</MDBCardTitle>
                 <MDBCardText>
                   <Content      
-                                username={this.state.organisation.username} 
-                                password={this.state.organisation.password}
-                                name={this.state.organisation.name}
-                                description={this.state.organisation.description}
-                                zipcode={this.state.organisation.zipcode}
-                                street_address={this.state.organisation.street_address}
-                                city={this.state.organisation.city}
-                                province={this.state.organisation.province}
-                                country={this.state.organisation.country}   
-                                email={this.state.organisation.email}
-                                phonenumber={this.state.organisation.phonenumber}
+                      username={this.state.organisation.username} 
+                      password={this.state.organisation.password}
+                      name={this.state.organisation.name}
+                      description={this.state.organisation.description}
+                      zipcode={this.state.organisation.zipcode}
+                      street_address={this.state.organisation.street_address}
+                      city={this.state.organisation.city}
+                      province={this.state.organisation.province}
+                      country={this.state.organisation.country}   
+                      email={this.state.organisation.email}
+                      phonenumber={this.state.organisation.phonenumber}
                   />
                 </MDBCardText>
               </MDBCardBody>
