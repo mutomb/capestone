@@ -31,7 +31,7 @@ router.post('/register', (req, res) => {
                 Organisation.create(organisationData)
                     .then(organisation => {
                         console.log(organisation.email + 'has registered');
-                        res.json({ status: organisation.email + 'has Registered' })
+                        res.json({ success:true })
                     })
                     .catch(err => {
                         res.send('Error:' + err)
@@ -52,7 +52,7 @@ router.post('/register', (req, res) => {
                 })*/
             } else {
                 console.log('User already exists'); 
-                res.json({ error: 'User already exists' })
+                res.json({ success:false })
             }
 
         })

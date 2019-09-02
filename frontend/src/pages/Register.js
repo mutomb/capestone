@@ -67,6 +67,7 @@ class Register extends React.Component {
       emailValid: false,
       phonenumberValid: false,
       formValid:false,
+      emailConflict:'',
       formErrors:{
         username:"", 
         password:"",
@@ -86,13 +87,10 @@ class Register extends React.Component {
   addItem=()=>{
     this.setState({
       socialissues:[...this.state.socialissues,this.state.item]
-    },()=>{
-      console.log(this.state.socialissues)
     })
   }
   deleteItem=(index)=>{
     var array = [...this.state.socialissues]; 
-    console.log(index);
     if (index > -1) {
       array.splice(index, 1);
       this.setState({
@@ -108,7 +106,7 @@ class Register extends React.Component {
       ()=>{
         this.validateField(name,value)
       });
-
+    this.setState({emailConflict:''});
   };
 
   validateField=(fieldName,value)=>{
@@ -207,7 +205,6 @@ class Register extends React.Component {
   } 
 
   submitHandler = event => {
-    console.log(this.state.socialissues)
     event.preventDefault();
     event.target.className += " was-validated"; 
     let obj={
@@ -225,16 +222,23 @@ class Register extends React.Component {
       username:this.state.username,
       socialissues: this.state.socialissues
     }
-    register(obj)
-
     
     if(this.state.formValid){
         register(obj)
-          .then(res=>{
+          .then(res=>{ 
+            if(res){
               this.props.history.push('/login')
+            }
+            else{
+              this.setState({
+                emailConflict:`Account with email address: ${this.state.email}, already exist.
+                Please login or use a different email address`
+              })
+            }
           })
     }
   }
+
 
   render(){
     return(
@@ -250,6 +254,9 @@ class Register extends React.Component {
                     onSubmit={this.submitHandler}
                     noValidate
                   >
+                  <div className="panel panel-default" style={{color:'red', textAlign:'center'}}>
+                      {this.state.emailConflict}
+                  </div>
                     <MDBRow className="form-row">
                       <MDBCol md="6">
                         <MDBInput label="Enter the name of your organisation" type="text" className="form-control"  placeholder="e.g McDonald" name="name" onChange={this.changeHandler}>

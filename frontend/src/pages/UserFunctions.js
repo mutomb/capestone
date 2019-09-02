@@ -18,7 +18,17 @@ export const register = newUser=>{
                     socialissues: newUser.socialissues,
                 })
                     .then(res=>{
-                        console.log('Registered!')
+                        if(res.data.success){
+                            alert('You have successfully registered!')
+                            return true;
+                        }
+                        else{
+                            return false;
+                        }
+                    })
+                    .catch(err=>{
+                        alert('error occured while registering')
+                        return false;
                     })
         
 }
