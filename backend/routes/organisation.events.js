@@ -40,7 +40,7 @@ router.get("/", (req, res)=> {
         .catch(err => {
             res.send('Error: name' + err)
         })
-  })
+  });
 
 router.post('/add', (req, res) => {
     const eventData = {

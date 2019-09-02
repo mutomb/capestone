@@ -19,6 +19,7 @@ componentDidMount(){
   })
       .then(res=>{
           this.setState({events:res.data});
+         
       })
       .catch(err=>{
           console.log('Error: anme '+err)
@@ -43,7 +44,9 @@ componentDidMount(){
             <MDBCard className="my-5 px-5 pb-5">
               <MDBCardBody>
             
-
+              {
+                  this.state.events.map((item, index) => {
+                    return (
               <MDBRow>
                   <MDBCol lg="5" xl="4">
                     <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
@@ -59,20 +62,20 @@ componentDidMount(){
                   </MDBCol>
                   <MDBCol lg="7" xl="8">
                     <h3 className="font-weight-bold mb-3 p-0">
-                      <strong>Event 1</strong>
+                      <strong>{item.title}</strong>
                     </h3>
-                    <h4>Organisation: Siyavula</h4>
-                    <h4>Date: 14 January 2019</h4>
-                    <h4>Location: Mowbray</h4>
+                    <h4>Organisation: {item.owner}</h4>
+                    <h4>Date: {item.when}</h4>
+                    <h4>Location: {item.where}</h4>
                     <p className="dark-grey-text">
-                      Nam libero tempore, cum soluta nobis est eligendi optio cumque
-                      nihil impedit quo minus id quod maxime placeat facere possimus,
-                      omnis voluptas assumenda est, omnis dolor repellendus et aut
-                      officiis debitis cum soluta nobis est eligendi placeat facere
-                      aut rerum.
+                     {item.what}
                     </p>
                   </MDBCol>
                 </MDBRow>
+
+                )
+              })
+            }
                 
                
               </MDBCardBody>
