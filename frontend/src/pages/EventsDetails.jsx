@@ -7,10 +7,10 @@ import {
   MDBInput, MDBJumbotron, MDBIcon, MDBAnimation,MDBListGroup,MDBListGroupItem,MDBScrollbar
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import { getEvents, addEvent } from './UserFunctions';
+import { getEvents, addEvent} from './UserFunctions';
 import './scrollbar.css';
 import './style.css';
-import {uploadEventPicture} from './UserFunctions'
+import {uploadEventPicture,deleteEvent} from './UserFunctions';
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -44,9 +44,7 @@ class EventDetails extends React.Component {
       selectedImage: event.target.files[0]
     })
   }
-  removeEventPicture = () => {
-    this.setState({ eventPic: null, eventPicStyle: { opacity: 0, position: "absolute", pointerEvents: "none" } })
-  }
+
 
 
   changeHandler = event => {
@@ -54,7 +52,7 @@ class EventDetails extends React.Component {
     const value = event.target.value;
     this.setState({ [name]: value });
   };
-  resetEventList(){
+  resetEventList=()=>{
     this.setState({
       titles: [],
       wheres: [],
@@ -119,9 +117,11 @@ class EventDetails extends React.Component {
       when:this.state.whens[i],
       what:this.state.whats[i],
       eventPic:`http://localhost:5000/${this.state.eventPics[i]}?${Date.now}`,
-      eventPicStyle:{opacity: 1,border:'1px solid red', color:'red'}
+      eventPicStyle:{opacity: 1}
     })
   }
+
+
   preventDefault=(e)=>{e.preventDefault();}
   componentWillMount() {
     if(this.state.owner){
@@ -138,7 +138,29 @@ class EventDetails extends React.Component {
         .catch(err => console.log('error')); 
     }
   }
-
+  deleteEvent=()=>{
+    deleteEvent({
+      owner:this.state.owner,
+      title:this.state.title
+    })
+    .then(res=>{
+      if(res){
+        this.resetEventPicture();
+        this.resetEventPicture();
+        getEvents(this.state.owner)
+        .then(events => {
+          this.setState({
+            titles: [...this.state.titles,...events.map(event=>event.title)],
+            wheres: [...this.state.wheres,...events.map(event=>event.where)],
+            whens: [...this.state.whens,...events.map(event=>event.when)],
+            whats: [...this.state.whats,...events.map(event=>event.what)],
+            eventPics:[...this.state.eventPics,...events.map(event=>event.imageData)]
+          })
+        })
+      }
+    })
+  }
+  
   render() {
     return (
       <>
@@ -231,12 +253,6 @@ class EventDetails extends React.Component {
                         >
                           ADD
                         </button>
-                        <button class="btn2" 
-                          style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
-                          onClick={this.removeEventPicture}
-                      >
-                          X
-                        </button>
                     </div>
                   </div>
                   <div class="file-field">
@@ -259,6 +275,14 @@ class EventDetails extends React.Component {
             <MDBRow>
               <MDBCol md="4">
                 <MDBBtn onClick={this.handleUpload} className="btn btn-green">Upload</MDBBtn>
+              </MDBCol>
+              <MDBCol md="4">
+                <MDBBtn onClick={this.deleteEvent} 
+                 className="btn btn-green"
+                 style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none"}}
+                 >
+                   Delete
+                </MDBBtn>
               </MDBCol>
             </MDBRow>
           </MDBCol>

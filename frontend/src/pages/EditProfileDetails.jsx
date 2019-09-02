@@ -6,7 +6,7 @@ import {
   MDBBtn
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import {updateOrganisation} from "./UserFunctions";
+import {updateOrganisation,removeOrganisation,deleteProfilePicture} from "./UserFunctions";
 import './style.css'
 class EditProfileDetails extends React.Component {
   constructor(props) {
@@ -57,12 +57,27 @@ class EditProfileDetails extends React.Component {
       })
       .catch(err=>console.log(err));
   }
+
+  unsubscribe=(event)=>{
+    event.preventDefault();
+    removeOrganisation(this.state.email)
+      .then(data=>{
+        if(data){
+          deleteProfilePicture(this.state.owner)
+          localStorage.removeItem('usertoken');
+          this.props.history.push('/')
+        }
+      })
+      .catch(err=>console.log(err));
+  }
+
   componentWillReceiveProps(nextProps){
     this.setState({
       organisation:nextProps
     })
   }
   shouldComponentUpdate(nextProps,nexState){}
+  
 
   render(){
     return(
@@ -114,7 +129,7 @@ class EditProfileDetails extends React.Component {
               <MDBBtn size="sm" type='submit' className="btn btn-green input-block-level">Save Changes</MDBBtn>
               </MDBCol>
               <MDBCol md="4">
-                <MDBBtn size="sm" onClick={this.confirm} className="btn btn-red">Delete Account</MDBBtn>
+                <MDBBtn size="sm" onClick={this.unsubscribe} className="btn btn-red">Delete Account</MDBBtn>
               </MDBCol>
             </MDBRow> 
           </form>

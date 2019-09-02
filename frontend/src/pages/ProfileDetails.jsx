@@ -1,10 +1,4 @@
 import React from "react";
-import {
-  MDBContainer,
-  MDBCol,
-  MDBRow,
-  MDBBtn, 
-} from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import {uploadProfilePicture, getProfilePicture, deleteProfilePicture} from './UserFunctions'
 import { MDBCard, MDBCardTitle, MDBCardGroup, MDBCardImage, MDBCardText, MDBCardBody } from "mdbreact";

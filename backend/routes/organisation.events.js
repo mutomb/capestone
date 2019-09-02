@@ -59,4 +59,22 @@ router.post('/add', (req, res) => {
 })
 
 
+router.delete('/delete', (req, res) => {
+    Event.findOneAndDelete({
+        owner: req.body.owner,
+        title: req.body.title
+    })
+        .then(event => {
+            res.json({
+                success:true
+            })
+
+        })
+        .catch(err => {
+            res.json({
+                success:false
+            })
+        })
+})
+
 module.exports = router;

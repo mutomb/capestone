@@ -197,12 +197,6 @@ class PostDetails extends React.Component {
                         >
                           ADD
                         </button>
-                        <button class="btn2" 
-                          style={this.state.postPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none" }}
-                          onClick={this.removePostPicture}
-                      >
-                          X
-                        </button>
                     </div>
                     </div>
                     <div class="file-field">

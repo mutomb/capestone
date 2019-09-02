@@ -24,6 +24,7 @@ export const register = newUser=>{
 }
 
 
+
 export const login = user=>{
     return(
         axios.post('organisation/login',{ 
@@ -43,6 +44,21 @@ export const login = user=>{
                 console.log("Error: "+err)
             })
     )
+}
+
+export const removeOrganisation=(email)=>{
+    return axios.delete(`organisation/delete/${email}`)
+               .then(data=>{
+                   if(data.data.success){
+                       return true;
+                   }
+                   else{
+                       return false;
+                   }
+               })
+               .catch(err=>{
+                   alert('Error while deleting organisation')
+               })
 }
 
 export const getEvents= email=>{
@@ -179,11 +195,48 @@ export const uploadEventPicture=(imageFormObj)=>{
                  }); 
  }
 
+
  export const uploadPostPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/postimage/add`, imageFormObj)
                  .then((data) => {
                      if (data.data.success) {
                          return data.data;
+                     }
+                     else{
+                         return false;
+                     }
+                 })
+                 .catch((err) => {
+                     alert("Error while uploading image using multer"+err);
+                 }); 
+ }
+
+ export const deletePost=(post)=>{
+    return  axios.delete(`http://localhost:5000/postDetails/delete`,{
+                        owner: post.owner,
+                        title: post.title
+                     })
+                 .then((data) => {
+                     if (data.data.success) {
+                         return data.data;
+                     }
+                     else{
+                         return false;
+                     }
+                 })
+                 .catch((err) => {
+                     alert("Error while uploading image using multer"+err);
+                 }); 
+ }
+
+ export const deleteEvent=(event)=>{
+    return  axios.delete(`http://localhost:5000/eventDetails/delete`,{
+                        owner: event.owner,
+                        title: event.title
+                     })
+                 .then((data) => {
+                     if (data.data.success) {
+                         return true;
                      }
                      else{
                          return false;

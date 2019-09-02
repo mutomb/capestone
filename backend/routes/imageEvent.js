@@ -65,7 +65,4 @@ EventRouter.route("/add")
             })
     });
 
-
-   
-
 module.exports = EventRouter;

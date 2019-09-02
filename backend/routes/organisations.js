@@ -150,12 +150,20 @@ router.post('/update',(req, res)=>{
 
 
 
-/*
-router.route('/:id').delete((req,res)=>{
-    Organisation.findByIdAndDelete(req.params.id)
-        .then(org=> res.json('organsation delete.'))
-        .catch(err=>res.status(400).json('Error: '+err));   
+
+router.route('/delete/:email').delete((req,res)=>{
+    Organisation.findOneAndDelete({
+        email: req.params.email
+    })
+        .then(org=> {
+            res.json({
+            success: true
+        })})
+        .catch(err=>{
+            res.json({
+            success:false
+        })});   
 });
-*/
+
 
 module.exports = router;
