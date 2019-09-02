@@ -25,6 +25,23 @@ router.post('/', (req, res) => {
         })
 })
 
+router.get("/", (req, res)=> {
+    Event.find({
+  
+    })
+        .then(events => {
+            if (events) {
+                res.json(events)
+            } else {
+                console.log('event does not exist')
+                res.send('event does not exist')
+            }
+        })
+        .catch(err => {
+            res.send('Error: name' + err)
+        })
+  })
+
 router.post('/add', (req, res) => {
     const eventData = {
         owner: req.body.owner,
