@@ -43,6 +43,7 @@ componentDidMount(){
 
             <MDBCard className="my-5 px-5 pb-5">
               <MDBCardBody>
+              
             
               {
                   this.state.events.map((item, index) => {
@@ -52,7 +53,7 @@ componentDidMount(){
                     <MDBView hover className="rounded z-depth-1-half mb-lg-0 mb-4">
                       <img
                         className="img-fluid"
-                        src="https://mdbootstrap.com/img/Photos/Others/images/48.jpg"
+                        src={item.imageData}
                         alt=""
                       />
                       <a href="#!">
@@ -70,8 +71,10 @@ componentDidMount(){
                     <p className="dark-grey-text">
                      {item.what}
                     </p>
+                    <hr className="my-5" />
                   </MDBCol>
                 </MDBRow>
+                
 
                 )
               })

@@ -71,6 +71,7 @@ export class Post extends Component {
                           <MDBBtn color="primary" size="md">
                             Read More
                           </MDBBtn>
+                          <hr className="my-5" />
                         </MDBCol>
                       </MDBRow>
                     )

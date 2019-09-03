@@ -61,6 +61,25 @@ router.post('/register', (req, res) => {
         })
 })
 
+router.get("/", (req, res)=> {
+    Organisation.find({
+  
+    }
+    ,{_id:0,username:1,socialissues:1,city:1}
+    )
+        .then(orga => {
+            if (orga) {
+                res.json(orga)
+            } else {
+                console.log('event does not exist')
+                res.send('event does not exist')
+            }
+        })
+        .catch(err => {
+            res.send('Error: name' + err)
+        })
+  });
+
 router.post('/login', (req, res) => {
     Organisation.findOne({
         email: req.body.email
