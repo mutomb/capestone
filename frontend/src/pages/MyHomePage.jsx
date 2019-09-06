@@ -49,7 +49,10 @@ class MyHomePage extends React.Component {
                           </MDBCardTitle>
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Education"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -81,7 +84,10 @@ class MyHomePage extends React.Component {
                          
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Poverty"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -109,12 +115,16 @@ class MyHomePage extends React.Component {
                         <MDBCardBody cascade className="text-center">
                           <MDBCardTitle>
                             <strong>Crime</strong>
+                          
                           </MDBCardTitle>
                          
 
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Crime"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -150,7 +160,10 @@ class MyHomePage extends React.Component {
                           
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Fees Must Fall"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -183,7 +196,10 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Corruption"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -216,7 +232,10 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Drug Abuse"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}
@@ -251,7 +270,10 @@ class MyHomePage extends React.Component {
 
                           <MDBNavLink 
                               tag="button"
-                              to="/table"
+                              to={{
+                                pathname: "/table",
+                                state: { issue: "Unemployment"}
+                                  }}
                               color="mdb-color"
                               className="btn btn-outline-green btn-sm btn-rounded d-inline"
                               onClick={this.scrollToTop}

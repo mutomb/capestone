@@ -11,12 +11,16 @@ export class DatatablePage extends Component {
   constructor(props){
     super(props);
     this.state={
+
       apiResponse:"",
+      organisation:["jhgjgh","hgjhg","hjgh"],
+      socialIssue:this.props.name,
+      location:'',
       events : [],
       data : {
         columns: [
           {
-            label: "Orginisation",
+            label: "Social Issue",
             field: "name",
             width: 150,
             attributes: {
@@ -25,7 +29,7 @@ export class DatatablePage extends Component {
             }
           },
           {
-            label: "Social Issue",
+            label: "Orginisation",
             field: "position",
             width: 270
           },
@@ -39,7 +43,7 @@ export class DatatablePage extends Component {
         rows: [
           {
            
-            //clickEvent: () => testClickEvent(1)
+           
           }
         ]
       }
@@ -48,11 +52,17 @@ export class DatatablePage extends Component {
 
 componentDidMount(){
 
-  axios.get('http://localhost:5000/organisation',{
+  axios.get('http://localhost:5000/organisation/'+this.state.socialIssue,{
   })
       .then(res=>{
-        
+          
+          //this.setState({data:res.data});
+          for( var i=0;i< res.data.length ; i++) {
+            res.data[i].socialissues = [this.state.socialIssue];
+          }
+          
           this.setState({data:{columns:this.state.data.columns,rows:res.data}});
+          
         
          
       })
