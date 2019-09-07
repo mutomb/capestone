@@ -20,9 +20,8 @@ const eventSchema = new schema({
         minlength: 3
     },
     when: {
-        type: String,
+        type: Date,
         required: true,
-        minlength: 3
     },
     what: { 
         type: String,

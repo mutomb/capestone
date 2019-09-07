@@ -11,6 +11,8 @@ import { getEvents, addEvent} from './UserFunctions';
 import './scrollbar.css';
 import './style.css';
 import {uploadEventPicture,deleteEvent} from './UserFunctions';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -19,8 +21,8 @@ class EventDetails extends React.Component {
       owner: props.email,
       title:"",
       where: "",
-      when: "",
-      what: "", 
+      when: new Date(),
+      what: "",
       eventPic: "",
       titles: [],
       wheres: [],
@@ -45,8 +47,11 @@ class EventDetails extends React.Component {
     })
   }
 
-
-
+  handleDateChange = (date) => {
+    this.setState({
+      when: date
+    });
+  };
   changeHandler = event => {
     const name = event.target.name;
     const value = event.target.value;
@@ -119,6 +124,7 @@ class EventDetails extends React.Component {
       eventPic:`http://localhost:5000/${this.state.eventPics[i]}?${Date.now}`,
       eventPicStyle:{opacity: 1}
     })
+    console.log(this.state.when)
   }
 
 
@@ -130,7 +136,7 @@ class EventDetails extends React.Component {
           this.setState({
             titles: [...this.state.titles,...events.map(event=>event.title)],
             wheres: [...this.state.wheres,...events.map(event=>event.where)],
-            whens: [...this.state.whens,...events.map(event=>event.when)],
+            whens: [...this.state.whens,...events.map(event=>new Date(event.when))],
             whats: [...this.state.whats,...events.map(event=>event.what)],
             eventPics:[...this.state.eventPics,...events.map(event=>event.imageData)]
           })
@@ -205,7 +211,12 @@ class EventDetails extends React.Component {
 
             <MDBRow>
               <MDBCol md="12">
-                <MDBInput value={this.state.when} label="When is the event going to take place?" onChange={this.changeHandler} name='when' />
+              <span style={{color:'grey', marginRight:10}}>When is the event going to take place?</span>
+                <DatePicker
+                  selected={this.state.when}
+                  onChange={this.handleDateChange}
+                /> 
+                
               </MDBCol>
             </MDBRow>
 
@@ -256,7 +267,8 @@ class EventDetails extends React.Component {
               </MDBCol>
             </MDBRow>
           </MDBCol>
-        </MDBRow>
+        </MDBRow>           
+        
       </>
     )
   }
