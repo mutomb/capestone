@@ -11,6 +11,7 @@ import Events from "./pages/events";
 import Register from './pages/Register';
 import  NotFound from './pages/NotFound';
 import SimpleMap from "./pages/SimpleMap.js";
+import About from "./pages/about";
 class App extends Component {
  
   constructor(props){
@@ -44,6 +45,7 @@ class App extends Component {
         <Route path="/register" component={Register} />
         <Route path = "/login" component ={Login}/>
         <Route path = "/map" component ={SimpleMap}/>
+        <Route path = "/about" component ={About}/>
         <Route path = "/notfound" component ={NotFound}/>
       </Switch>
       <MyFooter/>
