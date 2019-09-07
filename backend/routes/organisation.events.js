@@ -6,7 +6,7 @@ const mongoose= require('mongoose');
 
 let Event = require('../models/event.model');
 router.use(cors())
-
+  
 router.post('/', (req, res) => {
     console.log(req.body.owner)
     Event.find({
@@ -40,7 +40,7 @@ router.get("/", (req, res)=> {
         .catch(err => {
             res.send('Error: name' + err)
         })
-  });
+  })
 
 router.post('/add', (req, res) => {
     const eventData = {
@@ -49,6 +49,7 @@ router.post('/add', (req, res) => {
         when: req.body.when,
         where: req.body.where,
         what: req.body.what,
+        tags: req.body.title +" "+req.body.what+" "+req.body.where+" "+req.body.when+" "+req.body.name
     }
     Event.findOne({
         owner: req.body.owner,
@@ -75,23 +76,49 @@ router.post('/add', (req, res) => {
         })
 })
 
-
-router.delete('/delete', (req, res) => {
-    Event.findOneAndDelete({
-        owner: req.body.owner,
-        title: req.body.title
+router.post('/tags', (req, res) => {
+    const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
+    Event.find({
+        tags: regex
     })
-        .then(event => {
-            res.json({
-                success:true
-            })
-
+        .then(events => {
+            if (events) {
+                if(events.length<1){
+                    res.json({
+                        found:false
+                    })
+                }
+                else{ 
+                    const payload = {
+                        _ids: [...events.map(event=>event._id)],
+                        owners: [...events.map(event=>event.owner)],
+                        titles: [...events.map(event=>event.title)],
+                        whats: [...events.map(event=>event.what)],
+                        wheres: [...events.map(event=>event.where)],
+                        whens: [...events.map(event=>event.when)],
+                        imageDatas: [...events.map(event=>event.imageData)],
+                        }
+                        res.json({
+                            payload:payload,
+                            found:true
+                        })    
+                }
+                
+            } else {
+                res.json({found:false })
+            }
         })
         .catch(err => {
-            res.json({
-                success:false
-            })
+            console.log(err)
+            res.send('Error' + err);
         })
+
 })
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
+
+
 
 module.exports = router;
