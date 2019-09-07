@@ -11,14 +11,16 @@ import { getPosts, addPost } from './UserFunctions';
 import './scrollbar.css'
 import {uploadPostPicture} from './UserFunctions'
 import './style.css';
+
 class PostDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       postPicStyle:null,
       owner: props.email,
+      name: props.name,
       title:"",
-      what: "", 
+      what: "",
       postPic:"",
       titles: [],
       whats: [],
@@ -58,7 +60,8 @@ class PostDetails extends React.Component {
     let post = {
       owner: this.state.owner,
       title: this.state.title,
-      what: this.state.what
+      what: this.state.what,
+      name:this.state.name
     }
     addPost(post)
       .then(res => {
@@ -132,10 +135,10 @@ class PostDetails extends React.Component {
             <MDBRow>
               <MDBCol md="12" className="mt-3 mx-auto">
                 <MDBJumbotron>
-                  <h1 className="text-center mt-3 grey-text">
+                  <h3 className="text-center mt-3 grey-text">
                     <MDBIcon icon="table" className="green-text mr-2 " />
-                    Your Posts
-                  </h1>
+                    Click on post to view
+                  </h3>
                   <ul className="list-unstyled example-components-list">
                   <div className="scrollbar scrollbar-primary  mt-5 mx-auto" style={this.state.scrollContainerStyle}> 
                       {   
@@ -150,7 +153,6 @@ class PostDetails extends React.Component {
                                   <div className='p'>
                                     <div className="d-flex w-100 justify-content-between">
                                       <h5 className="mb-1">{this.state.titles[index]}</h5>
-                                      <small>posted today</small>
                                     </div>
                                     <p className="mb-1">{this.state.whats[index]}</p>
                                   </div>

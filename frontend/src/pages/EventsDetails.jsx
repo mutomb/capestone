@@ -138,28 +138,6 @@ class EventDetails extends React.Component {
         .catch(err => console.log('error')); 
     }
   }
-  deleteEvent=()=>{
-    deleteEvent({
-      owner:this.state.owner,
-      title:this.state.title
-    })
-    .then(res=>{
-      if(res){
-        this.resetEventPicture();
-        this.resetEventPicture();
-        getEvents(this.state.owner)
-        .then(events => {
-          this.setState({
-            titles: [...this.state.titles,...events.map(event=>event.title)],
-            wheres: [...this.state.wheres,...events.map(event=>event.where)],
-            whens: [...this.state.whens,...events.map(event=>event.when)],
-            whats: [...this.state.whats,...events.map(event=>event.what)],
-            eventPics:[...this.state.eventPics,...events.map(event=>event.imageData)]
-          })
-        })
-      }
-    })
-  }
   
   render() {
     return (
@@ -172,10 +150,10 @@ class EventDetails extends React.Component {
                 <MDBRow>
                   <MDBCol md="12" className="mt-3 mx-auto">
                     <MDBJumbotron>
-                      <h1 className="text-center mt-3 grey-text">
+                      <h3 className="text-center mt-3 grey-text">
                         <MDBIcon icon="table" className="green-text mr-2 " />
-                        Your Events
-                      </h1>
+                        Click on event to view
+                      </h3>
                       <ul className="list-unstyled example-components-list">
                       <div className="scrollbar scrollbar-primary  mt-5 mx-auto" style={this.state.scrollContainerStyle}> 
                           {   
@@ -276,17 +254,8 @@ class EventDetails extends React.Component {
               <MDBCol md="4">
                 <MDBBtn onClick={this.handleUpload} className="btn btn-green">Upload</MDBBtn>
               </MDBCol>
-              <MDBCol md="4">
-                <MDBBtn onClick={this.deleteEvent} 
-                 className="btn btn-green"
-                 style={this.state.eventPicStyle || { opacity: 0, position: "absolute", pointerEvents: "none"}}
-                 >
-                   Delete
-                </MDBBtn>
-              </MDBCol>
             </MDBRow>
           </MDBCol>
-
         </MDBRow>
       </>
     )

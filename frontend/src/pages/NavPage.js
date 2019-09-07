@@ -4,20 +4,22 @@ import {
   MDBEdgeHeader
 } from "mdbreact";
 import "./MyHomePage.css";
-//MyNavbar org
-//NavUsers
 import NavUsers from "./NavUsers";
-import NavbarPage from "./NavbarPage";
-import NavsPage from "./NavsPage";
-import MyNavbar from "./MyNavbar";
+import './style.css'
 class NavPage extends React.Component {
   scrollToTop = () => window.scrollTo(0, 0);
   render() {
     return (
       <>
-        <MDBEdgeHeader color="green" className="sectionPage" />
+        <div class="wrapper"
+
+              className='editable wrapper'
+          >
+            <div class="clip-text clip-text_one">Community Organisations</div>
+
+        </div>
         <NavUsers/>
-    </>
+      </>
     );
   }
 }

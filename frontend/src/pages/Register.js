@@ -9,7 +9,6 @@ import {
   MDBCardBody
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import axios from "axios";
 import {register} from './UserFunctions';
 import './Chips.css'
 const Chips=(props)=>{  
@@ -231,7 +230,7 @@ class Register extends React.Component {
             }
             else{
               this.setState({
-                emailConflict:`Account with email address: ${this.state.email}, already exist.
+                emailConflict:`Account with email address: ${this.state.email}, already exist.  
                 Please login or use a different email address`
               })
             }
@@ -382,7 +381,7 @@ class Register extends React.Component {
             </MDBCardBody>
             </MDBCard>
             </MDBCol>
-            </MDBRow>     
+            </MDBRow>   
       </MDBContainer>
      </>
     )

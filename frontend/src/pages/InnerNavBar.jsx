@@ -56,11 +56,6 @@ class InnerNavBar extends React.Component {
                       Posts
                     </MDBNavLink>
                   </MDBNavItem>
-                  <MDBNavItem >   
-                    <MDBNavLink to="#" active={this.state.activeItemPills === "4"} onClick={this.togglePills("4")}>
-                      Edit Personal Details
-                    </MDBNavLink>
-                  </MDBNavItem>
                 </MDBNav>
                 <MDBTabContent activeItem={this.state.activeItemPills}>
                   <MDBTabPane tabId="1">
@@ -74,10 +69,6 @@ class InnerNavBar extends React.Component {
                   <MDBTabPane tabId="3">
                   <br/><br/>
                    {this.props.postsContent}
-                  </MDBTabPane>
-                  <MDBTabPane tabId="4">
-                  <br/><br/>
-                   {this.props.EditProfileContent}
                   </MDBTabPane>
                 </MDBTabContent>
               </SectionContainer>

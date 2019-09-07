@@ -24,7 +24,7 @@ const eventSchema = new schema({
         required: true,
         minlength: 3
     },
-    what: {
+    what: { 
         type: String,
         required: true,
         unique: false,
@@ -37,6 +37,10 @@ const eventSchema = new schema({
     imageData: {
         type: String,
         required: false,
+    },
+    tags:{
+        type: String,
+        required: false,   
     }
 },
     {

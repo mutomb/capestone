@@ -27,6 +27,10 @@ const postSchema= new schema({
     imageData: {
         type: String,
         required: false,
+    },
+    tags:{
+        type: String,
+        required: false,   
     }
 },
     {timestamps:{

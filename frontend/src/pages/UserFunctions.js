@@ -95,11 +95,9 @@ export const addEvent=event=>{
             what: event.what
         })
         .then(res=>{
-            console.log(`${event.title} event uploaded`);
             return res;
         })
         .catch(err=>{
-            console.log(err)
             return err;
         })
     )
@@ -123,7 +121,8 @@ export const addPost=post=>{
         axios.post('postDetails/add',{
             owner:post.owner,
             title:post.title,
-            what: post.what
+            what: post.what,
+            name:post.name
         })
         .then(res=>{
             console.log(`${post.title} post uploaded`);
@@ -151,7 +150,17 @@ export const updateOrganisation=organisation=>{
             email:organisation.email,
             phonenumber:organisation.phonenumber  
         })
-            .then(res=>console.log(res))     
+            .then(data=>{
+                if(data.data.success){
+                    return true
+                }
+                else{
+                    return false
+                }
+            })
+            .catch(err=>{
+                return false            
+            })   
 }
 
 export const uploadProfilePicture=(imageFormObj)=>{
@@ -191,7 +200,6 @@ export const deleteProfilePicture=(email)=>{
 export const uploadEventPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/eventimage/add`, imageFormObj)
                  .then((data) => {
-                    console.log(data)
                      if (data.data.success) {
                          return data.data;
                      }
@@ -200,7 +208,6 @@ export const uploadEventPicture=(imageFormObj)=>{
                      }
                  })
                  .catch((err) => {
-                     console.log('not worked')
                      alert("Error while uploading image using multer"+err);
                  }); 
  }
@@ -255,4 +262,50 @@ export const uploadEventPicture=(imageFormObj)=>{
                  .catch((err) => {
                      alert("Error while uploading image using multer"+err);
                  }); 
+ } 
+
+ export const getOrganisations=(keyword)=>{
+    return axios.post('http://localhost:5000/organisation/',{
+                keyword:keyword
+            })
+                .then(data=>{
+                    return data.data
+                })
+                .catch(err=>alert(err))
  }
+ 
+ export const getSearchedPosts= (keyword)=>{
+    return( 
+        axios.post('postDetails/tags',{
+            keyword:keyword
+        })
+            .then(data=>{
+                return data.data
+            })
+            .catch(err=>alert(err))
+    )
+
+}
+export const getSearchedEvents= (keyword)=>{
+    return( 
+        axios.post('eventDetails/tags',{
+            keyword:keyword
+        })
+            .then(data=>{
+                return data.data
+            })
+            .catch(err=>alert(err))
+    )
+
+}
+
+export const getOrganisation= (email)=>{
+    return( 
+        axios.get(`organisation/${email}`)
+            .then(data=>{
+                return data.data
+            })
+            .catch(err=>alert(err))
+    )
+
+}

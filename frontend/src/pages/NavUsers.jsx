@@ -7,16 +7,30 @@ import {
   MDBNavbarToggler,
   MDBCollapse,
   MDBIcon,
-  MDBCol,
-  MDBFormInline
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import { withRouter } from 'react-router';
-
+import jwt_decode from 'jwt-decode';
 class NavUsers extends Component {
-  state = {
-    collapseID: ""
-  };
+  constructor(props){
+    super(props);
+    const token= localStorage.getItem('usertoken'); 
+    if(token){
+      const decoded= jwt_decode(token);
+      this.state={
+        organisation:{...decoded},
+        token:true,
+        collapseID: ""
+      }
+    }
+    else{
+      this.state={
+        token:false,
+        organisation:"",
+        collapseID: ""
+      }
+    }
+  }
 
   toggleCollapse = collapseID => () =>
     this.setState(prevState => ({
@@ -30,15 +44,13 @@ class NavUsers extends Component {
 
     
   render() {
-
     const loginRegLink=(
 
-      <SectionContainer header="With dropdown">
+      <SectionContainer >
             <MDBNavbar
             color="green"
             dark
             expand="md"
-            style={{ marginTop: "20px" }}
             >
             <MDBNavbarToggler
                 onClick={this.toggleCollapse("navbarCollapse3")}
@@ -84,7 +96,7 @@ class NavUsers extends Component {
     
     const logoutUserLink=(
     
-      <SectionContainer header="With dropdown">
+      <SectionContainer>
             <MDBNavbar
             color="green"
             dark
@@ -117,7 +129,7 @@ class NavUsers extends Component {
                 <MDBNavItem>
                     <MDBNavLink to="/organisation">
                       <MDBIcon className="d-inline-inline fas fa-user-circle" />
-                      <div className="d-none d-md-inline">User</div>
+                      <div className="d-none d-md-inline">{this.state.organisation.name}</div>
                     </MDBNavLink>
                 </MDBNavItem>
                 <MDBNavItem>

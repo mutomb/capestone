@@ -2,7 +2,6 @@ import React from "react";
 import {MDBContainer,MDBCol,MDBRow} from "mdbreact";
 import InnerNavBar from "../pages/InnerNavBar";
 import ProfileDetails from "../pages/ProfileDetails";
-import EditProfileDetails from "../pages/EditProfileDetails";
 import PostsDetails from "../pages/PostsDetails";
 import EventsDetails from "../pages/EventsDetails";
 import jwt_decode from 'jwt-decode';
@@ -53,10 +52,7 @@ class MyOrganisationalPage extends React.Component {
               postsContent={
               <PostsDetails
                 email={this.state.organisation.email}
-              />}
-              EditProfileContent={
-              <EditProfileDetails
-                organisation={this.state.organisation}
+                name={this.state.organisation.name}
               />} 
               />
             </MDBCol>

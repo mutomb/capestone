@@ -51,7 +51,8 @@ router.post('/add', (req, res) => {
     const postData = {
         owner: req.body.owner,
         title: req.body.title,
-        what: req.body.what
+        what: req.body.what,
+        tags: req.body.title +" "+req.body.what+" "+req.body.name
     }
     Post.findOne({
         owner: req.body.owner,
@@ -77,6 +78,49 @@ router.post('/add', (req, res) => {
             res.send('error: ' + err)
         })
 })
+
+
+
+router.post('/tags', (req, res) => {
+    const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
+    Post.find({
+        tags: regex
+    })
+        .then(posts => {
+            if (posts) {
+                if(posts.length<1){
+                    res.json({
+                        found:false
+                    })
+                }
+                else{ 
+                    const payload = {
+                        _ids: [...posts.map(post=>post._id)],
+                        owners: [...posts.map(post=>post.owner)],
+                        titles: [...posts.map(post=>post.title)],
+                        whats: [...posts.map(post=>post.what)],
+                        imageDatas: [...posts.map(post=>post.imageData)],
+                        }
+                        res.json({
+                            payload:payload,
+                            found:true
+                        })    
+                }
+                
+            } else {
+                res.json({found:false })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.send('Error' + err);
+        })
+
+})
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 
 module.exports = router;
