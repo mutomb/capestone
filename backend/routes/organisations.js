@@ -3,10 +3,108 @@ const cors = require('cors');
 const jwt = require('jsonwebtoken');
 //const bcrpyt = require('bcrypt-nodejs');
 const mongoose= require('mongoose');
-
 let Organisation = require('../models/organisation.model');
 router.use(cors())
 process.env.SECRET_KEY = 'secret';
+
+
+router.post('/', (req, res) => {
+    const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
+    Organisation.find({
+        name: regex
+    })
+        .then(organisations => {
+            if (organisations) {
+                if(organisations.length<1){
+                    res.json({
+                        found:false
+                    })
+                }
+                else{
+                    const payload = {
+                        _id: [...organisations.map(organisation=>organisation._id)],
+                        names: [...organisations.map(organisation=>organisation.name)],
+                        descriptions: [...organisations.map(organisation=>organisation.description)],
+                        zipcodes: [...organisations.map(organisation=>organisation.zipcode)],
+                        street_addresses: [...organisations.map(organisation=>organisation.street_address)],
+                        cities: [...organisations.map(organisation=>organisation.city)],
+                        provinces: [...organisations.map(organisation=>organisation.province)],
+                        countries: [...organisations.map(organisation=>organisation.country)],
+                        emails: [...organisations.map(organisation=>organisation.email)],
+                        phonenumbers: [...organisations.map(organisation=>organisation.phonenumber)],
+                        socialissues: [...organisations.map(organisation=>organisation.socialissues)]
+                        }
+                        res.json({
+                            payload:payload,
+                            found:true
+                        })    
+                }
+                
+            } else {
+                res.json({found:false })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.send('Error' + err);
+        })
+
+})
+
+router.get("/", (req, res)=> {
+    Organisation.find({
+  
+    }
+    ,{_id:0,username:1,socialissues:1,city:1}
+    )
+        .then(orga => {
+            if (orga) {
+                res.json(orga)
+            } else {
+                console.log('event does not exist')
+                res.send('event does not exist')
+            }
+        })
+        .catch(err => {
+            res.send('Error: name' + err)
+        })
+  });
+
+router.get('/:email', (req, res) => {
+    Organisation.findOne({
+        email: req.params.email
+    })
+        .then(organisation => {
+            if (organisation) {
+                
+                const payload = {
+                    _id: organisation._id,
+                    name: organisation.name,
+                    description: organisation.description,
+                    zipcode: organisation.zipcode,
+                    street_address: organisation.street_address,
+                    city: organisation.city,
+                    province:organisation.province,
+                    country: organisation.country,
+                    email: organisation.email,
+                    phonenumber: organisation.phonenumber,
+                    socialissues: organisation.socialissues
+                    }
+                    res.json({
+                        payload:payload,
+                        found:true
+                    })              
+                
+            } else {
+                res.json({found:false })
+            }
+        })
+        .catch(err => {
+            console.log(err)
+            res.send('Error' + err);
+        })
+})
+
 
 router.post('/register', (req, res) => {
     const organisationData = {
@@ -59,28 +157,9 @@ router.post('/register', (req, res) => {
         .catch(err => {
             res.send('error: my name is ' + err)
         })
-})
+});
 
-router.get("/", (req, res)=> {
-    Organisation.find({
-  
-    }
-    ,{_id:0,username:1,socialissues:1,city:1}
-    )
-        .then(orga => {
-            if (orga) {
-                res.json(orga)
-            } else {
-                console.log('event does not exist')
-                res.send('event does not exist')
-            }
-        })
-        .catch(err => {
-            res.send('Error: name' + err)
-        })
-  });
-
-  router.get("/:social", (req, res)=> {
+ router.get("/:social", (req, res)=> {
     Organisation.find({socialissues:req.params.social}
     ,{_id:0,username:1,socialissues:1,city:1}
     )
@@ -178,15 +257,15 @@ router.post('/update',(req, res)=>{
                 organisation.phonenumber=req.body.phonenumber,
                 organisation.socialissues=req.body.socialissues
                 organisation.save()
-                    .then((org)=>res.send(org))
+                    .then((org)=>res.json({
+                        data:org,
+                        success:true
+                    }))
                     .catch(err=>res.send('Error: '+err));
             }
         })
         .catch(err=>res.send('error: '+err));
 });
-
-
-
 
 router.route('/delete/:email').delete((req,res)=>{
     Organisation.findOneAndDelete({
@@ -202,5 +281,8 @@ router.route('/delete/:email').delete((req,res)=>{
         })});   
 });
 
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
