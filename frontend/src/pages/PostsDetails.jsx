@@ -1,3 +1,7 @@
+/** 
+ * Created by: Jeanluc
+ * Handles the View/UI for a  company that is logged in to update/add an Post's detail 
+ */
 import React from "react";
 import {
   MDBContainer,
@@ -29,33 +33,32 @@ class PostDetails extends React.Component {
       scrollContainerStyle: { width: "100%", maxHeight: "31.25em" }
     };
   }
-
+/** aid refreshing of image type of states */
   resetPostPicture=()=>{
     this.setState({ postPic:""})
   }
-
+/**  handles input inputs*/
   addPostPicture=event =>{
     this.setState({postPic:URL.createObjectURL(event.target.files[0]),
       postPicStyle:{opacity:1, color:'red'},
       selectedImage: event.target.files[0]
     })
   }
-  removePostPicture=() =>{
-    this.setState({postPic:null,postPicStyle:{opacity:0, position:"absolute", pointerEvents:"none"}})
-  }
 
+  /**handles input changes for text inputs */
   changeHandler=event=>{
     const name=event.target.name;
     const value=event.target.value;
     this.setState({[name]: value});
   }
+    /**aids when state changes */
   resetPostList(){
     this.setState({
       titles: [],
       whats: []
     })
   }
-
+/**send uploaded Post data to the controller */
   handleUpload = () => {
     let post = {
       owner: this.state.owner,
@@ -80,7 +83,7 @@ class PostDetails extends React.Component {
       .catch(err => console.log(err));
   }
 
-
+/** send uploded image to controller */
   uploadImage=(image)=> {
     let imageFormObj = new FormData();
     imageFormObj.append("imageName", this.state.owner+this.state.title); 
@@ -99,8 +102,9 @@ class PostDetails extends React.Component {
             }
           })   
   } 
-
-
+/** stores postlist
+ * to be displayed on the side cards
+ */
   displayPost=(i)=>{
     this.setState({
       title:this.state.titles[i],
@@ -112,6 +116,9 @@ class PostDetails extends React.Component {
 
   preventDefault=(e)=>{e.preventDefault(); console.log(e)}
   componentWillMount() {
+    /**
+      * calls the controller that gets existing posts when the organisation logs in
+    */
     if(this.state.owner){
       getPosts(this.state.owner)
         .then(posts => {

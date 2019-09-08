@@ -1,13 +1,19 @@
+/**
+ * created by: jeanluc mutomb
+ * View/UI that handles the form that allows the organisation to sign in
+ */
+
 import React, { Component } from "react";
 import {
   MDBContainer,
   MDBRow,
   MDBCol,
-  MDBAlert,
-  MDBAnimation
 } from "mdbreact";
-import { MDBBtn, MDBCard, MDBCardHeader, MDBCardBody,MDBIcon,MDBInput } from 'mdbreact';
-import {login} from './UserFunctions'
+import { MDBBtn, MDBCard, MDBCardBody,MDBInput } from 'mdbreact';
+import {login} from './UserFunctions';
+/**
+ * that diplays hints when an input is invalid
+ */
 const FormErrors = (props) =>
   <div className='formErrors'>
     {Object.keys(props.formErrors).map((fieldName, i) => {
@@ -20,7 +26,9 @@ const FormErrors = (props) =>
       }
     })}
   </div>
-
+/**
+ * handles the sig in form
+ */
 class Login extends Component {
   constructor(props){
     super(props);
@@ -49,7 +57,9 @@ class Login extends Component {
           this.validateField(name,value)
     });
   };
-
+/**
+ * validate the input fields
+ */
   validateField=(fieldName, value)=> {
     let fieldValidationErrors = this.state.formErrors;
     let emailValid = this.state.emailValid;
@@ -73,10 +83,16 @@ class Login extends Component {
       passwordValid: passwordValid
     }, this.validateForm);
   }
+  /**
+   * check if all inputs are valid and enables then enables the submit button
+   */
   validateForm=()=>{
     this.setState({formValid: this.state.emailValid &&
                               this.state.passwordValid});
   }
+  /**
+   * added error indicative class name to input
+   */
   errorClass=(error)=>{
     return(error.length === 0 ? '' : 'has-error');
   } 

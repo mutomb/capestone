@@ -1,14 +1,21 @@
+/**
+ * created by jeanluc mutomb
+ * handles display of organisational details on the profile page
+ */
+
 import React from "react";
 import SectionContainer from "../components/sectionContainer";
 import { withRouter } from 'react-router-dom';
 import {uploadProfilePicture, getProfilePicture, deleteProfilePicture, updateOrganisation} from './UserFunctions'
 import { 
-  MDBCard, MDBCardTitle, MDBCardGroup, 
+  MDBCard, MDBCardGroup, 
   MDBCardImage, MDBCardText, MDBCardBody, 
   MDBRow,MDBCol,MDBBtn
 } from "mdbreact";
 import './style.css'
-
+/**
+ * handle display of hint when changed profile diplay in incorrect
+ */
 const FormErrors = (props) =>
   <div className='formErrors'>
     {Object.keys(props.formErrors).map((fieldName, i) => {
@@ -74,11 +81,16 @@ class ProfileDetails extends React.Component {
         }
     }
   }
+  /**
+   * aid refreshing updated profile image state
+   */
   resetProfilePicture=()=>{
     this.setState({ multerImage:null})
     
   }
-
+/**
+ * calls controller that handles uploaded profile picture
+ */
   uploadImage=(e)=> {
     let imageFormObj = new FormData();
     imageFormObj.append("imageName", this.state.owner); 
@@ -96,7 +108,9 @@ class ProfileDetails extends React.Component {
             }
           })
   }
-
+/**
+ * delete profile picture
+ */
   removeImage=() =>{ 
     deleteProfilePicture(this.state.owner)
       .then(data=>{
@@ -116,7 +130,10 @@ class ProfileDetails extends React.Component {
       this.validateField(name,value)
     })
   }
-
+/**
+ * calls controller that handles text input
+ * changes to the profile details
+ */
   uploadHandler=event=>{
     event.preventDefault();
     event.target.className += " was-validated"; 
@@ -148,7 +165,9 @@ class ProfileDetails extends React.Component {
       .catch(err=>console.log(err));
     }
   }
-
+/**
+ * check if a text input is valid
+ */
   validateField=(fieldName,value)=>{
     let fieldValidationErrors= this.state.formErrors;
     let usernameValid=this.state.usernameValid;
@@ -221,6 +240,9 @@ class ProfileDetails extends React.Component {
         phonenumberValid: phonenumberValid,
       }, this.validateForm);
   }
+  /**
+   * check if all input are valid before commiting changes then enables submit button
+   */
   validateForm=()=>{
     this.setState(
       {formValid: this.state.emailValid &&
@@ -236,7 +258,9 @@ class ProfileDetails extends React.Component {
                   this.state.phonenumberValid                              
       });
   }
-
+/**
+ * add error class to text input 
+ */
   errorClass=(error)=>{
     return(error.length === 0 ? '' : 'has-error');
   }   
@@ -248,6 +272,9 @@ class ProfileDetails extends React.Component {
   }
 
   componentWillMount(){
+    /**
+     * retrieves the organisation's profile picture when it logs in
+     */
     if(this.state.owner){
       getProfilePicture(this.state.owner)
         .then(res=>{

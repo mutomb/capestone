@@ -1,3 +1,9 @@
+/**
+ * created by: jeanluc mutomb
+ * handles the main navigation bar
+ * displays different components based on whether the user is logged in or not
+ */
+
 import React, { Component } from "react";
 import {
   MDBNavbar,

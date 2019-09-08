@@ -1,3 +1,7 @@
+/** 
+ * Created by: Jeanluc
+ * Handles the View/UI for a  company that is logged in to update/add an Event's detail 
+ */
 import React from "react";
 import {
   MDBContainer,
@@ -13,10 +17,6 @@ import './style.css';
 import {uploadEventPicture,deleteEvent} from './UserFunctions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-/** 
- * Created by: Jeanluc
- * View for componay to view or 
- */
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -37,12 +37,12 @@ class EventDetails extends React.Component {
       scrollContainerStyle: { width: "100%", maxHeight: "31.25em" }
     };
   }
-/** aid refreshing of image type states */
+/** aid refreshing of image type of states */
   resetEventPicture=()=>{
     this.setState({ eventPic:""})
     
   }
-/**  for Company to append image on before uploading an event*/
+/**  handles input inputs*/
   addEventPicture = event => {
     this.setState({ 
       eventPic: URL.createObjectURL(event.target.files[0]), 
@@ -50,17 +50,19 @@ class EventDetails extends React.Component {
       selectedImage: event.target.files[0]
     })
   }
-
+/**handles date picker changes */
   handleDateChange = (date) => {
     this.setState({
       when: date
     });
   };
+  /**handles input changes for text inputs */
   changeHandler = event => {
     const name = event.target.name;
     const value = event.target.value;
     this.setState({ [name]: value });
   };
+  /**aids when state changes */
   resetEventList=()=>{
     this.setState({
       titles: [],
@@ -69,7 +71,7 @@ class EventDetails extends React.Component {
       whats: [],
     })
   }
-
+/**send uploaded event data to the controller */
   handleUpload = () => {
     let event = {
       owner: this.state.owner,
@@ -96,7 +98,7 @@ class EventDetails extends React.Component {
       })
       .catch(err => console.log(err));
   }
-
+/** send uploded image to controller */
   uploadImage=(image)=> {
     let imageFormObj = new FormData();
     imageFormObj.append("imageName", this.state.owner+this.state.title); 
@@ -118,7 +120,9 @@ class EventDetails extends React.Component {
     
   } 
 
-
+/** stores eventlist
+ * to be displayed on the side cards
+ */
   displayEvent=(i)=>{
     this.setState({
       title:this.state.titles[i],
@@ -131,9 +135,12 @@ class EventDetails extends React.Component {
     console.log(this.state.when)
   }
 
-
   preventDefault=(e)=>{e.preventDefault();}
+
   componentWillMount() {
+/**
+ * calls the controller that gets existing events when the organisation logs in
+ */
     if(this.state.owner){
       getEvents(this.state.owner)
         .then(events => {

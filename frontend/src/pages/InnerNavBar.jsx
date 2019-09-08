@@ -1,16 +1,17 @@
+/**
+ * created by: Jeanluc Mutomb
+ * View/UI handles the navigation tabs for an organisation that is already logged in
+ */
+
 import React from "react";
 import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBInputGroup,
-  MDBBtn,
-  MDBInput, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem,MDBNavLink
+ MDBTabPane, MDBTabContent, MDBNav, MDBNavItem,MDBNavLink
 
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
-import axios from "axios";
-import { element } from "prop-types";
 import "./InnerNavStyle.css";
 
 
@@ -22,7 +23,9 @@ class InnerNavBar extends React.Component {
   state = {
     activeItemPills: "1", //
   }; 
-
+/**
+ * indicative of active and pressed tab
+ */
   togglePills = tab => () => {
     if (this.state.activePills !== tab) {
       this.setState({

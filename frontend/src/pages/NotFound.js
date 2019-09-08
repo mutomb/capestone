@@ -1,3 +1,9 @@
+/**
+ * created by jeanluc mutomb
+ * handles unthaurized requests
+ */
+
+
 import React, { Component } from "react";
 import {MDBContainer,MDBBtn} from "mdbreact";
 class NotFound extends Component {

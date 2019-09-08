@@ -1,3 +1,7 @@
+/**
+ * created by: jeanluc mutomb
+ * handles the view for the Homepage of the website
+ */
 import React from "react";
 import {
   MDBContainer,MDBCol,MDBRow,MDBCardBody,
@@ -82,6 +86,11 @@ class MyHomePage extends React.Component {
       eventimageDatas:[]
     })
   }
+  /**
+   * calls the search controller to find search results
+   * when the user clicks the search button
+   * diplays different views depending on the type selected category
+   */
   search=(e)=>{
     e.preventDefault(); 
     if(this.state.selectedCat=='Organisations'){    
@@ -199,6 +208,9 @@ class MyHomePage extends React.Component {
       [name]:value
     })
   }
+  /**
+   * functions that handle the modal view/fullview/popup of the searched data
+   */
   openModal=(event,index)=> {
     event.preventDefault();
     let array=this.state.visibleIndex;
@@ -247,18 +259,28 @@ class MyHomePage extends React.Component {
         eventvisibleIndex: array
     });
   }
+  /**
+   * handles the dropdown menu on the search bar
+   */
   displayCategories=()=>{
    return this.state.categories.map((item,index)=>{
      return (<MDBDropdownItem onClick={(e)=>this.selectCategory(e,index)}>{item}</MDBDropdownItem>)
     })
   }
+/**
+   * handles the dropdown menu on the search bar
+*/
   selectCategory=(e,index)=>{
     e.preventDefault();
     this.setState({
       selectedCat: this.state.categories[index]
     })
   }
-
+/**
+ * renders different views depending on the states
+ * if the search button is pressed then the search result should be displayed or else display the social issues overview 
+ * deffirent types of search(organisation,event,post) have different views
+ */
   render() {
     const renderSearch=this.state.renderSearch;
     return (
@@ -678,9 +700,16 @@ class MyHomePage extends React.Component {
 }
 export default MyHomePage;
 
-
+/**
+ * component that handles the display of results in in a list form
+ * when user press search
+ * different types for results/views
+ */
 
 const SearchResults=(props)=>{
+  /**
+   * handles the display of events in the list
+   */
   const displayEventList=()=>{
     if(props.foundResults){  
       if(props.eventOwners.length>0 && 
@@ -726,6 +755,9 @@ const SearchResults=(props)=>{
       return(<div>No results found for: {props.keyword} </div>)
     }
   }
+  /**
+   * handles the display of posts in the list
+   */
   const displayPostList=()=>{
     if(props.foundResults){  
       if(props.postOwners.length>0 &&
@@ -767,6 +799,9 @@ const SearchResults=(props)=>{
       return(<div>No results found for: {props.keyword} </div>)
     }
   }
+  /**
+   * handles the display of organisations in the list
+   */
   const displayOrganisationList=()=>{
     if(props.foundResults){ 
       if(props.names.length>0 && 
@@ -834,7 +869,10 @@ const SearchResults=(props)=>{
   )
 }
 
-//Display Organisation Full Details.
+  /**
+   * handles the display the display of one organisation form the list on a Modal component
+   * full display of organisation datails
+   */
 class OrganisationListFullView extends React.Component{
   constructor(props){
     super(props)
@@ -843,7 +881,9 @@ class OrganisationListFullView extends React.Component{
       imageStyle:{ opacity: 0, position: "absolute", pointerEvents: "none" }
     }
   }
-
+  /**
+   * get the picture that is associated with pressed organisation
+   */
    getPic=()=>{
     getProfilePicture(this.props.email)
       .then(res=>{
@@ -920,7 +960,10 @@ class OrganisationListFullView extends React.Component{
 }
 
 
-//Display Post Full Details.
+  /**
+   * handles the display the display of one post from the list on a Modal component
+   * full display of the post datails
+   */
 class PostListFullView extends React.Component{
   constructor(props){
     super(props)
@@ -954,7 +997,9 @@ class PostListFullView extends React.Component{
     } 
     
   }
-  
+  /**
+   * get the organisation details of the organisation that posted that event
+   */
   getOrganisationDetails=()=>{
     if(this.props.owner){
       getOrganisation(this.props.owner)
@@ -1030,7 +1075,10 @@ class PostListFullView extends React.Component{
 
 }
 
-//Display Event Full Details.
+  /**
+   * handles the display of one event from the list on a Modal component
+   * full display of event datails
+   */
 class EventListFullView extends React.Component{
   constructor(props){
     super(props)
@@ -1064,7 +1112,9 @@ class EventListFullView extends React.Component{
     } 
     
   }
-  
+    /**
+   * get the organisation details of the organisation that posted that Post
+   */
   getOrganisationDetails=()=>{
     if(this.props.owner){
       getOrganisation(this.props.owner)
@@ -1142,7 +1192,10 @@ class EventListFullView extends React.Component{
 
 }
 
-
+/**
+ * handles the styling of the different content on the modal components
+ * different content from different type of searches
+ */
 
 const Content= props=>{ 
     var scrollContainerStyle={

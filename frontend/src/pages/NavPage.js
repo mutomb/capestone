@@ -1,8 +1,9 @@
-import React from "react";
+/**
+ * created by jeanluc mutomb
+ * handles the display of the main website logo and the navigation bar
+ */
 
-import {
-  MDBEdgeHeader
-} from "mdbreact";
+import React from "react";
 import "./MyHomePage.css";
 import NavUsers from "./NavUsers";
 import './style.css'

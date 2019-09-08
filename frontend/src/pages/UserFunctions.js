@@ -1,8 +1,15 @@
+/**
+ * created by: jeanluc mutomb
+ * represent the Controller 
+ * coordinates the request from the view by directing them to appropriate backend routes
+ */
+
 import axios from 'axios';
-
-
+/**
+ * handles the registration of an organisation
+ */
 export const register = newUser=>{
-   
+            
         return  axios.post('organisation/register',{
                     username:newUser.username, 
                     password:newUser.password,
@@ -33,8 +40,9 @@ export const register = newUser=>{
         
 }
 
-
-
+/**
+ * handle the siging in of organisation
+ */
 export const login = user=>{
     return(
         axios.post('organisation/login',{ 
@@ -55,21 +63,9 @@ export const login = user=>{
             })
     )
 }
-
-export const removeOrganisation=(email)=>{
-    return axios.delete(`organisation/delete/${email}`)
-               .then(data=>{
-                   if(data.data.success){
-                       return true;
-                   }
-                   else{
-                       return false;
-                   }
-               })
-               .catch(err=>{
-                   alert('Error while deleting organisation')
-               })
-}
+/**
+ * handles the retrieval of a batch of events that were uploaded by given organisation
+ */
 
 export const getEvents= email=>{
     return( 
@@ -85,6 +81,9 @@ export const getEvents= email=>{
     )
 
 }
+/**
+ * handles uploading of one event to database
+ */
 export const addEvent=event=>{
     return(
         axios.post('eventDetails/add',{
@@ -102,6 +101,9 @@ export const addEvent=event=>{
         })
     )
 }
+/**
+ * handles the retrieval of a batch of Posts that were uploaded by given organisation
+ */
 export const getPosts= email=>{
     return( 
         axios.post('postDetails/',{
@@ -116,6 +118,10 @@ export const getPosts= email=>{
     )
 
 }
+/**
+ * handles uploading of one post to database
+ */
+
 export const addPost=post=>{
     return(
         axios.post('postDetails/add',{
@@ -134,7 +140,9 @@ export const addPost=post=>{
         })
     )
 }
-
+/**
+ * handles upload of modification to organisation details to database
+ */
 export const updateOrganisation=organisation=>{
     
     return axios.post('organisation/update',{
@@ -162,7 +170,9 @@ export const updateOrganisation=organisation=>{
                 return false            
             })   
 }
-
+/**
+ * handles the uploading of profile picture to the database
+ */
 export const uploadProfilePicture=(imageFormObj)=>{
    return  axios.post(`http://localhost:5000/image/uploadmulter`, imageFormObj)
                 .then((data) => {
@@ -177,6 +187,9 @@ export const uploadProfilePicture=(imageFormObj)=>{
                     alert("Error while uploading image using multer"+err);
                 }); 
 } 
+/**
+ * handles the retrieval of profile picture from the database
+ */
 export const getProfilePicture=(email)=>{
     return  axios.post(`http://localhost:5000/image/${email}`)
                 .then((data) => {
@@ -186,7 +199,9 @@ export const getProfilePicture=(email)=>{
                     alert("Upload profile picture"+err);
                 }); 
 }
-
+/**
+ * handles deletion of profile picture from the database
+ */
 export const deleteProfilePicture=(email)=>{
     return  axios.delete(`http://localhost:5000/image/delete/${email}`)
                 .then((data) => {
@@ -196,7 +211,9 @@ export const deleteProfilePicture=(email)=>{
                     alert("error occured while deleting picture:"+err);
                 }); 
 }
-
+/**
+ * handles the uploading of event picture to database
+ */
 export const uploadEventPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/eventimage/add`, imageFormObj)
                  .then((data) => {
@@ -211,8 +228,9 @@ export const uploadEventPicture=(imageFormObj)=>{
                      alert("Error while uploading image using multer"+err);
                  }); 
  }
-
-
+/**
+ * handles the uploading of post picture to database
+ */
  export const uploadPostPicture=(imageFormObj)=>{
     return  axios.post(`http://localhost:5000/postimage/add`, imageFormObj)
                  .then((data) => {
@@ -227,42 +245,9 @@ export const uploadEventPicture=(imageFormObj)=>{
                      alert("Error while uploading image using multer"+err);
                  }); 
  }
-
- export const deletePost=(post)=>{
-    return  axios.delete(`http://localhost:5000/postDetails/delete`,{
-                        owner: post.owner,
-                        title: post.title
-                     })
-                 .then((data) => {
-                     if (data.data.success) {
-                         return data.data;
-                     }
-                     else{
-                         return false;
-                     }
-                 })
-                 .catch((err) => {
-                     alert("Error while uploading image using multer"+err);
-                 }); 
- }
-
- export const deleteEvent=(event)=>{
-    return  axios.delete(`http://localhost:5000/eventDetails/delete`,{
-                        owner: event.owner,
-                        title: event.title
-                     })
-                 .then((data) => {
-                     if (data.data.success) {
-                         return true;
-                     }
-                     else{
-                         return false;
-                     }
-                 })
-                 .catch((err) => {
-                     alert("Error while uploading image using multer"+err);
-                 }); 
- } 
+/**
+ * handles the retrieval of many organisations that match searched critiria
+ */
 
  export const getOrganisations=(keyword)=>{
     return axios.post('http://localhost:5000/organisation/',{
@@ -273,7 +258,9 @@ export const uploadEventPicture=(imageFormObj)=>{
                 })
                 .catch(err=>alert(err))
  }
- 
+ /**
+ * handles the retrieval of many Posts that match searched critiria
+ */
  export const getSearchedPosts= (keyword)=>{
     return( 
         axios.post('postDetails/tags',{
@@ -286,6 +273,9 @@ export const uploadEventPicture=(imageFormObj)=>{
     )
 
 }
+/**
+ * handles the retrieval of many Events that match searched critiria
+ */
 export const getSearchedEvents= (keyword)=>{
     return( 
         axios.post('eventDetails/tags',{
@@ -298,7 +288,9 @@ export const getSearchedEvents= (keyword)=>{
     )
 
 }
-
+/**
+ * handles the retrieval of public details of one organisation
+ */
 export const getOrganisation= (email)=>{
     return( 
         axios.get(`organisation/${email}`)

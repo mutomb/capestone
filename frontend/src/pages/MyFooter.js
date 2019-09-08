@@ -1,3 +1,8 @@
+/**
+ * created by: jeanluc mutomb
+ * View for the footer component
+ */
+
 import React from "react";
 import { MDBContainer, MDBFooter } from "mdbreact";
 

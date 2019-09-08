@@ -1,3 +1,8 @@
+/**
+ * created by jeanluc mutomb
+ * handle registration form
+ */
+
 import React from "react";
 import {
   MDBContainer,
@@ -10,7 +15,10 @@ import {
 } from "mdbreact";
 import SectionContainer from "../components/sectionContainer";
 import {register} from './UserFunctions';
-import './Chips.css'
+import './Chips.css';
+/**
+ * handles the addition of social issues that organisation will be working on
+ */
 const Chips=(props)=>{  
   return(
     <>
@@ -21,7 +29,9 @@ const Chips=(props)=>{
     </>
   )
 }
-
+/**
+ * handles the display of hint for invalid input field
+ */
 const FormErrors = (props) =>
   <div className='formErrors'>
     {Object.keys(props.formErrors).map((fieldName, i) => {
@@ -82,12 +92,17 @@ class Register extends React.Component {
       }
     };
   }
-
+/**
+ * add social issues from the form
+ */
   addItem=()=>{
     this.setState({
       socialissues:[...this.state.socialissues,this.state.item]
     })
   }
+  /**
+   * delete social issues from the form
+   */
   deleteItem=(index)=>{
     var array = [...this.state.socialissues]; 
     if (index > -1) {
@@ -107,7 +122,9 @@ class Register extends React.Component {
       });
     this.setState({emailConflict:''});
   };
-
+/**
+ * validates a registration input field
+ */
   validateField=(fieldName,value)=>{
     let fieldValidationErrors= this.state.formErrors;
     let usernameValid=this.state.usernameValid;
@@ -184,25 +201,33 @@ class Register extends React.Component {
         phonenumberValid: phonenumberValid,
       }, this.validateForm);
   }
+  /**
+   * validate the whole form and enables the submit button
+   */
   validateForm=()=>{
-    this.setState({formValid: this.state.emailValid &&
-                              this.state.passwordValid &&
-                              this.state.usernameValid &&
-                              this.state.nameValid &&
-                              this.state.descriptionValid &&
-                              this.state.zipcodeValid &&
-                              this.state.street_addressValid &&
-                              this.state.cityValid &&
-                              this.state.provinceValid &&
-                              this.state.countryValid &&
-                              this.state.phonenumberValid                              
+    this.setState({
+      formValid: this.state.emailValid &&
+                this.state.passwordValid &&
+                this.state.usernameValid &&
+                this.state.nameValid &&
+                this.state.descriptionValid &&
+                this.state.zipcodeValid &&
+                this.state.street_addressValid &&
+                this.state.cityValid &&
+                this.state.provinceValid &&
+                this.state.countryValid &&
+                this.state.phonenumberValid                              
                   });
   }
-
+  /**
+   * add error class name to text input
+   */
   errorClass=(error)=>{
     return(error.length === 0 ? '' : 'has-error');
   } 
-
+  /**
+   * calls controller that handles registration
+   */
   submitHandler = event => {
     event.preventDefault();
     event.target.className += " was-validated"; 
