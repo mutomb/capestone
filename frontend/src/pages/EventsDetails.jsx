@@ -13,6 +13,10 @@ import './style.css';
 import {uploadEventPicture,deleteEvent} from './UserFunctions';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+/** 
+ * Created by: Jeanluc
+ * View for componay to view or 
+ */
 class EventDetails extends React.Component {
   constructor(props) {
     super(props);
@@ -33,12 +37,12 @@ class EventDetails extends React.Component {
       scrollContainerStyle: { width: "100%", maxHeight: "31.25em" }
     };
   }
-
+/** aid refreshing of image type states */
   resetEventPicture=()=>{
     this.setState({ eventPic:""})
     
   }
-
+/**  for Company to append image on before uploading an event*/
   addEventPicture = event => {
     this.setState({ 
       eventPic: URL.createObjectURL(event.target.files[0]), 

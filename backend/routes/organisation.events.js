@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
 
 router.get("/", (req, res)=> {
     Event.find({
-  
+        owner:req.body.owner
     })
         .then(events => {
             if (events) {

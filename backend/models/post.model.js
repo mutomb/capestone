@@ -1,3 +1,10 @@
+
+/*
+ * Created by: Jeanluc Mutomb
+ * JSON model representing how a Post is stored in mongodb 
+ * tags property is compared with the visitor's search keyword, to find a Post
+ * */
+
 const mongoose = require('mongoose');
 const schema= mongoose.Schema;
 const postSchema= new schema({

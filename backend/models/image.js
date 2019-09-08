@@ -1,10 +1,12 @@
+
+/**
+ * Created by: Jeanluc Mutomb
+ * JSON model representing how an organistaion's profile picture is store in mongodb 
+ * */ 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-/* 
-    Image Schema for storing images in the 
-    mongodb database
-*/
+
 var ImageSchema = new Schema({
     owner: {
         type: String, 

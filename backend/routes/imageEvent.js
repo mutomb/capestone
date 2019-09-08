@@ -1,8 +1,15 @@
+/*
+ * Created by: Jeanluc Mutomb
+ * Restful API that handles uploading and finding images associated with an Organisation's Event
+ * */
+
 var express = require('express');
 var Event = require('../models/event.model');
 var EventRouter = express.Router();
 const multer = require('multer');
-
+/**
+ * stores Event's image to folder: backend/uploads/events
+ */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/events');
@@ -11,17 +18,19 @@ const storage = multer.diskStorage({
         cb(null,  req.body.imageName+".jpeg");
     }
 });
-
+/**
+ * only allows jpeg type image
+ */
 const fileFilter = (req, file, cb) => {
-   // if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     if (file.mimetype === 'image/jpeg') {
         cb(null, true);
     } else {
-        // rejects storing a file
         cb(null, false);
     }
 }
-
+/**
+ * set allowed images size limit to ~50mb
+ */
 const upload = multer({
     storage: storage,
     limits: {
@@ -31,9 +40,9 @@ const upload = multer({
 });
 
 /* 
-    stores image in uploads folder
-    using multer and creates a reference to the 
-    file
+* End point that recieves an imcoming image for upload
+*  Updates an event if image associated with that event already exists
+* owner is the email address of the compony; used as unique identify together with event title
 */
 EventRouter.route("/add")
     .post(upload.single('imageData'), (req, res, next) => {

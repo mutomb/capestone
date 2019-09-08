@@ -1,3 +1,10 @@
+/**
+ * Created by: Jeanluc Mutomb
+ * JSON model of the Event in the mongodb database
+ * The tags property is compared with the user's seach keyword to find an event
+ */
+
+
 const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const eventSchema = new schema({

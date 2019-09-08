@@ -1,8 +1,16 @@
+/*
+ * Created by: Jeanluc Mutomb
+ * API end that handles the uploading and deleting profile an Organisation's Profile picture
+ * */
+
+
 var express = require('express');
 var Image = require('../models/image');
 var ImageRouter = express.Router();
 const multer = require('multer');
-
+/**
+ * Storing profile pictures to folder: backend/uploads/profile
+ */
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './uploads/profile');
@@ -12,17 +20,20 @@ const storage = multer.diskStorage({
         cb(null,  req.body.imageName+".jpeg");
     }
 });
-
+/**
+ * Only allows jpeg format image
+ */
 const fileFilter = (req, file, cb) => {
-   // if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
     if (file.mimetype === 'image/jpeg') {
         cb(null, true);
     } else {
-        // rejects storing a file
         cb(null, false);
     }
 }
 
+/**
+ * set maximum image size allowed to ~50MB
+ */
 const upload = multer({
     storage: storage,
     limits: {
@@ -32,9 +43,7 @@ const upload = multer({
 });
 
 /* 
-    stores image in uploads folder
-    using multer and creates a reference to the 
-    file
+* API end that recieves an uploaded image for storing
 */
 ImageRouter.route("/uploadmulter")
     .post(upload.single('imageData'), (req, res, next) => {
@@ -74,7 +83,10 @@ ImageRouter.route("/uploadmulter")
                 console.log('error" '+err)
             })
     });
-
+    
+/**
+ * API end that accepts requests for profile picture as a function of the email
+ */
 ImageRouter.post('/:email', (req, res, next) => {
         const owner= req.params.email;
         Image.findOne({
@@ -98,7 +110,9 @@ ImageRouter.post('/:email', (req, res, next) => {
                 console.log('error" '+err)
             })
     });
-
+/**
+ * end point that deletes profile picture as function of the email
+ */
   
     ImageRouter.route('/delete/:email').delete((req,res)=>{
         Image.findOneAndDelete({

@@ -1,3 +1,9 @@
+/*
+ * Created by: Jeanluc Mutomb
+ * JSON model representing how an subcribed organisation Account is stored in mongodb 
+ * */
+
+
 const mongoose= require('mongoose');
 const schema= mongoose.Schema;
 const organisationSchema= new schema({
