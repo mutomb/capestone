@@ -1,12 +1,21 @@
+/**
+ * created by: Jeanluc Mutomb
+ * Restful API handling uplaods/update of Organistion data to the database
+ */
+
 const router = require('express').Router();
 const cors = require('cors');
 const jwt = require('jsonwebtoken');
-//const bcrpyt = require('bcrypt-nodejs');
-const mongoose= require('mongoose');
 let Organisation = require('../models/organisation.model');
 router.use(cors())
+/**
+ * key used to generate global session taken
+ */
 process.env.SECRET_KEY = 'secret';
-
+ /**
+  * finds all the Oragnisations in the database that match a given searched keyword by the visitor
+  * regular expression only match organisation name
+  *  */ 
 
 router.post('/', (req, res) => {
     const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
@@ -69,6 +78,10 @@ router.get("/", (req, res)=> {
             res.send('Error: name' + err)
         })
   });
+/**
+ * Find one organisation by email address
+ * used in when associating a post/event detail with an organisation
+ */
 
 router.get('/:email', (req, res) => {
     Organisation.findOne({
@@ -104,7 +117,10 @@ router.get('/:email', (req, res) => {
             res.send('Error' + err);
         })
 })
-
+/**
+ *  used to register a new organition
+ * recieves registration form data
+ */
 
 router.post('/register', (req, res) => {
     const organisationData = {
@@ -134,20 +150,6 @@ router.post('/register', (req, res) => {
                     .catch(err => {
                         res.send('Error:' + err)
                     })
-                    /* //Asynchronous hashing not working?
-                bcrpyt.hash(req.body.password, (err, hash)=> {
-                    console.log(hash)
-                    organisationData.password = hash;
-                    Organisation.create(organisationData)
-                        .then(organisation => {
-                            console.log(organisation.email + 'has registered'); //
-                            res.json({ status: organisation.email + 'has Registered' })
-                        })
-                        .catch(err => {
-                            res.send('Error:' + err)
-                        })
-
-                })*/
             } else {
                 console.log('User already exists'); 
                 res.json({ success:false })
@@ -176,6 +178,10 @@ router.post('/register', (req, res) => {
         })
   });
 
+/**
+ *  used to login existing organisation
+ * recieves registration form data
+ */
 
 router.post('/login', (req, res) => {
     Organisation.findOne({
@@ -183,7 +189,6 @@ router.post('/login', (req, res) => {
     })
         .then(organisation => {
             if (organisation) {
-                //if (bcrpyt.compareSync(req.body.password, organisation.password)) {
                 if(req.body.password===organisation.password){
                     const payload = {
                         _id: organisation._id,
@@ -217,7 +222,10 @@ router.post('/login', (req, res) => {
         })
 
 })
-
+/**
+ * get organisation profile details after login,
+ * Authenticate username and password provided by organisation
+ */
 router.get('/profile', (req, res) => {
     var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
     Organisation.findOne({
@@ -235,7 +243,10 @@ router.get('/profile', (req, res) => {
             res.send('error: ' + error)
         })
 })
-
+/**
+ * end point for updating organisation details
+ * used by logged in organisations
+ */
 router.post('/update',(req, res)=>{
         console.log(req.body)
         Organisation.findOne({
@@ -267,19 +278,6 @@ router.post('/update',(req, res)=>{
         .catch(err=>res.send('error: '+err));
 });
 
-router.route('/delete/:email').delete((req,res)=>{
-    Organisation.findOneAndDelete({
-        email: req.params.email
-    })
-        .then(org=> {
-            res.json({
-            success: true
-        })})
-        .catch(err=>{
-            res.json({
-            success:false
-        })});   
-});
 
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

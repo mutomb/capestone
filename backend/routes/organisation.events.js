@@ -1,12 +1,18 @@
+/**
+ * created by: Jeanluc Mutomb
+ * Restful API handling uplaods/update of Events data to the database that organisation adds
+ */
+
 const router = require('express').Router();
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const multer= require('multer');
-const mongoose= require('mongoose');
 
 let Event = require('../models/event.model');
 router.use(cors())
-  
+ /**
+  * finds all the Events in the database that were uploaded by given organisation
+  * used when logged in organisation requests data
+  * owner is the email address; which is unique
+  *  */ 
 router.post('/', (req, res) => {
     console.log(req.body.owner)
     Event.find({
@@ -24,7 +30,11 @@ router.post('/', (req, res) => {
             res.send('Error: name' + err)
         })
 })
-
+ /**
+  * finds all the Posts in the database that were uploaded by given organisation
+  * using the get request
+  * owner is the email address; which is unique
+  *  */ 
 router.get("/", (req, res)=> {
     Event.find({
         owner:req.body.owner
@@ -33,7 +43,6 @@ router.get("/", (req, res)=> {
             if (events) {
                 res.json(events)
             } else {
-                console.log('event does not exist')
                 res.send('event does not exist')
             }
         })
@@ -41,7 +50,10 @@ router.get("/", (req, res)=> {
             res.send('Error: name' + err)
         })
   })
-
+ /**
+  * adds Event data to the database 
+  * 
+  *  */ 
 router.post('/add', (req, res) => {
     const eventData = {
         owner: req.body.owner,
@@ -76,6 +88,10 @@ router.post('/add', (req, res) => {
         })
 })
 
+/**
+ * finds Events when visitor make a search request
+ * regular expression for matching with the tags
+ */
 router.post('/tags', (req, res) => {
     const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
     Event.find({

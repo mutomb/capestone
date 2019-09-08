@@ -1,12 +1,18 @@
+/**
+ * created by: Jeanluc Mutomb
+ * Restful API handling uplaods/update of Post data to the database that organisation adds
+ */
+
 const router = require('express').Router();
 const cors = require('cors');
-const jwt = require('jsonwebtoken');
-const multer= require('multer');
-const mongoose= require('mongoose');
 
 let Post = require('../models/post.model');
 router.use(cors())
-
+ /**
+  * finds all the Posts in the database that were uploaded by given organisation
+  * used when logged in organisation requests data
+  * owner is the email address; which is unique
+  *  */ 
 router.post('/', (req, res) => {
     Post.find({
         owner:req.body.owner
@@ -23,7 +29,11 @@ router.post('/', (req, res) => {
             res.send('Error: name' + err)
         })
 })
-
+ /**
+  * finds all the Posts in the database that were uploaded by given organisation
+  * using the get request
+  * owner is the email address; which is unique
+  *  */ 
 router.get("/", (req, res)=> {
   Post.find({
 
@@ -45,8 +55,10 @@ router.post("/getPost", (req, res)=> {
   var name = req.body.postName;
   res.json("name of post is ");
 });
-
-
+ /**
+  * adds Post data to database 
+  * 
+  *  */ 
 router.post('/add', (req, res) => {
     const postData = {
         owner: req.body.owner,
@@ -79,7 +91,10 @@ router.post('/add', (req, res) => {
         })
 })
 
-
+/**
+ * finds Posts when visitor make a search request
+ * regular expression for matching with the tags
+ */
 
 router.post('/tags', (req, res) => {
     const regex = new RegExp(escapeRegex(req.body.keyword), 'gi');
