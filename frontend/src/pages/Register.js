@@ -70,6 +70,8 @@ class Register extends React.Component {
       phonenumberValid: false,
       formValid: false,
       emailConflict: '',
+      latitude:'12',
+      longitude:'12',
       formErrors: {
         username: "",
         password: "",
@@ -199,10 +201,9 @@ class Register extends React.Component {
       username: this.state.username,
       socialissues: this.state.socialissues,
       where:this.state.where,
-      latitute:this.state.latitute,
+      latitude:this.state.latitude,
       longitude:this.state.longitude
     }
-
     if (this.state.formValid) {
       register(obj)
         .then(res => {
@@ -220,10 +221,14 @@ class Register extends React.Component {
   }
   locationChange = (e) => {
     this.setState({
-      latitute:e.coordinates.lat,
-      longitude:e.coordinates.lng,
       where: e.place
     })
+    if(e.coordinates.lat && e.coordinates.lng){
+      this.setState({
+        latitude:e.coordinates.lat,
+        longitude:e.coordinates.lng
+      })
+    }
   }
 
   render() {

@@ -13,7 +13,7 @@ import {
   MDBRow,MDBCol,MDBBtn
 } from "mdbreact";
 import './style.css'
-
+import { GoogleComponent } from 'react-google-location';
 /**
  * handle display of hint when changed profile diplay in incorrect
  */
@@ -43,9 +43,9 @@ class ProfileDetails extends React.Component {
         username:props.organisation.username, 
         password:props.organisation.password,
         name:props.organisation.name,
-        where:organisation.where,
-        latitude:organisation.latitude,
-        longitude: organisation.longitude,
+        where:props.organisation.where,
+        latitude:props.organisation.latitude,
+        longitude: props.organisation.longitude,
         description:props.organisation.description,
         email:props.organisation.email,
         phonenumber:props.organisation.phonenumber,
@@ -88,7 +88,7 @@ class ProfileDetails extends React.Component {
     uploadProfilePicture(imageFormObj)
           .then(data=>{
             if(data.success){
-              this.resetProfilePicture();country
+              this.resetProfilePicture();
               this.setState({ multerImage:`http://localhost:5000/${data.imageData}?${Date.now}`, 
                               imageStyle: {opacity: 1,maxHeight:'300px',borderRadius:'10px'} 
                               })
@@ -232,6 +232,7 @@ class ProfileDetails extends React.Component {
   }
 
   componentWillMount(){
+    console.log(this.state.organisation)
     /**
      * retrieves the organisation's profile picture when it logs in
      */
@@ -331,6 +332,7 @@ class ProfileDetails extends React.Component {
                       </div>
                     <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Location</h3>
+                    <p>current Location: {this.state.where}</p>
                     <GoogleComponent
                               apiKey={'AIzaSyD2FpH5qD7mqvXvWP4EhSmcpa2kuig5MLs'}
                               language={'en'}
@@ -339,6 +341,7 @@ class ProfileDetails extends React.Component {
                               locationBoxStyle={'placeBox'}  
                               locationListStyle={'placeList'}
                               onChange={(e) => { this.locationChange(e)}} 
+                              
                     />                  
                     <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Contact Detail</h3>

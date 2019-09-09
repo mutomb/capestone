@@ -37,11 +37,7 @@ class MyHomePage extends React.Component {
         foundResults:false,
         names:[],
         descriptions:[],
-        zipcodes:[],
-        street_addresses:[],
-        cities:[],
-        provinces:[],
-        countries:[],
+        wheres:[],
         emails:[],
         phonenumbers:[],
         socialissues:[],
@@ -66,11 +62,7 @@ class MyHomePage extends React.Component {
     this.setState({
       names:[],
       descriptions:[],
-      zipcodes:[],
-      street_addresses:[],
-      cities:[],
-      provinces:[],
-      countries:[],
+      wheres:[],
       emails:[],
       phonenumbers:[],
       socialissues:[],
@@ -105,11 +97,7 @@ class MyHomePage extends React.Component {
               renderSearch:true,
               names:[...this.state.names,...payload.names.map(name=>name)],
               descriptions:[...this.state.descriptions,...payload.descriptions.map(description=>description)],
-              zipcodes:[...this.state.zipcodes,...payload.zipcodes.map(zipocde=>zipocde)],
-              street_addresses:[...this.state.street_addresses,...payload.street_addresses.map(street_address=>street_address)],
-              cities:[...this.state.cities,...payload.cities.map(city=>city)],
-              provinces:[...this.state.provinces,...payload.provinces.map(province=>province)],
-              countries:[...this.state.countries,...payload.countries.map(country=>country)],
+              wheres:[...this.state.wheres,...payload.wheres.map(where=>where)],
               emails:[...this.state.emails,...payload.emails.map(email=>email)],
               phonenumbers:[...this.state.phonenumbers,...payload.phonenumbers.map(phonenumber=>phonenumber)],
               socialissues:[...this.state.socialissues,...payload.socialissues.map(socialissues=>socialissues)],
@@ -336,11 +324,7 @@ class MyHomePage extends React.Component {
                   names={this.state.names}
                   descriptions={this.state.descriptions}
                   socialissues={this.state.socialissues}
-                  street_addresses={this.state.street_addresses}
-                  zipcodes={this.state.zipcodes}
-                  cities={this.state.cities}
-                  provinces={this.state.provinces}
-                  countries={this.state.countries}
+                  wheres={this.state.wheres}
                   emails={this.state.emails}
                   phonenumbers={this.state.phonenumbers}
                   foundResults={this.state.foundResults}
@@ -805,18 +789,17 @@ const SearchResults=(props)=>{
   const displayOrganisationList=()=>{
     if(props.foundResults){ 
       if(props.names.length>0 && 
-        props.cities.length >0 && 
-        props.provinces.length>0 && 
-        props.descriptions.length>0 &&
-        props.countries.length>0
-        ){
+        props.wheres.length >0 && 
+        props.descriptions.length>0
+         )
+        {
           return props.names.map((name,index)=>{
           return  (
             <div key={index}>
             <MDBListGroupItem href="#" onClick={e=>e.preventDefault()} style={{marginBottom:2, maxHeight:200}}>
                   <div className="d-flex w-100 justify-content-between">
                     <h5 className="mb-1">{name}</h5>
-                    <small>{props.cities[index]+" "+props.provinces[index]+" "+props.countries[index]}</small>
+                    <small>{props.wheres[index]}</small>
                   </div>
                   <p className="mb-1" style={{overflow:'hidden', textOverflow:'ellipsis', width:'80%',maxHeight:50}}>
                     {props.descriptions[index]}
@@ -828,12 +811,8 @@ const SearchResults=(props)=>{
                       closeModal={props.closeModal}
                       visible={props.visibleIndex[index]}
                       name={props.names[index]}
-                      zipcode={props.zipcodes[index]}
-                      street_address={props.street_addresses[index]}
-                      city={props.cities[index]}
-                      province={props.provinces[index]}
+                      where={props.wheres[index]}
                       description={props.descriptions[index]}
-                      country={props.countries[index]} 
                       email={props.emails[index]}
                       phonenumber={props.phonenumbers[index]}
                       socialissues={props.socialissues[index]}
@@ -937,11 +916,7 @@ class OrganisationListFullView extends React.Component{
                     <Content      
                         name={this.props.name}
                         description={this.props.description}
-                        zipcode={this.props.zipcode}
-                        street_address={this.props.street_address}
-                        city={this.props.city}
-                        province={this.props.province}
-                        country={this.props.country}   
+                        where={this.props.where}
                         email={this.props.email}
                         phonenumber={this.props.phonenumber}
                         socialissues={this.props.socialissues}
@@ -971,28 +946,20 @@ class PostListFullView extends React.Component{
       this.state={
         imageData:`http://localhost:5000/${props.imageData}`,
         imageStyle:{opacity:1, width:'30%',maxHeight:'200px', marginLeft:'5%',borderRadius:'10px'},
-        city:'',
-        country:'',
         description:'',
         name:'',
         phonenumber:'',
-        province:'',
-        street_address:'',
-        zipcode:''    
+        whereOrg:'',
       }
     }
     else{
       this.state={
         imageData:`http://localhost:5000/${props.imageData}`,
         imageStyle:{ opacity: 0, position: "absolute", pointerEvents: "none" },
-        city:'',
-        country:'',
         description:'',
         name:'',
         phonenumber:'',
-        province:'',
-        street_address:'',
-        zipcode:''
+        whereOrg:''
       }
     } 
     
@@ -1005,22 +972,20 @@ class PostListFullView extends React.Component{
       getOrganisation(this.props.owner)
         .then(organisation=>{
             this.setState({
-              city:organisation.payload.city,
-              country:organisation.payload.country,
               description:organisation.payload.description,
+              whereOrg:organisation.payload.where,
               name:organisation.payload.name,
               phonenumber:organisation.payload.phonenumber,
-              province:organisation.payload.province,
-              street_address:organisation.payload.street_address,
-              zipcode:organisation.payload.zipcode
             })
         })
         .catch(err=>console.log(err))
     }
   }
-
+  componentWillMount(){
+    this.getOrganisationDetails()
+  }
   render(){
-    {this.getOrganisationDetails()}
+
     return(
       <section>
       <MDBBtn 
@@ -1055,13 +1020,10 @@ class PostListFullView extends React.Component{
                         what={this.props.what}
                         title={this.props.title}
                         selectedCat={this.props.selectedCat}
-                        city={this.state.city}
-                        country={this.state.country}
+                        whereOrg={this.state.whereOrg}
                         description={this.state.description}
                         name={this.state.name}
                         phonenumber={this.state.phonenumber}
-                        province={this.state.province}
-                        street_address={this.state.street_address}
                     />
                   </MDBCardText>
                 </MDBCardBody>
@@ -1086,28 +1048,20 @@ class EventListFullView extends React.Component{
       this.state={
         imageData:`http://localhost:5000/${props.imageData}`,
         imageStyle:{opacity:1, width:'30%',maxHeight:'200px', marginLeft:'5%',borderRadius:'10px'},
-        city:'',
-        country:'',
         description:'',
         name:'',
         phonenumber:'',
-        province:'',
-        street_address:'',
-        zipcode:''    
+        whereOrg:''
       }
     }
     else{
       this.state={
         imageData:`http://localhost:5000/${props.imageData}`,
         imageStyle:{ opacity: 0, position: "absolute", pointerEvents: "none" },
-        city:'',
-        country:'',
         description:'',
         name:'',
         phonenumber:'',
-        province:'',
-        street_address:'',
-        zipcode:''
+        whereOrg:''
       }
     } 
     
@@ -1120,22 +1074,20 @@ class EventListFullView extends React.Component{
       getOrganisation(this.props.owner)
         .then(organisation=>{
             this.setState({
-              city:organisation.payload.city,
-              country:organisation.payload.country,
+              whereOrg:organisation.payload.where,
               description:organisation.payload.description,
               name:organisation.payload.name,
               phonenumber:organisation.payload.phonenumber,
-              province:organisation.payload.province,
-              street_address:organisation.payload.street_address,
-              zipcode:organisation.payload.zipcode
             })
         })
         .catch(err=>console.log(err))
     }
   }
-  
+  componentWillMount(){
+    this.getOrganisationDetails()
+    console.log(this.state.whereOrg)
+  }
   render(){
-    {this.getOrganisationDetails()}
     return(
       <section>
       <MDBBtn 
@@ -1172,14 +1124,11 @@ class EventListFullView extends React.Component{
                         when={this.props.when}
                         title={this.props.title}
                         selectedCat={this.props.selectedCat}
-                        city={this.state.city}
-                        country={this.state.country}
                         description={this.state.description}
                         name={this.state.name}
                         phonenumber={this.state.phonenumber}
-                        province={this.state.province}
-                        street_address={this.state.street_address}
-                    />
+                        whereOrg={this.state.whereOrg}
+                     />
                   </MDBCardText>
                 </MDBCardBody>
               </MDBCard>
@@ -1207,15 +1156,15 @@ const Content= props=>{
         (<MDBListGroupItem href="#" onClick={e=>e.preventDefault()}>
           <div className="d-flex w-100 justify-content-between">
             <h4 className="mb-1">{props.name}</h4>
-            <h5>{props.email+" "+props.phonenumber}</h5>
+            <h6>{props.email}<br/>{props.phonenumber}</h6>
           </div>
           <div className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}> 
+          <h6 className="mb-1">About us</h6>
             <p className="mb-1" style={{wordBreak:"break-word", width:'90%'}}>
                 {props.description}
             </p>
           </div>
-          <p>{props.street_address+" "+props.zipcode}</p>
-          <p>{props.city+" "+props.province+" "+props.country}</p>
+          <p>Our location: {props.where}</p>
           <small>{props.socialissues.map(item=><span style={{marginLeft:2}}>{item}</span>)}</small>
       </MDBListGroupItem>)
       :props.selectedCat=='Posts'?
@@ -1231,14 +1180,15 @@ const Content= props=>{
           <p>posted by:</p>
           <p><span style={{fontWeight:'bold'}}>{props.name}</span></p>
           <p>{props.owner} {props.phonenumber}</p>
-          <p>{props.country} {props.province} {props.city} {props.street_address}</p>
+          <p>{props.whereOrg}</p>
       </MDBListGroupItem>)
       :
       (<MDBListGroupItem href="#" onClick={e=>e.preventDefault()}>
           <div className="d-flex w-100 justify-content-between">
-            <h4 className="mb-1">{props.title}</h4>
-            <h4 className="mb-1">where: {props.where}</h4>
-            <h4 className="mb-1">when: {props.when}</h4>
+            <h4 className="mb-1">{props.title}<br/> 
+            <h5>where: {props.where}</h5>
+            <h5>when: {props.when}</h5>
+            </h4>
           </div>
           <div className="scrollbar scrollbar-primary  mt-5 mx-auto" style={scrollContainerStyle}> 
             <p className="mb-1" style={{wordBreak:"break-word", width:'90%'}}>
@@ -1246,9 +1196,10 @@ const Content= props=>{
             </p>
           </div>
           <p>posted by:</p>
-          <p><span style={{fontWeight:'bold'}}>{props.name}</span></p>
-          <p>{props.owner} {props.phonenumber}</p>
-          <p>{props.country} {props.province} {props.city} {props.street_address}</p>
+          <p><span style={{fontWeight:'bold'}}>{props.name}</span><br/>
+          {props.owner}<br/> {props.phonenumber}<br/>
+          {props.whereOrg}
+          </p>
        </MDBListGroupItem>)   
     )
   }

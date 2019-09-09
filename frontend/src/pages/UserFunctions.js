@@ -9,15 +9,15 @@ import axios from 'axios';
  * handles the registration of an organisation
  */
 export const register = newUser => {
-
+    console.log(newUser);
     return axios.post('organisation/register', {
         username: newUser.username,
         password: newUser.password,
         name: newUser.name,
         description: newUser.description,
         where: newUser.where,
-        latitude:newUser.latitude,
-        longitutde:newUser.longitutde,
+        latitude: newUser.latitude,
+        longitude: newUser.longitude,
         email: newUser.email,
         phonenumber: newUser.phonenumber,
         socialissues: newUser.socialissues,
@@ -148,9 +148,9 @@ export const updateOrganisation = organisation => {
         password: organisation.password,
         name: organisation.name,
         description: organisation.description,
-        where:organisation.where,
-        latitude:organisation.latitude,
-        longitutde:organisation.longitutde,
+        where: organisation.where,
+        latitude: organisation.latitude,
+        longitutde: organisation.longitutde,
         email: organisation.email,
         phonenumber: organisation.phonenumber
     })

@@ -31,12 +31,6 @@ const organisationSchema= new schema({
         type: String,
         trim: true
     },
- 
-    zipcode: { type: String },
-    street_address: { type: String },
-    city:{ type: String },
-    province: {type: String},
-    country:{ type: String },
 
     phonenumber: { type: String },
 
@@ -50,7 +44,11 @@ const organisationSchema= new schema({
     longitude:{
         type: String,
         required: false
-    },    
+    },
+    where:{
+        type: String,
+        required: false
+    }    
 },
     {timestamps:{
         timeStamp: true,

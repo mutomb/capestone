@@ -34,9 +34,9 @@ router.post('/', (req, res) => {
                         _id: [...organisations.map(organisation=>organisation._id)],
                         names: [...organisations.map(organisation=>organisation.name)],
                         descriptions: [...organisations.map(organisation=>organisation.description)],
-                        wheres: [...wheres.map(organisation=>organisation.where)],
-                        latitudes: [...latitudes.map(organisation=>organisation.latitude)],
-                        longitudes: [...longitudes.map(organisation=>organisation.longitude)],
+                        wheres: [...organisations.map(organisation=>organisation.where)],
+                        latitudes: [...organisations.map(organisation=>organisation.latitude)],
+                        longitudes: [...organisations.map(organisation=>organisation.longitude)],
                         emails: [...organisations.map(organisation=>organisation.email)],
                         phonenumbers: [...organisations.map(organisation=>organisation.phonenumber)],
                         socialissues: [...organisations.map(organisation=>organisation.socialissues)]
@@ -87,16 +87,13 @@ router.get('/:email', (req, res) => {
     })
         .then(organisation => {
             if (organisation) {
-                
                 const payload = {
                     _id: organisation._id,
                     name: organisation.name,
                     description: organisation.description,
-                    zipcode: organisation.zipcode,
-                    street_address: organisation.street_address,
-                    city: organisation.city,
-                    province:organisation.province,
-                    country: organisation.country,
+                    where:organisation.where,
+                    latitude:organisation.latitude,
+                    longitude:organisation.longitude,
                     email: organisation.email,
                     phonenumber: organisation.phonenumber,
                     socialissues: organisation.socialissues
@@ -118,7 +115,7 @@ router.get('/:email', (req, res) => {
 /**
  *  used to register a new organition
  * recieves registration form data
- */
+ */ 
 
 router.post('/register', (req, res) => {
     const organisationData = {
@@ -126,11 +123,9 @@ router.post('/register', (req, res) => {
         password: req.body.password,
         name: req.body.name,
         description: req.body.description,
-        zipcode: req.body.zipcode,
-        street_address: req.body.street_address,
-        city: req.body.city,
-        province: req.body.province,
-        country: req.body.country,
+        where:req.body.where,
+        latitude:req.body.latitude,
+        longitude:req.body.longitude,
         email: req.body.email,
         phonenumber: req.body.phonenumber,
         socialissues: req.body.socialissues
@@ -194,11 +189,9 @@ router.post('/login', (req, res) => {
                         password: organisation.password,
                         name: organisation.name,
                         description: organisation.description,
-                        zipcode: organisation.zipcode,
-                        street_address: organisation.street_address,
-                        city: organisation.city,
-                        province: organisation.province,
-                        country: organisation.country,
+                        where: organisation.where,
+                        longitude:organisation.longitude,
+                        latitude:organisation.latitude,
                         email: organisation.email,
                         phonenumber: organisation.phonenumber,
                         socialissues: organisation.socialissues
@@ -257,11 +250,9 @@ router.post('/update',(req, res)=>{
                 organisation.password=req.body.password,
                 organisation.name=req.body.name,
                 organisation.description=req.body.description,
-                organisation.zipcode=req.body.zipcode,
-                organisation.street_address=req.body.street_address,
-                organisation.city=req.body.city,
-                organisation.province=req.body.province,
-                organisation.country=req.body.country,
+                organisation.where=req.body.where,
+                organisation.latitude=req.body.latitude,
+                organisation.longitude=req.body.longitude,
                 organisation.email=req.body.email,
                 organisation.phonenumber=req.body.phonenumber,
                 organisation.socialissues=req.body.socialissues
