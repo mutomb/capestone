@@ -13,6 +13,7 @@ import {
   MDBRow,MDBCol,MDBBtn
 } from "mdbreact";
 import './style.css'
+
 /**
  * handle display of hint when changed profile diplay in incorrect
  */
@@ -42,12 +43,10 @@ class ProfileDetails extends React.Component {
         username:props.organisation.username, 
         password:props.organisation.password,
         name:props.organisation.name,
+        where:organisation.where,
+        latitude:organisation.latitude,
+        longitude: organisation.longitude,
         description:props.organisation.description,
-        zipcode:props.organisation.zipcode,
-        street_address:props.organisation.street_address,
-        city:props.organisation.city,
-        province:props.organisation.province,
-        country:props.organisation.country,
         email:props.organisation.email,
         phonenumber:props.organisation.phonenumber,
         changed:false,
@@ -58,11 +57,6 @@ class ProfileDetails extends React.Component {
         passwordValid: true,
         nameValid: true,
         descriptionValid: true,
-        zipcodeValid: true,
-        street_addressValid: true,
-        cityValid: true,
-        provinceValid: true,
-        countryValid: true,
         emailValid: true,
         phonenumberValid: true,
         formValid:true,
@@ -70,12 +64,7 @@ class ProfileDetails extends React.Component {
           username:"", 
           password:"",
           name:"",
-          description:"",
-          zipcode:"",
-          street_address:"",
-          city:"",
-          province:"",
-          country:"",  
+          where:'',
           email:"",
           phonenumber:""
         }
@@ -99,7 +88,7 @@ class ProfileDetails extends React.Component {
     uploadProfilePicture(imageFormObj)
           .then(data=>{
             if(data.success){
-              this.resetProfilePicture();
+              this.resetProfilePicture();country
               this.setState({ multerImage:`http://localhost:5000/${data.imageData}?${Date.now}`, 
                               imageStyle: {opacity: 1,maxHeight:'300px',borderRadius:'10px'} 
                               })
@@ -142,11 +131,9 @@ class ProfileDetails extends React.Component {
       password:this.state.password,
       name:this.state.name,
       description:this.state.description,
-      zipcode:this.state.zipcode,
-      street_address:this.state.street_address,
-      city:this.state.city,
-      province:this.state.province,
-      country:this.state.country,  
+      where:this.state.where,
+      longitude:this.state.longitude,
+      latitude:this.state.latitude,
       email:this.state.email,
       phonenumber:this.state.phonenumber,
     }
@@ -174,11 +161,6 @@ class ProfileDetails extends React.Component {
     let passwordValid=this.state.passwordValid;
     let nameValid=this.state.nameValid;
     let descriptionValid=this.state.descriptionValid;
-    let zipcodeValid=this.state.zipcodeValid;
-    let street_addressValid=this.state.street_addressValid;
-    let cityValid=this.state.cityValid;
-    let provinceValid=this.state.provinceValid;
-    let countryValid=this.state.countryValid;
     let emailValid=this.state.emailValid;
     let phonenumberValid=this.state.phonenumberValid;
       switch(fieldName){
@@ -198,26 +180,6 @@ class ProfileDetails extends React.Component {
             descriptionValid = value.length >= 1;
             fieldValidationErrors.description= descriptionValid ? '': 'cannot be empty';
             break;
-        case 'zipcode':
-            zipcodeValid = value.length >= 1;
-            fieldValidationErrors.zipcode = zipcodeValid ? '': ' is too short';
-            break;
-        case 'street_address':
-            street_addressValid = value.length >= 3;
-            fieldValidationErrors.street_address = street_addressValid ? '': ' is too short';
-            break;
-        case 'city':
-            cityValid = value.length >= 1;
-            fieldValidationErrors.city = cityValid ? '': 'cannot be empty';
-            break;
-        case 'province':
-            provinceValid = value.length >= 1;
-            fieldValidationErrors.province = provinceValid ? '': 'cannot be empty';
-            break;
-        case 'country':
-            countryValid = value.length >= 1;
-            fieldValidationErrors.country = countryValid ? '': 'cannot be empty';
-            break;
         case 'phonenumber':
             phonenumberValid = value.length >= 10;
             fieldValidationErrors.phonenumber = phonenumberValid ? '': ' is invalid';
@@ -231,11 +193,6 @@ class ProfileDetails extends React.Component {
         passwordValid: passwordValid,
         nameValid: nameValid,
         descriptionValid: descriptionValid,
-        zipcodeValid: zipcodeValid,
-        street_addressValid: street_addressValid,
-        cityValid: cityValid,
-        provinceValid: provinceValid,
-        countryValid: countryValid,
         emailValid: emailValid,
         phonenumberValid: phonenumberValid,
       }, this.validateForm);
@@ -250,11 +207,6 @@ class ProfileDetails extends React.Component {
                   this.state.usernameValid &&
                   this.state.nameValid &&
                   this.state.descriptionValid &&
-                  this.state.zipcodeValid &&
-                  this.state.street_addressValid &&
-                  this.state.cityValid &&
-                  this.state.provinceValid &&
-                  this.state.countryValid &&
                   this.state.phonenumberValid                              
       });
   }
@@ -269,6 +221,14 @@ class ProfileDetails extends React.Component {
       this.setState({
         organisation:nextProps.organisation
       })
+  }
+
+  locationChange = (e) => {
+    this.setState({
+      latitute:e.coordinates.lat,
+      longitude:e.coordinates.lng,
+      where: e.place
+    })
   }
 
   componentWillMount(){
@@ -371,48 +331,15 @@ class ProfileDetails extends React.Component {
                       </div>
                     <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Location</h3>
-                    <p><span style={this.state.style}>zipcode:</span>
-                    <span 
-                    onInput = {e => {this.handleChange('zipcode', e.currentTarget.textContent)}}
-                    contentEditable='true'
-                    className='editable'
-                    >{this.state.organisation.zipcode}</span></p>
-                      <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} feedbackFor={'zipcode'} />
-                      </div>
-                    <p><span style={this.state.style}>Street Address:</span>
-                    <span 
-                    onInput = {e => {this.handleChange('street_address', e.currentTarget.textContent)}}
-                    contentEditable='true'
-                    className='editable'
-                    >{this.state.organisation.street_address}</span></p>
-                      <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} feedbackFor={'street_address'} />
-                      </div>
-                    <p><span style={this.state.style}>City:</span>
-                    <span contentEditable='true'
-                    className='editable'
-                    onInput = {e => {this.handleChange('city', e.currentTarget.textContent)}}
-                    >{this.state.organisation.city}</span></p>
-                      <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} feedbackFor={'city'} />
-                      </div>
-                    <p><span style={this.state.style}>Province:</span>
-                    <span contentEditable='true'
-                    className='editable'
-                    onInput = {e => {this.handleChange('province', e.currentTarget.textContent)}}
-                    >{this.state.organisation.province}</span></p>
-                      <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} feedbackFor={'province'} />
-                      </div>
-                    <p><span style={this.state.style}>Country:</span>
-                    <span contentEditable='true'
-                    className='editable'
-                    onInput = {e => {this.handleChange('country', e.currentTarget.textContent)}}
-                    >{this.state.organisation.country}</span></p>
-                      <div className="panel panel-default">
-                            <FormErrors formErrors={this.state.formErrors} feedbackFor={'country'} />
-                      </div>                    
+                    <GoogleComponent
+                              apiKey={'AIzaSyD2FpH5qD7mqvXvWP4EhSmcpa2kuig5MLs'}
+                              language={'en'}
+                              country={'country:in'}
+                              coordinates={true}
+                              locationBoxStyle={'placeBox'}  
+                              locationListStyle={'placeList'}
+                              onChange={(e) => { this.locationChange(e)}} 
+                    />                  
                     <hr style={{backgroundColor:'green', height:'0.005em'}}/>
                     <h3>Your Contact Detail</h3>
                     <p>

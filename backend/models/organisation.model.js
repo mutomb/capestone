@@ -42,7 +42,15 @@ const organisationSchema= new schema({
 
     socialissues:{
         type: Array,
-    }
+    },
+    latitude:{
+        type: String,
+        required:false
+    },
+    longitude:{
+        type: String,
+        required: false
+    },    
 },
     {timestamps:{
         timeStamp: true,

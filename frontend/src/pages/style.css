@@ -204,4 +204,10 @@ background-position: 50% 50%;
   background-image: url(http://localhost:5000/uploads/socialissues/education.jpeg);
 }
 
-
+.placeBox{
+  width:80%;
+}
+.placeList{
+  background-color: rgb(24, 170, 61);
+  color: white;
+}
